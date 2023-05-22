@@ -1,6 +1,3 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'main_router.dart';
 
 abstract class Routes {
   const Routes._();
