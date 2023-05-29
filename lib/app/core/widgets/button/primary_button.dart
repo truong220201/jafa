@@ -28,11 +28,11 @@ enum ButtonSize {
   TextStyle get primaryTextStyle {
     switch (this) {
       case large:
-        return TextStyles.bold14_FFFFFF_primaryButton;
+        return TextStyles.bold14_titleBold;
       case small:
-        return TextStyles.bold12_FFFFFF_smallPrimaryButton;
+        return TextStyles.bold14_titleBold;
       case extraSmall:
-        return TextStyles.bold12_FFFFFF_smallPrimaryButton;
+        return TextStyles.bold14_titleBold;
     }
   }
 
@@ -42,7 +42,7 @@ enum ButtonSize {
         throw UnimplementedError('No TextStyle for large SecondaryButton');
       case small:
       case extraSmall:
-        return TextStyles.bold12_primary359EC7_smallSecondaryButton;
+        return TextStyles.bold14_titleBold;
     }
   }
 
@@ -52,7 +52,7 @@ enum ButtonSize {
         throw UnimplementedError('No TextStyle for large TertiaryButton');
       case small:
       case extraSmall:
-        return TextStyles.bold12_F04F4F;
+        return TextStyles.bold14_titleBold;
     }
   }
 }

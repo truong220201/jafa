@@ -15,15 +15,21 @@ part 'main_router.gr.dart';
   MaterialRoute(page: RegisterInfoView),
   MaterialRoute(page: RegisterPhoneView),
 <<<<<<< HEAD
+<<<<<<< HEAD
   MaterialRoute(page: WelcomeView, initial: true),
   MaterialRoute(
     page: HomeView,
   ),
 =======
+=======
+>>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
   MaterialRoute(
     page: WelcomeView,
   ),
   MaterialRoute(page: HomeView, initial: true),
+<<<<<<< HEAD
+>>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
+=======
 >>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
   MaterialRoute(
     page: TreeCreateView,

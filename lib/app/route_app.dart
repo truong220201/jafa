@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/values/app_theme.dart';
 import 'main_router.dart';
+import 'modules/tree/views/detail_jafa/repository/mock_tree_detail_repository.dart';
+import 'modules/tree/views/home/repository/mock_home_repository.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -24,17 +27,24 @@ class _RouteAppState extends State<RouteApp> {
   late MainRouter _appRouter;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      routerDelegate: _appRouter.delegate(
-        navigatorObservers: () => [
-          AutoRouteObserver(),
-        ],
-      ),
-      theme: appTheme,
-      localizationsDelegates: const [
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<MockHomeRepository>(
+            create: (context) => MockHomeRepository()),
+        RepositoryProvider<MockTreeDetailRepository>(
+            create: (context) => MockTreeDetailRepository()),
       ],
-      debugShowCheckedModeBanner: false,
+      child: MaterialApp.router(
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routerDelegate: _appRouter.delegate(
+          navigatorObservers: () => [
+            AutoRouteObserver(),
+          ],
+        ),
+        theme: appTheme,
+        localizationsDelegates: const [],
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

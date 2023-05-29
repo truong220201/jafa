@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:genealogy_management/app/main_router.dart';
 import '../../../../core/values/app_colors.dart';
 import 'package:intl/intl.dart';
 
@@ -258,7 +260,10 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                                   primary: AppColors.color_178_0_0_1,
                                   padding: const EdgeInsets.all(16),
                                 ),
-                                onPressed: () {},
+                                onPressed: () async {
+                                  final nextState = await context.router
+                                      .push(const HomeViewRoute());
+                                },
                                 child: const Icon(
                                   Icons.done,
                                   size: 36,

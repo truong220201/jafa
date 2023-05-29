@@ -7,10 +7,6 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:flutter_svg/svg.dart';
-<<<<<<< HEAD
-import 'package:genealogy_management/app/core/widgets/asset_image/asset_image_view.dart';
-=======
->>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import '../../../../core/analytics/analytics_manager.dart';
@@ -21,11 +17,6 @@ import '../../../../core/values/text_styles.dart';
 late List<CameraDescription> cameras;
 
 class ScanQRView extends StatefulWidget {
-<<<<<<< HEAD
-  const ScanQRView({super.key});
-
-=======
->>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
   @override
   State<ScanQRView> createState() => _ScanQRViewState();
 }
@@ -34,17 +25,10 @@ class _ScanQRViewState extends State<ScanQRView> {
   DateTime? detectedTime;
   CameraController? _controller;
   String? _parentFacilityId;
-<<<<<<< HEAD
-  final bool _showCountdownText = false;
-  Timer? _timer;
-  int _start = 5;
-  final bool _isDetecting = true;
-=======
   bool _showCountdownText = false;
   Timer? _timer;
   int _start = 5;
   bool _isDetecting = true;
->>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
 
   @override
   void initState() {
@@ -171,26 +155,6 @@ class _ScanQRViewState extends State<ScanQRView> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(162, 169, 169, 169),
       appBar: AppBar(
-<<<<<<< HEAD
-          actions: const [
-            SizedBox(
-              width: 50,
-            )
-          ],
-          backgroundColor: const Color.fromARGB(255, 148, 0, 0),
-          leading: Center(
-              child: InkWell(
-            onTap: () {
-              context.router.pop();
-            },
-            child: SvgPicture.asset(
-              "assets/images/back_arrow.svg",
-            ),
-          )),
-          title: const Center(
-            child: Text('Quét mã QR'),
-          )),
-=======
         backgroundColor: AppColors.c1D1D1D_onSurface,
         // actions: [
         //   Padding(
@@ -211,7 +175,6 @@ class _ScanQRViewState extends State<ScanQRView> {
         //   ),
         // ],
       ),
->>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
       body: _buildPage(context),
     );
   }
@@ -297,104 +260,6 @@ class _ScanQRViewState extends State<ScanQRView> {
   }
 
   _buildPage(BuildContext context) {
-<<<<<<< HEAD
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      fit: StackFit.expand,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: _parentFacilityId != null
-              ? _buildCamera()
-              : _buildQRCodeScanner(),
-        ),
-        const OverlayShape(),
-        Positioned(
-            top: MediaQuery.of(context).size.height - 290, child: _content()),
-      ],
-    );
-  }
-
-  Widget _content() {
-    return Container(
-      padding:
-          const EdgeInsetsDirectional.symmetric(vertical: 20, horizontal: 13.5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-      ),
-      child: Text(
-        'Quét mã QR của gia phả \nbạn muốn tham gia ',
-        textAlign: TextAlign.center,
-        style: TextStyles.medium14_lineHeight21_sur
-            .copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
-      ),
-    );
-  }
-}
-
-class OverlayShape extends StatelessWidget {
-  const OverlayShape({Key? key}) : super(key: key);
-
-  //final OverlayModel model;
-
-  @override
-  Widget build(BuildContext context) {
-    var media = MediaQuery.of(context);
-    var size = media.size;
-    double width = media.orientation == Orientation.portrait
-        ? size.shortestSide * .9
-        : size.longestSide * .5;
-    double padding = (size.width - width) / 2;
-
-    double ratio = 9;
-    double height = width;
-    double radius = 9;
-    if (media.orientation == Orientation.portrait) {}
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        ColorFiltered(
-          colorFilter: const ColorFilter.mode(
-              Color.fromARGB(200, 217, 217, 217), BlendMode.srcOut),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 128,
-                  right: padding,
-                  left: padding,
-                  child: Container(
-                    width: width,
-                    height: width,
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(radius)),
-                    child: const Center(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-            top: 128,
-            left: padding,
-            child: Container(
-              width: width,
-              height: width,
-              decoration: ShapeDecoration(
-                color: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(radius),
-                  side: const BorderSide(width: 1, color: Colors.white),
-                ),
-              ),
-            )),
-=======
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -422,8 +287,7 @@ class OverlayShape extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              child:
-               _parentFacilityId != null
+              child: _parentFacilityId != null
                   ? _buildCamera()
                   : _buildQRCodeScanner(),
             ),
@@ -436,7 +300,6 @@ class OverlayShape extends StatelessWidget {
           'QRを読み取ってください',
           style: TextStyles.bold14_titleBold.copyWith(color: Colors.white),
         ),
->>>>>>> b3b5df6f12f5763db561532bb107f9167703c0ce
       ],
     );
   }

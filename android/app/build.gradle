@@ -1,3 +1,5 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -26,7 +28,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -47,7 +49,7 @@ android {
         applicationId "com.example.genealogy_management"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -60,10 +62,44 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    flavorDimensions "app"
+    productFlavors {
+        dev {
+            dimension "app"
+            applicationIdSuffix ".dev"
+        }
+        prod {
+            dimension "app"
+        }
+    }
+}
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern
+    println(tskReqStr)
+    if( tskReqStr.contains( "assemble" ) )
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else if( tskReqStr.contains("bundle") )
+        pattern = Pattern.compile("bundle(\\w+)(Release|Debug)")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher( tskReqStr )
+
+    if( matcher.find() )
+        return matcher.group(1).toLowerCase()
+    else
+    {
+        println "NO MATCH FOUND"
+        return ""
+    }
 }
 
 flutter {
     source '../..'
+    target "lib/main_" + getCurrentFlavor() + ".dart"
 }
 
 dependencies {
