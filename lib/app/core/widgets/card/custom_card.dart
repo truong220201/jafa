@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomCard extends StatelessWidget {
   CustomCard({
@@ -12,20 +13,21 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 31, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 31, vertical: 10),
       child: Container(
           alignment: Alignment.centerLeft,
           width: double.infinity,
           height: 70,
-          decoration: new BoxDecoration(
+          decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: new BorderRadius.circular(16.0),
+            borderRadius: BorderRadius.circular(16.0),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              const Padding(
+                padding:
+                    EdgeInsets.only(left: 15, top: 10, right: 5, bottom: 10),
                 child: CircleAvatar(
                     // backgroundImage:
                     //     AssetImage("assets/images/user.png"),
@@ -33,7 +35,8 @@ class CustomCard extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -42,11 +45,12 @@ class CustomCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: CircleAvatar(
-                    // backgroundImage:
-                    //     AssetImage("assets/images/user.png"),
-                    ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: SvgPicture.asset(
+                  "assets/images/iconMore.svg",
+                  //color: const Color.fromARGB(255, 3, 3, 3),
+                ),
               ),
             ],
           )),

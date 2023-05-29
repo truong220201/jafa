@@ -32,7 +32,7 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  //await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 

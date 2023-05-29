@@ -14,10 +14,14 @@ part 'main_router.gr.dart';
   MaterialRoute(page: ConfirmView),
   MaterialRoute(page: RegisterInfoView),
   MaterialRoute(page: RegisterPhoneView),
+  MaterialRoute(page: WelcomeView, initial: true),
+  MaterialRoute(page: WelcomeView, initial: true),
   MaterialRoute(
-    page: WelcomeView,
+    page: HomeView,
   ),
-  MaterialRoute(page: HomeView, initial: true),
+  MaterialRoute(
+    page: HomeView,
+  ),
   MaterialRoute(
     page: TreeCreateView,
   ),

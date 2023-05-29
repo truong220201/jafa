@@ -44,7 +44,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                   await context.router.pop();
                 },
                 icon: SvgPicture.asset(
-                  "assets/images/scanqr.svg",
+                  "assets/images/back_icon.svg",
                 ),
               ),
             ),
@@ -61,7 +61,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                     context.read<TreeDetailCubit>().changeShowInviteFriends();
                   },
                   icon: SvgPicture.asset(
-                    "assets/images/scanqr.svg",
+                    "assets/images/share_network.svg",
                   ),
                 );
               }),
@@ -73,7 +73,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                     context.read<TreeDetailCubit>().changeModal();
                   },
                   icon: SvgPicture.asset(
-                    "assets/images/scanqr.svg",
+                    "assets/images/dots_three.svg",
                   ),
                 );
               })
@@ -200,17 +200,27 @@ class _TreeDetailViewState extends State<TreeDetailView> {
             padding: const EdgeInsets.all(10.0),
             child: Container(
                 width: 210,
-                height: 137,
+                height: 127,
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _cardMini(context, const Icon(Icons.abc), 'Sửa thông tin',
+                    _cardMini(
+                        context,
+                        SvgPicture.asset(
+                          "assets/images/edit_icon.svg",
+                        ),
+                        'Sửa thông tin',
                         () => {debugPrint('tap')}),
                     _cardMiniExit(context, 'Rời gia tộc', () => {}),
-                    _cardMini(context, const Icon(Icons.abc), 'Xoá gia tộc',
+                    _cardMini(
+                        context,
+                        SvgPicture.asset(
+                          "assets/images/ic_trash.svg",
+                        ),
+                        'Xoá gia tộc',
                         () => {}),
                   ],
                 )),
@@ -322,23 +332,19 @@ class _TreeDetailViewState extends State<TreeDetailView> {
           children: [
             const Text('Thành viên'),
             _card(
-                context,
-                const Icon(
-                  Icons.add,
-                  size: 40,
+                icon: SvgPicture.asset(
+                  "assets/images/nguoi_dung_lk.svg",
                 ),
-                'Xem gia phả dạng danh sách',
-                '50 thành viên',
-                () => {}),
+                title: 'Xem gia phả dạng danh sách',
+                content: '50 thành viên',
+                onTap: () => {}),
             _card(
-                context,
-                const Icon(
-                  Icons.add,
-                  size: 40,
+                icon: SvgPicture.asset(
+                  "assets/images/nguoi_dung_lk.svg",
                 ),
-                'Xem gia phả dạng danh sách',
-                '50 thành viên',
-                () => {})
+                title: 'Xem gia phả dạng danh sách',
+                content: '50 thành viên',
+                onTap: () => {})
           ],
         ));
   }
@@ -354,14 +360,12 @@ class _TreeDetailViewState extends State<TreeDetailView> {
           children: [
             const Text('Nguyên quán'),
             _card(
-                context,
-                const Icon(
-                  Icons.add,
-                  size: 40,
+                icon: SvgPicture.asset(
+                  "assets/images/mapPinLine.svg",
                 ),
-                'Xem gia phả dạng danh sách',
-                'Note note',
-                () => {}),
+                title: 'Xem gia phả dạng danh sách',
+                content: 'Note note',
+                onTap: () => {}),
           ],
         ));
   }
@@ -377,52 +381,53 @@ class _TreeDetailViewState extends State<TreeDetailView> {
           children: [
             const Text('Quan hệ của bạn với gia tộc này'),
             _card(
-                context,
-                const Icon(
-                  Icons.add,
-                  size: 40,
+                icon: SvgPicture.asset(
+                  "assets/images/path.svg",
                 ),
-                'Họ ngoại bên mẹ',
-                '',
-                () => {}),
+                title: 'Họ ngoại bên mẹ',
+                onTap: () => {}),
           ],
         ));
   }
 
-  Widget _card(BuildContext context, Icon icon, String title, String content,
-      Function onTap) {
+  Widget _card(
+      {SvgPicture? icon, String? title, String? content, Function? onTap}) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        icon,
+        Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: icon,
+        ),
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              title != ''
+              title != null
                   ? Text(
                       title,
                       style: TextStyles.medium16_lineHeight24_sur,
                     )
                   : Container(),
-              Text(
-                content,
-                style: TextStyles.small12_lineHeight18_sur,
-              )
+              content != null
+                  ? Text(
+                      content,
+                      style: TextStyles.small12_lineHeight18_sur,
+                    )
+                  : Container()
             ],
           ),
         ),
-        const Icon(
-          Icons.add,
-          size: 40,
+        SvgPicture.asset(
+          "assets/images/iconMore.svg",
         ),
       ]),
     );
   }
 
   Widget _cardMini(
-      BuildContext context, Icon icon, String content, Function onTapp) {
+      BuildContext context, SvgPicture icon, String content, Function onTapp) {
     return GestureDetector(
       onTap: () => onTapp(),
       child: Container(
@@ -459,17 +464,17 @@ class _TreeDetailViewState extends State<TreeDetailView> {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: const BoxDecoration(
-            color: Colors.amber,
+            color: Color.fromARGB(255, 229, 170, 170),
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         padding: const EdgeInsets.symmetric(vertical: 10),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Icon(
-                Icons.abc,
-                color: Color.fromARGB(255, 235, 66, 66),
-              )),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SvgPicture.asset(
+              "assets/images/ic_log_out.svg",
+            ),
+          ),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -477,17 +482,18 @@ class _TreeDetailViewState extends State<TreeDetailView> {
               children: [
                 Text(
                   content,
-                  style: TextStyles.medium14_lineHeight21_sur,
+                  style: TextStyles.medium14_lineHeight21_sur
+                      .copyWith(color: const Color.fromARGB(255, 148, 0, 0)),
                 )
               ],
             ),
           ),
-          const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Icon(
-                Icons.abc,
-                color: Color.fromARGB(255, 235, 66, 66),
-              )),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SvgPicture.asset(
+              "assets/images/caret.svg",
+            ),
+          ),
         ]),
       ),
     );

@@ -27,7 +27,7 @@ class _HomeViewState extends State<HomeView> {
   bool haveJaFa = true;
   void openScan() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ScanQRView()));
+        context, MaterialPageRoute(builder: (context) => const ScanQRView()));
   }
 
   @override
