@@ -18,27 +18,29 @@ class _$MainRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     ConfirmViewRoute.name: (routeData) {
+      final args = routeData.argsAs<ConfirmViewRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const ConfirmView(),
+        child: ConfirmView(
+          key: args.key,
+          registrationState: args.registrationState,
+        ),
       );
     },
     RegisterInfoViewRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterInfoViewRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const RegisterInfoView(),
+        child: RegisterInfoView(
+          key: args.key,
+          registrationState: args.registrationState,
+        ),
       );
     },
     RegisterPhoneViewRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: const RegisterPhoneView(),
-      );
-    },
-    WelcomeViewRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const WelcomeView(),
       );
     },
     HomeViewRoute.name: (routeData) {
@@ -65,6 +67,12 @@ class _$MainRouter extends RootStackRouter {
         child: ScanQRView(),
       );
     },
+    WelcomeViewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const WelcomeView(),
+      );
+    },
   };
 
   @override
@@ -82,12 +90,8 @@ class _$MainRouter extends RootStackRouter {
           path: '/register-phone-view',
         ),
         RouteConfig(
-          WelcomeViewRoute.name,
-          path: '/welcome-view',
-        ),
-        RouteConfig(
           HomeViewRoute.name,
-          path: '/',
+          path: '/home-view',
         ),
         RouteConfig(
           TreeCreateViewRoute.name,
@@ -101,31 +105,79 @@ class _$MainRouter extends RootStackRouter {
           ScanQRViewRoute.name,
           path: '/scan-qr-view',
         ),
+        RouteConfig(
+          WelcomeViewRoute.name,
+          path: '/',
+        ),
       ];
 }
 
 /// generated route for
 /// [ConfirmView]
-class ConfirmViewRoute extends PageRouteInfo<void> {
-  const ConfirmViewRoute()
-      : super(
+class ConfirmViewRoute extends PageRouteInfo<ConfirmViewRouteArgs> {
+  ConfirmViewRoute({
+    Key? key,
+    required RegistrationState registrationState,
+  }) : super(
           ConfirmViewRoute.name,
           path: '/confirm-view',
+          args: ConfirmViewRouteArgs(
+            key: key,
+            registrationState: registrationState,
+          ),
         );
 
   static const String name = 'ConfirmViewRoute';
 }
 
+class ConfirmViewRouteArgs {
+  const ConfirmViewRouteArgs({
+    this.key,
+    required this.registrationState,
+  });
+
+  final Key? key;
+
+  final RegistrationState registrationState;
+
+  @override
+  String toString() {
+    return 'ConfirmViewRouteArgs{key: $key, registrationState: $registrationState}';
+  }
+}
+
 /// generated route for
 /// [RegisterInfoView]
-class RegisterInfoViewRoute extends PageRouteInfo<void> {
-  const RegisterInfoViewRoute()
-      : super(
+class RegisterInfoViewRoute extends PageRouteInfo<RegisterInfoViewRouteArgs> {
+  RegisterInfoViewRoute({
+    Key? key,
+    required RegistrationState registrationState,
+  }) : super(
           RegisterInfoViewRoute.name,
           path: '/register-info-view',
+          args: RegisterInfoViewRouteArgs(
+            key: key,
+            registrationState: registrationState,
+          ),
         );
 
   static const String name = 'RegisterInfoViewRoute';
+}
+
+class RegisterInfoViewRouteArgs {
+  const RegisterInfoViewRouteArgs({
+    this.key,
+    required this.registrationState,
+  });
+
+  final Key? key;
+
+  final RegistrationState registrationState;
+
+  @override
+  String toString() {
+    return 'RegisterInfoViewRouteArgs{key: $key, registrationState: $registrationState}';
+  }
 }
 
 /// generated route for
@@ -141,24 +193,12 @@ class RegisterPhoneViewRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [WelcomeView]
-class WelcomeViewRoute extends PageRouteInfo<void> {
-  const WelcomeViewRoute()
-      : super(
-          WelcomeViewRoute.name,
-          path: '/welcome-view',
-        );
-
-  static const String name = 'WelcomeViewRoute';
-}
-
-/// generated route for
 /// [HomeView]
 class HomeViewRoute extends PageRouteInfo<void> {
   const HomeViewRoute()
       : super(
           HomeViewRoute.name,
-          path: '/',
+          path: '/home-view',
         );
 
   static const String name = 'HomeViewRoute';
@@ -198,4 +238,16 @@ class ScanQRViewRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScanQRViewRoute';
+}
+
+/// generated route for
+/// [WelcomeView]
+class WelcomeViewRoute extends PageRouteInfo<void> {
+  const WelcomeViewRoute()
+      : super(
+          WelcomeViewRoute.name,
+          path: '/',
+        );
+
+  static const String name = 'WelcomeViewRoute';
 }

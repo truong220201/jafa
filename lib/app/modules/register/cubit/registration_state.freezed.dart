@@ -20,10 +20,14 @@ mixin _$RegistrationState {
   bool get phonePass => throw _privateConstructorUsedError;
   String get confirmCode => throw _privateConstructorUsedError;
   bool get confirmCodePass => throw _privateConstructorUsedError;
+  String get avatar => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get birthday => throw _privateConstructorUsedError;
-  bool get showHomePage => throw _privateConstructorUsedError;
+  bool get showHomePage =>
+      throw _privateConstructorUsedError; // @Default(false) bool showImageLoading,
+  UserModel? get userModel =>
+      throw _privateConstructorUsedError; // List<String>? imageList,
   Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,10 +46,12 @@ abstract class $RegistrationStateCopyWith<$Res> {
       bool phonePass,
       String confirmCode,
       bool confirmCodePass,
+      String avatar,
       String name,
       String gender,
       String birthday,
       bool showHomePage,
+      UserModel? userModel,
       Object? error});
 }
 
@@ -66,10 +72,12 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
     Object? phonePass = null,
     Object? confirmCode = null,
     Object? confirmCodePass = null,
+    Object? avatar = null,
     Object? name = null,
     Object? gender = null,
     Object? birthday = null,
     Object? showHomePage = null,
+    Object? userModel = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -89,6 +97,10 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
           ? _value.confirmCodePass
           : confirmCodePass // ignore: cast_nullable_to_non_nullable
               as bool,
+      avatar: null == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -105,6 +117,10 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
           ? _value.showHomePage
           : showHomePage // ignore: cast_nullable_to_non_nullable
               as bool,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       error: freezed == error ? _value.error : error,
     ) as $Val);
   }
@@ -123,10 +139,12 @@ abstract class _$$_RegistrationStateCopyWith<$Res>
       bool phonePass,
       String confirmCode,
       bool confirmCodePass,
+      String avatar,
       String name,
       String gender,
       String birthday,
       bool showHomePage,
+      UserModel? userModel,
       Object? error});
 }
 
@@ -145,10 +163,12 @@ class __$$_RegistrationStateCopyWithImpl<$Res>
     Object? phonePass = null,
     Object? confirmCode = null,
     Object? confirmCodePass = null,
+    Object? avatar = null,
     Object? name = null,
     Object? gender = null,
     Object? birthday = null,
     Object? showHomePage = null,
+    Object? userModel = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_RegistrationState(
@@ -168,6 +188,10 @@ class __$$_RegistrationStateCopyWithImpl<$Res>
           ? _value.confirmCodePass
           : confirmCodePass // ignore: cast_nullable_to_non_nullable
               as bool,
+      avatar: null == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -184,6 +208,10 @@ class __$$_RegistrationStateCopyWithImpl<$Res>
           ? _value.showHomePage
           : showHomePage // ignore: cast_nullable_to_non_nullable
               as bool,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       error: freezed == error ? _value.error : error,
     ));
   }
@@ -197,10 +225,12 @@ class _$_RegistrationState extends _RegistrationState {
       this.phonePass = false,
       this.confirmCode = '',
       this.confirmCodePass = false,
+      this.avatar = '',
       this.name = '',
       this.gender = '',
       this.birthday = '',
       this.showHomePage = false,
+      this.userModel,
       this.error})
       : super._();
 
@@ -218,6 +248,9 @@ class _$_RegistrationState extends _RegistrationState {
   final bool confirmCodePass;
   @override
   @JsonKey()
+  final String avatar;
+  @override
+  @JsonKey()
   final String name;
   @override
   @JsonKey()
@@ -228,12 +261,16 @@ class _$_RegistrationState extends _RegistrationState {
   @override
   @JsonKey()
   final bool showHomePage;
+// @Default(false) bool showImageLoading,
+  @override
+  final UserModel? userModel;
+// List<String>? imageList,
   @override
   final Object? error;
 
   @override
   String toString() {
-    return 'RegistrationState(phone: $phone, phonePass: $phonePass, confirmCode: $confirmCode, confirmCodePass: $confirmCodePass, name: $name, gender: $gender, birthday: $birthday, showHomePage: $showHomePage, error: $error)';
+    return 'RegistrationState(phone: $phone, phonePass: $phonePass, confirmCode: $confirmCode, confirmCodePass: $confirmCodePass, avatar: $avatar, name: $name, gender: $gender, birthday: $birthday, showHomePage: $showHomePage, userModel: $userModel, error: $error)';
   }
 
   @override
@@ -248,12 +285,15 @@ class _$_RegistrationState extends _RegistrationState {
                 other.confirmCode == confirmCode) &&
             (identical(other.confirmCodePass, confirmCodePass) ||
                 other.confirmCodePass == confirmCodePass) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.birthday, birthday) ||
                 other.birthday == birthday) &&
             (identical(other.showHomePage, showHomePage) ||
                 other.showHomePage == showHomePage) &&
+            (identical(other.userModel, userModel) ||
+                other.userModel == userModel) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -264,10 +304,12 @@ class _$_RegistrationState extends _RegistrationState {
       phonePass,
       confirmCode,
       confirmCodePass,
+      avatar,
       name,
       gender,
       birthday,
       showHomePage,
+      userModel,
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
@@ -284,10 +326,12 @@ abstract class _RegistrationState extends RegistrationState {
       final bool phonePass,
       final String confirmCode,
       final bool confirmCodePass,
+      final String avatar,
       final String name,
       final String gender,
       final String birthday,
       final bool showHomePage,
+      final UserModel? userModel,
       final Object? error}) = _$_RegistrationState;
   const _RegistrationState._() : super._();
 
@@ -300,6 +344,8 @@ abstract class _RegistrationState extends RegistrationState {
   @override
   bool get confirmCodePass;
   @override
+  String get avatar;
+  @override
   String get name;
   @override
   String get gender;
@@ -307,7 +353,9 @@ abstract class _RegistrationState extends RegistrationState {
   String get birthday;
   @override
   bool get showHomePage;
-  @override
+  @override // @Default(false) bool showImageLoading,
+  UserModel? get userModel;
+  @override // List<String>? imageList,
   Object? get error;
   @override
   @JsonKey(ignore: true)

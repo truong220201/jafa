@@ -39,7 +39,7 @@ class RatingOpenImgWidget extends StatelessWidget {
           scrollPhysics: const BouncingScrollPhysics(),
           builder: (BuildContext context, int index) {
             return PhotoViewGalleryPageOptions(
-              imageProvider: NetworkImage(imageUrl!),
+              imageProvider: NetworkImage(imageUrl),
               initialScale: PhotoViewComputedScale.contained,
               heroAttributes: PhotoViewHeroAttributes(tag: imageUrl),
             );

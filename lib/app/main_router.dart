@@ -1,36 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'modules/register/views/home/registration_info.dart';
-import 'modules/register/views/login/confirm.dart';
-import 'modules/register/views/login/registration_phone.dart';
-import 'modules/register/views/login/welcome.dart';
-import 'modules/tree/views/detail_jafa/views/tree_detail_view.dart';
-import 'modules/tree/views/home/views/home_default.dart';
-import 'modules/tree/views/scan_QR/scan_qr_view.dart';
-import 'modules/tree/views/tree_creat.dart';
+import 'modules/detail_jafa/views/tree_detail_view.dart';
+import 'modules/home/views/home_default.dart';
+import 'modules/register/cubit/registration_state.dart';
+import 'modules/register/views/home/registration_info_view.dart';
+import 'modules/register/views/login/confirm_view.dart';
+import 'modules/register/views/login/registration_phone_view.dart';
+import 'modules/register/views/login/welcome_view.dart';
+import 'modules/scan_QR/scan_qr_view.dart';
+import 'modules/tree_create/view/tree_create_view.dart';
 part 'main_router.gr.dart';
 
 @MaterialAutoRouter(routes: <AutoRoute>[
   MaterialRoute(page: ConfirmView),
   MaterialRoute(page: RegisterInfoView),
   MaterialRoute(page: RegisterPhoneView),
+  MaterialRoute(page: HomeView),
+  MaterialRoute(page: TreeCreateView),
+  MaterialRoute(page: TreeDetailView),
+  MaterialRoute(page: ScanQRView),
   MaterialRoute(page: WelcomeView, initial: true),
-  MaterialRoute(page: WelcomeView, initial: true),
-  MaterialRoute(
-    page: HomeView,
-  ),
-  MaterialRoute(
-    page: HomeView,
-  ),
-  MaterialRoute(
-    page: TreeCreateView,
-  ),
-  MaterialRoute(
-    page: TreeDetailView,
-  ),
-  MaterialRoute(
-    page: ScanQRView,
-  ),
 ])
 class MainRouter extends _$MainRouter {
   MainRouter({GlobalKey<NavigatorState>? navigatorKey}) : super(navigatorKey);

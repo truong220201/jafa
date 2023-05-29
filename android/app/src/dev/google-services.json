@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "908112629759",
+    "project_id": "genealogymanagement-6c48d",
+    "storage_bucket": "genealogymanagement-6c48d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908112629759:android:9f3584d8be5adf08f161ca",
+        "android_client_info": {
+          "package_name": "com.example.genealogy_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "908112629759-due441ulnjo8e76kiapj3hk39fb0sots.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.genealogy_management",
+            "certificate_hash": "b29b7b039e44588129dc7e93c6fdf171d9bfd68b"
+          }
+        },
+        {
+          "client_id": "908112629759-jtresjsku5d91ab94b297amned727olv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6yoRIngaT3pcu8TuKlvLBnlpDux0WF6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "908112629759-jtresjsku5d91ab94b297amned727olv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
