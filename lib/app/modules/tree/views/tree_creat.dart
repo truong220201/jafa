@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../core/values/app_colors.dart';
 import 'package:intl/intl.dart';
 
-class TreeCreate extends StatefulWidget {
-  const TreeCreate({super.key});
+class TreeCreateView extends StatefulWidget {
+  const TreeCreateView({super.key});
 
   @override
-  State<TreeCreate> createState() => _TreeCreateState();
+  State<TreeCreateView> createState() => _TreeCreateViewState();
 }
 
-class _TreeCreateState extends State<TreeCreate> {
+class _TreeCreateViewState extends State<TreeCreateView> {
   String selectedGender = "Nam";
   DateTime? selectedDate;
   final _formKey = GlobalKey<FormState>();

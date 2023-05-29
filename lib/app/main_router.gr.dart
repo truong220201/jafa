@@ -41,6 +41,30 @@ class _$MainRouter extends RootStackRouter {
         child: const WelcomeView(),
       );
     },
+    HomeViewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const HomeView(),
+      );
+    },
+    TreeCreateViewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const TreeCreateView(),
+      );
+    },
+    TreeDetailViewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const TreeDetailView(),
+      );
+    },
+    ScanQRViewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: ScanQRView(),
+      );
+    },
   };
 
   @override
@@ -59,7 +83,23 @@ class _$MainRouter extends RootStackRouter {
         ),
         RouteConfig(
           WelcomeViewRoute.name,
+          path: '/welcome-view',
+        ),
+        RouteConfig(
+          HomeViewRoute.name,
           path: '/',
+        ),
+        RouteConfig(
+          TreeCreateViewRoute.name,
+          path: '/tree-create-view',
+        ),
+        RouteConfig(
+          TreeDetailViewRoute.name,
+          path: '/tree-detail-view',
+        ),
+        RouteConfig(
+          ScanQRViewRoute.name,
+          path: '/scan-qr-view',
         ),
       ];
 }
@@ -106,8 +146,56 @@ class WelcomeViewRoute extends PageRouteInfo<void> {
   const WelcomeViewRoute()
       : super(
           WelcomeViewRoute.name,
-          path: '/',
+          path: '/welcome-view',
         );
 
   static const String name = 'WelcomeViewRoute';
+}
+
+/// generated route for
+/// [HomeView]
+class HomeViewRoute extends PageRouteInfo<void> {
+  const HomeViewRoute()
+      : super(
+          HomeViewRoute.name,
+          path: '/',
+        );
+
+  static const String name = 'HomeViewRoute';
+}
+
+/// generated route for
+/// [TreeCreateView]
+class TreeCreateViewRoute extends PageRouteInfo<void> {
+  const TreeCreateViewRoute()
+      : super(
+          TreeCreateViewRoute.name,
+          path: '/tree-create-view',
+        );
+
+  static const String name = 'TreeCreateViewRoute';
+}
+
+/// generated route for
+/// [TreeDetailView]
+class TreeDetailViewRoute extends PageRouteInfo<void> {
+  const TreeDetailViewRoute()
+      : super(
+          TreeDetailViewRoute.name,
+          path: '/tree-detail-view',
+        );
+
+  static const String name = 'TreeDetailViewRoute';
+}
+
+/// generated route for
+/// [ScanQRView]
+class ScanQRViewRoute extends PageRouteInfo<void> {
+  const ScanQRViewRoute()
+      : super(
+          ScanQRViewRoute.name,
+          path: '/scan-qr-view',
+        );
+
+  static const String name = 'ScanQRViewRoute';
 }

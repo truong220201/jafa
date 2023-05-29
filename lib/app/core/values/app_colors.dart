@@ -8,7 +8,9 @@ abstract class AppColors {
   static const Color color_148_0_0_1 = Color.fromRGBO(148, 0, 0, 1);
 
   //bg1 color
-  static const Color color_251_239_239_1 = Color.fromRGBO(251, 239, 239, 1);
+  static const Color color_251_239_239_1 = Color.fromRGBO(49, 37, 37, 1);
+  static const Color color_255_128_128_137 = Color.fromARGB(255, 128, 128, 137);
+
   static const Color color_245_245_245_1 = Color.fromRGBO(245, 245, 245, 1);
   static const Color color_255_255_255_1 = Color.fromRGBO(255, 255, 255, 1);
   static const Color color_194_194_194_1 = Color.fromRGBO(194, 194, 194, 1);
@@ -19,7 +21,7 @@ abstract class AppColors {
   static const Color color_89_0_0_1 = Color.fromRGBO(89, 0, 0, 1);
 
   //main4 color
-  static const Color color_249_217_217_1 = Color.fromRGBO(249,217,217,1);
+  static const Color color_249_217_217_1 = Color.fromRGBO(249, 217, 217, 1);
 
   /// white
   static const Color _color_FFFFFF = Color(0xFFFFFFFF);
@@ -222,7 +224,7 @@ abstract class AppColors {
   /// F04F4F
   static const Color cF04F4F_denied = _color_F04F4F;
 
-  static final Color dialogBarrierColor = Colors.black87;
+  static const Color dialogBarrierColor = Colors.black87;
 
   static const Color c000000_black = _color_000000;
 

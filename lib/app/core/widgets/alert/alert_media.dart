@@ -63,7 +63,7 @@ class ForceLogoutDialog extends AlertDialog {
               if (titleDialog.isNotEmpty) ...[
                 Text(
                   titleDialog,
-                  style: TextStyles.medium14_date
+                  style: TextStyles.bold14_titleBold
                       .copyWith(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -73,7 +73,7 @@ class ForceLogoutDialog extends AlertDialog {
               ],
               Text(
                 body,
-                style: TextStyles.medium12_defaultStyle,
+                style: TextStyles.bold14_titleBold,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -101,7 +101,7 @@ class ErrorDialog extends AlertDialog {
             children: [
               Text(
                 'エラー',
-                style: TextStyles.medium14_date
+                style: TextStyles.bold14_titleBold
                     .copyWith(fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -110,7 +110,7 @@ class ErrorDialog extends AlertDialog {
               ),
               Text(
                 message,
-                style: TextStyles.medium12_defaultStyle,
+                style: TextStyles.bold14_titleBold,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
