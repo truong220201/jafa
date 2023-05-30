@@ -1,27 +1,29 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "jafa (prod)",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main_prod.dart",
-      "args": ["--flavor", "prod"]
-    },{
-      "name": "jafa (dev)",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main_dev.dart",
-      "args": ["--flavor", "dev"]
-    },{
-        "name": "jafa (local)",
-        "request": "launch",
-        "type": "dart",
-        "program": "lib/main_local.dart",
-        "args": ["--flavor", "local"]
-      }
-  ]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "genealogy_management (local)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_local.dart",
+            "args": ["--flavor", "local"]
+        },
+        {
+            "name": "genealogy_management (dev)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": ["--flavor", "dev"]
+        },
+        {
+            "name": "genealogy_management (prod)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart",
+            "args": ["--flavor", "prod"]
+        },
+    ]
 }

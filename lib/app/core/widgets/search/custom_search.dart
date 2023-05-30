@@ -1,9 +1,11 @@
 import 'dart:math' as math;
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:genealogy_management/app/core/values/app_values.dart';
 
+import '../../../main_router.dart';
 import '../../values/app_colors.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -53,7 +55,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color.fromARGB(255, 255, 255, 255),
-              hintText: widget.hintText ?? 'Tim kiem',
+              hintText: widget.hintText ?? 'Tìm kiếm',
               // hintStyle: context.textStyle.titleMedium?.copyWith(
               //   fontSize: Dimens.body,
               //   fontWeight: FontWeight.w400,
@@ -78,19 +80,24 @@ class _SearchWidgetState extends State<SearchWidget> {
               ),
               contentPadding: const EdgeInsets.all(8),
               prefixIcon: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(5),
                 child: SvgPicture.asset(
-                  "assets/images/scanqr.svg",
-                  color: const Color.fromARGB(255, 3, 3, 3),
+                  "assets/images/search.svg",
+                  //color: const Color.fromARGB(255, 3, 3, 3),
                 ),
               ),
               prefixIconConstraints: const BoxConstraints(maxWidth: 40),
               prefixIconColor: AppColors.c000000_black,
-              suffixIcon: Container(
-                padding: const EdgeInsets.all(10),
-                child: SvgPicture.asset(
-                  "assets/images/scanqr.svg",
-                  color: const Color.fromARGB(255, 3, 3, 3),
+              suffixIcon: InkWell(
+                onTap: () async {
+                  await context.router.push(const ScanQRViewRoute());
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(2),
+                  child: SvgPicture.asset(
+                    "assets/images/scanqr.svg",
+                    //color: const Color.fromARGB(255, 3, 3, 3),
+                  ),
                 ),
               ),
               suffixIconConstraints: const BoxConstraints(maxWidth: 40),

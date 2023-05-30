@@ -6,7 +6,6 @@ import 'app/flavors/environment.dart';
 import 'app/my_app.dart';
 import 'app/core/config/app_bloc_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'deep_link.dart';
 
@@ -32,7 +31,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
 
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  //FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 

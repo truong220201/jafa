@@ -66,7 +66,11 @@ class PrimaryButton extends StatelessWidget {
     this.width,
     this.showLoading = false,
     this.buttonSize = ButtonSize.large,
-    this.backgroundColor = AppColors.c359EC7_primary,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.textSize,
+    this.textWeight = FontWeight.w400,
+    this.borderColor = AppColors.color_0_0_0_1,
     //this.fontSize = 14,
   }) : super(key: key);
 
@@ -77,6 +81,10 @@ class PrimaryButton extends StatelessWidget {
   final bool showLoading;
   final ButtonSize buttonSize;
   final Color backgroundColor;
+  final Color textColor;
+  final Color borderColor;
+  final double textSize;
+  final FontWeight textWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -85,24 +93,20 @@ class PrimaryButton extends StatelessWidget {
       height: height,
       width: width ?? double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(height),
-        color: enable ? backgroundColor : backgroundColor.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(10),
+        color: backgroundColor,
+        border: Border.all(
+          color: borderColor,
+        ),
       ),
       child: InkWell(
-        onTap: enable ? onTap : null,
+        onTap: onTap,
         child: Center(
-          child: showLoading
-              ? SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                    color: AppColors.cFFFFFF_onPrimary,
-                  ),
-                )
-              : Text(
-                  title,
-                  style: buttonSize.primaryTextStyle,
-                ),
+          child: Text(
+            title,
+            style: TextStyle(
+                color: textColor, fontSize: textSize, fontWeight: textWeight),
+          ),
         ),
       ),
     );

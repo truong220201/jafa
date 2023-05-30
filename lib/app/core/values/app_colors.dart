@@ -13,7 +13,15 @@ abstract class AppColors {
 
   static const Color color_245_245_245_1 = Color.fromRGBO(245, 245, 245, 1);
   static const Color color_255_255_255_1 = Color.fromRGBO(255, 255, 255, 1);
+  static const Color color_248_170_151_1 = Color.fromRGBO(248, 170, 151, 1);
+  static const Color color_0_0_0_1 = Color.fromRGBO(0, 0, 0, 1);
+  static const Color color_96_96_96_1 = Color.fromRGBO(96, 96, 96, 1);
+  static const Color color_173_173_173_1 = Color.fromRGBO(173, 173, 173, 1);
+  static const Color color_239_241_243_1 = Color.fromRGBO(239, 241, 243, 1);
   static const Color color_194_194_194_1 = Color.fromRGBO(194, 194, 194, 1);
+  static const Color color_208_213_221_1 = Color.fromRGBO(208, 213, 221, 1);
+  static const Color color_255_0_0_1 = Color.fromRGBO(255, 0, 0, 1);
+  static const Color color_52_64_84_1 = Color.fromRGBO(52, 64, 84, 1);
   //bg2 color
   static const Color color_229_170_170_1 = Color.fromRGBO(229, 170, 170, 1);
 

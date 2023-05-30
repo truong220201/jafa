@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../values/app_colors.dart';
+
 class BottomTab extends StatefulWidget {
   const BottomTab({super.key});
 
@@ -13,6 +15,8 @@ class _BottomTabState extends State<BottomTab> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+        selectedItemColor: AppColors.color_178_0_0_1,
+        unselectedItemColor: AppColors.color_255_255_255_1,
       items: [
         BottomNavigationBarItem(
             icon: SvgPicture.asset(

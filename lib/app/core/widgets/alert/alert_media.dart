@@ -79,11 +79,11 @@ class ForceLogoutDialog extends AlertDialog {
               const SizedBox(
                 height: 16,
               ),
-              PrimaryButton(
-                title: 'ログインへ',
-                buttonSize: ButtonSize.small,
-                onTap: () => loginCallback(),
-              ),
+              // PrimaryButton(
+              //   title: 'ログインへ',
+              //   buttonSize: ButtonSize.small,
+              //   onTap: () => loginCallback(),
+              // ),
             ],
           ),
         );
@@ -114,11 +114,11 @@ class ErrorDialog extends AlertDialog {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              PrimaryButton(
-                title: 'キャンセル',
-                buttonSize: ButtonSize.small,
-                onTap: () => callback(),
-              ),
+              // PrimaryButton(
+              //   title: 'キャンセル',
+              //   buttonSize: ButtonSize.small,
+              //   onTap: () => callback(),
+              // ),
             ],
           ),
         );
