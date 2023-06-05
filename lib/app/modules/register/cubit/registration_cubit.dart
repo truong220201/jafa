@@ -1,9 +1,10 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../core/services/firebase_manager.dart';
+import '../../../core/values/regexp_constant.dart';
+import '../../../data/model/gender.dart';
 import '../models/user_model.dart';
 import '../repository/registration_repository.dart';
 import 'registration_state.dart';
@@ -13,13 +14,10 @@ class RegistrationCubit extends Cubit<RegistrationState> {
       : super(const RegistrationState());
 
   final RegistrationRepository _registrationRepository;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void setPhone(String phone) {
-    if (RegExp(
-            r"^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$")
-        .hasMatch(phone)) {
+    if (RegexpConstants.phoneNumber.hasMatch(phone)) {
       emit(state.copyWith(phonePass: true));
     } else {
       emit(state.copyWith(phonePass: false));
@@ -27,8 +25,20 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     emit(state.copyWith(phone: phone));
   }
 
+  void setPhonePass(bool bool) {
+    emit(state.copyWith(phonePass: bool));
+  }
+
+  void setConfirmPass(bool bool) {
+    emit(state.copyWith(confirmCodePass: bool));
+  }
+
+  void setShowHomePage(bool bool) {
+    emit(state.copyWith(showHomePage: bool));
+  }
+
   void setConfirmCode(String confirmCode) {
-    if (RegExp(r"^\d{6}$").hasMatch(confirmCode)) {
+    if (RegexpConstants.otp.hasMatch(confirmCode)) {
       emit(state.copyWith(confirmCodePass: true, confirmCode: confirmCode));
     } else {
       emit(state.copyWith(confirmCodePass: false, confirmCode: confirmCode));
@@ -41,25 +51,12 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     if (name != null) emit(state.copyWith(showHomePage: true));
   }
 
-  void setGender(String gender) {
+  void setGender(Gender gender) {
     emit(state.copyWith(gender: gender));
   }
 
   void setBirthday(String birthday) {
     emit(state.copyWith(birthday: birthday));
-  }
-
-  initData(RegistrationState registrationState) {
-    emit(state.copyWith(
-      userModel: registrationState.userModel,
-      phone: registrationState.phone,
-      avatar: registrationState.avatar,
-      gender: registrationState.gender,
-      name: registrationState.name,
-      birthday: registrationState.birthday,
-      confirmCodePass: true,
-      showHomePage: true,
-    ));
   }
 
   void setUserModel(UserModel user) {
@@ -98,8 +95,34 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     }
   }
 
-  initPass() {
-    emit(state.copyWith(phonePass: true));
+  void verify(String phone, String verify, Function? success) {
+    FirebaseManager.verifyPhoneNumber("+84${phone.substring(1)}",
+        (verificationId, forceResendingToken) async {
+      verify = verificationId;
+      emit(state.copyWith(verificationId: verificationId));
+      if (success != null) {
+        success();
+      }
+    });
+  }
+
+  Future<void> credential(String verificationId, String otp, Function? success,
+      Function? fail) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: otp);
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      emit(state.copyWith(userCredential: userCredential));
+      if (success != null) {
+        success();
+      }
+    } catch (e) {
+      if (fail != null) {
+        fail();
+      }
+    }
   }
 
   // Future<List<String>> getFilePaths() async {

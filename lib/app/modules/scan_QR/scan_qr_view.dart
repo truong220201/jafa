@@ -266,7 +266,7 @@ class _ScanQRViewState extends State<ScanQRView> {
         ),
         Text(
           '設定用メーター撮影',
-          style: TextStyles.bold14_titleBold.copyWith(
+          style: TextStyles.bold14TitleBold.copyWith(
             color: Colors.white,
           ),
         ),
@@ -296,7 +296,7 @@ class _ScanQRViewState extends State<ScanQRView> {
         ),
         Text(
           'QRを読み取ってください',
-          style: TextStyles.bold14_titleBold.copyWith(color: Colors.white),
+          style: TextStyles.bold14TitleBold.copyWith(color: Colors.white),
         ),
       ],
     );

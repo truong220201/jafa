@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../core/values/province_info.dart';
+import '../../../core/values/string_constants.dart';
+import '../../../core/values/text_styles.dart';
 import '../../../core/widgets/button/custom_buttom.dart';
+import '../../../core/widgets/popup/popup_select_image.dart';
 import '../cubit/tree_create_cubit.dart';
 import '../cubit/tree_create_state.dart';
 import '../repository/tree_create_repository.dart';
@@ -46,19 +49,19 @@ class _TreeCreateViewState extends State<TreeCreateView> {
         leading: Container(
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.color_251_239_239_1,
+            color: AppColors.colorFFFBEFEF,
           ),
           child: IconButton(
-            color: AppColors.color_178_0_0_1,
+            color: AppColors.colorFFB20000,
             onPressed: () async {
               await context.router.pop();
             },
             icon: const Icon(Icons.arrow_back_outlined),
           ),
         ),
-        title: const Text(
-          "Danh sách gia tộc",
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+        title:  Text(
+          StringConstants.creatTree,
+          style: TextStyles.mediumBlackS20,
         ),
         actions: [
           BlocSelector<TreeCreateCubit, TreeCreateState, bool>(
@@ -68,13 +71,13 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: (pass)
-                        ? AppColors.color_251_239_239_1
-                        : AppColors.color_245_245_245_1,
+                        ? AppColors.colorFFFBEFEF
+                        : AppColors.colorFFF5F5F5,
                   ),
                   child: IconButton(
                     color: (pass)
-                        ? AppColors.color_178_0_0_1
-                        : AppColors.color_194_194_194_1,
+                        ? AppColors.colorFFB20000
+                        : AppColors.colorFFC2C2C2,
                     onPressed: () {},
                     icon: Icon(
                         (pass) ? Icons.done : Icons.arrow_forward_outlined),
@@ -83,9 +86,9 @@ class _TreeCreateViewState extends State<TreeCreateView> {
             selector: (state) => state.pass,
           ),
         ],
-        backgroundColor: AppColors.color_148_0_0_1,
+        backgroundColor: AppColors.colorFF940000,
       ),
-      backgroundColor: AppColors.color_251_239_239_1,
+      backgroundColor: AppColors.colorFFFBEFEF,
       body: BlocBuilder<TreeCreateCubit, TreeCreateState>(
           builder: (context, state) {
         final cubit = context.read<TreeCreateCubit>();
@@ -100,7 +103,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                 Expanded(
                   child: Container(
                       decoration: const BoxDecoration(
-                        color: AppColors.color_255_255_255_1,
+                        color: AppColors.colorFFFFFFFF,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
@@ -118,21 +121,14 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                               Container(
                                 padding: const EdgeInsets.only(left: 20),
                                 child: RichText(
-                                  text: const TextSpan(
+                                  text:  TextSpan(
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: 'Tên gia phả',
-                                        style: TextStyle(
-                                            color: AppColors.color_0_0_0_1,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w700),
-                                      ),
+                                        text: StringConstants.nameTree,
+                                        style: TextStyles.boldBlackS18,),
                                       TextSpan(
-                                          text: '*',
-                                          style: TextStyle(
-                                              color: AppColors.color_255_0_0_1,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700)),
+                                          text: StringConstants.obligatory1,
+                                          style: TextStyles.boldRed1S18),
                                     ],
                                   ),
                                 ),
@@ -142,29 +138,27 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                     const EdgeInsets.only(left: 20, right: 36),
                                 child: TextFormField(
                                   controller: _nameController,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  style:  TextStyles.size15,
                                   onChanged: (value) {
                                     cubit.setName(value);
                                   },
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Trường bắt buộc!';
+                                      return StringConstants.obligatory;
                                     }
                                     return null;
                                   },
                                   decoration: InputDecoration(
-                                    hintText: 'Nhập tên dòng họ',
+                                    hintText: StringConstants.roleHint,
                                     focusedBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: AppColors.color_173_173_173_1),
+                                          color: AppColors.colorFFADADAD),
                                     ),
                                     suffixIcon: (state.name != '')
                                         ? IconButton(
                                             icon: const Icon(
                                               Icons.cancel_outlined,
-                                              color: AppColors.color_148_0_0_1,
+                                              color: AppColors.colorFF940000,
                                             ),
                                             onPressed: () {
                                               _nameController.clear();
@@ -172,7 +166,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                           )
                                         : null,
                                   ),
-                                  cursorColor: AppColors.color_0_0_0_1,
+                                  cursorColor: AppColors.colorFF000000,
                                 ),
                               ),
                               const SizedBox(
@@ -180,11 +174,8 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                               ),
                               Container(
                                 padding: const EdgeInsets.only(left: 20),
-                                child: const Text('Giả sử dòng họ',
-                                    style: TextStyle(
-                                        color: AppColors.color_0_0_0_1,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700)),
+                                child:  Text(StringConstants.history,
+                                    style: TextStyles.boldBlackS18),
                               ),
                               Stack(
                                 children: [
@@ -200,9 +191,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                         textAlignVertical:
                                             TextAlignVertical.top,
                                         controller: _historyController,
-                                        style: const TextStyle(
-                                          fontSize: 15,
-                                        ),
+                                        style:  TextStyles.size15,
                                         inputFormatters: [
                                           LengthLimitingTextInputFormatter(
                                               2000),
@@ -211,13 +200,13 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                         decoration: InputDecoration(
                                           border: InputBorder.none,
                                           hintText:
-                                              'Nhập đôi nét về dòng họ của bạn',
+                                              StringConstants.desHistory,
                                           counterText:
                                               '${_historyController.text.length}/2000',
                                           contentPadding: const EdgeInsets.only(
                                               bottom: 60, top: 12),
                                         ),
-                                        cursorColor: AppColors.color_0_0_0_1,
+                                        cursorColor: AppColors.colorFF000000,
                                       ),
                                     ),
                                   ),
@@ -226,7 +215,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                     left: 20,
                                     right: 36,
                                     child: Container(
-                                      color: AppColors.color_173_173_173_1,
+                                      color: AppColors.colorFFADADAD,
                                       height: 1,
                                     ),
                                   )
@@ -237,11 +226,8 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                               ),
                               Container(
                                 padding: const EdgeInsets.only(left: 20),
-                                child: const Text('Địa chỉ',
-                                    style: TextStyle(
-                                        color: AppColors.color_0_0_0_1,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700)),
+                                child:  Text(StringConstants.address,
+                                    style: TextStyles.boldBlackS18),
                               ),
                               Padding(
                                 padding:
@@ -249,15 +235,12 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                 child: TextField(
                                   controller: _provinceController,
                                   readOnly: true,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  style:  TextStyles.size15,
                                   decoration: InputDecoration(
-                                      hintText: 'Chọn Tỉnh/Thành',
+                                      hintText: StringConstants.selectProvince,
                                       focusedBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color.fromRGBO(
-                                                173, 173, 173, 1)),
+                                            color: AppColors.colorFFADADAD),
                                       ),
                                       suffixIcon: IconButton(
                                         icon: const Icon(Icons.arrow_drop_down),
@@ -265,7 +248,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                           _showProvinceDialog(context, cubit);
                                         },
                                       )),
-                                  cursorColor: AppColors.color_0_0_0_1,
+                                  cursorColor: AppColors.colorFF000000,
                                 ),
                               ),
                               const SizedBox(
@@ -278,20 +261,17 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                   validator: (value) {
                                     if (districtList.isEmpty ||
                                         state.province == "") {
-                                      return "Vui lòng chọn tỉnh";
+                                      return StringConstants.obliProvince;
                                     }
                                   },
                                   controller: _districtController,
                                   readOnly: true,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  style:  TextStyles.size15,
                                   decoration: InputDecoration(
-                                      hintText: 'Chọn Quận/Huyện',
+                                      hintText: StringConstants.selectDistrict,
                                       focusedBorder: const UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color.fromRGBO(
-                                                173, 173, 173, 1)),
+                                            color: AppColors.colorFFADADAD),
                                       ),
                                       suffixIcon: IconButton(
                                         icon: const Icon(Icons.arrow_drop_down),
@@ -302,7 +282,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                                           }
                                         },
                                       )),
-                                  cursorColor: AppColors.color_0_0_0_1,
+                                  cursorColor: AppColors.colorFF000000,
                                 ),
                               ),
                               const SizedBox(
@@ -310,28 +290,23 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                               ),
                               Container(
                                 padding: const EdgeInsets.only(left: 20),
-                                child: const Text(
-                                    'Quan hệ của bạn với gia tộc này',
-                                    style: TextStyle(
-                                        color: AppColors.color_0_0_0_1,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700)),
+                                child:  Text(
+                                    StringConstants.relaTree,
+                                    style: TextStyles.boldBlackS18),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 20, right: 36),
+                               Padding(
+                                padding: const EdgeInsets.only(left: 20, right: 36),
                                 child: TextField(
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
+                                  style: TextStyles.size15,
                                   decoration: InputDecoration(
-                                    hintText: 'Nhà nội, Nhà ngoại, Nhà vợ',
-                                    focusedBorder: UnderlineInputBorder(
+                                    hintText: StringConstants.hintRela,
+                                    focusedBorder: const UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color:
-                                              Color.fromRGBO(173, 173, 173, 1)),
+                                              AppColors.colorFFADADAD),
                                     ),
                                   ),
-                                  cursorColor: AppColors.color_0_0_0_1,
+                                  cursorColor: AppColors.colorFF000000,
                                 ),
                               ),
                             ],
@@ -351,12 +326,12 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
-                    primary: AppColors.color_248_170_151_1,
+                    primary: AppColors.colorFFF8AA97,
                     padding: const EdgeInsets.all(38),
                   ),
                   child: const Icon(
                     Icons.camera_alt,
-                    color: AppColors.color_255_255_255_1,
+                    color: AppColors.colorFFFFFFFF,
                     size: 36,
                   ),
                 )),
@@ -371,7 +346,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Chọn tỉnh/thành'),
+          title:  Text(StringConstants.selectProvince),
           content: SizedBox(
             width: 200,
             height: 300,
@@ -404,7 +379,7 @@ class _TreeCreateViewState extends State<TreeCreateView> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Chọn quận/huyện'),
+          title:  Text(StringConstants.selectDistrict),
           content: SizedBox(
             width: 200,
             height: 300,
@@ -437,46 +412,13 @@ Future<void> selectImage(BuildContext context, TreeCreateCubit cubit) async {
     backgroundColor: Colors.transparent,
     context: context,
     builder: (BuildContext context) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomButton(
-                width: 120,
-                backgroundColor: AppColors.color_255_255_255_1,
-                onTap: () {
-                  cubit.chooseImageFromGallery();
-                  Navigator.pop(context);
-                },
-                textColor: AppColors.color_0_0_0_1,
-                textSize: 16,
-                title: 'Chọn ảnh',
-                icon: const Icon(Icons.image),
-              ),
-              const SizedBox(
-                width: 40,
-              ),
-              CustomButton(
-                width: 120,
-                icon: const Icon(Icons.camera_alt),
-                backgroundColor: AppColors.color_255_255_255_1,
-                onTap: () {
-                  cubit.takeImageFromCamera();
-                  Navigator.pop(context);
-                },
-                textColor: AppColors.color_0_0_0_1,
-                textSize: 16,
-                title: 'Chụp ảnh',
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-        ],
-      );
+      return PopupSelectImage(onTap1: () {
+        cubit.chooseImageFromGallery();
+        Navigator.pop(context);
+      }, onTap2: () {
+        cubit.takeImageFromCamera();
+        Navigator.pop(context);
+      });
     },
   );
 }

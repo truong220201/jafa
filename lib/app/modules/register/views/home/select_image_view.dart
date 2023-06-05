@@ -112,8 +112,8 @@ class ImagePickerView {}
   //                                 child: const CircularProgressIndicator(
   //                                   strokeWidth: 4,
   //                                   valueColor: AlwaysStoppedAnimation<Color>(
-  //                                       AppColors.color_178_0_0_1),
-  //                                   backgroundColor: AppColors.color_96_96_96_1,
+  //                                       AppColors.color178_0_0_1),
+  //                                   backgroundColor: AppColors.color96_96_96_1,
   //                                 ),
   //                               ),
   //                             ));

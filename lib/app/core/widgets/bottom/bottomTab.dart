@@ -15,8 +15,8 @@ class _BottomTabState extends State<BottomTab> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.color_178_0_0_1,
-        unselectedItemColor: AppColors.color_255_255_255_1,
+      selectedItemColor: AppColors.colorFFB20000,
+      unselectedItemColor: AppColors.colorFFFFFFFF,
       items: [
         BottomNavigationBarItem(
             icon: SvgPicture.asset(

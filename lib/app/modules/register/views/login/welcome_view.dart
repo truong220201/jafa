@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/values/app_colors.dart';
+import '../../../../core/values/text_styles.dart';
 import '../../../../main_router.dart';
 
 class WelcomeView extends StatefulWidget {
@@ -13,9 +14,15 @@ class WelcomeView extends StatefulWidget {
 
 class _WelcomeViewState extends State<WelcomeView> {
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.color_251_239_239_1,
+      backgroundColor: AppColors.colorFFFBEFEF,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -37,28 +44,23 @@ class _WelcomeViewState extends State<WelcomeView> {
               ),
               InkWell(
                 onTap: () async {
-                  final nextState =
-                      await context.router.push(const RegisterPhoneViewRoute());
+                  await context.router.push(const RegisterPhoneViewRoute());
                   // if (nextState != null) {
                   //   _nextState =
                   //       nextState as RegisterInformationState?;
                   // }
                 },
                 child: Container(
-                  padding: const EdgeInsets.only(
-                      left: 48, right: 48, top: 16, bottom: 16),
-                  decoration: const BoxDecoration(
-                    color: AppColors.color_255_255_255_1,
-                    borderRadius: BorderRadius.all(Radius.circular(32)),
-                  ),
-                  child: const Text(
-                    "Đăng nhập với số điện thoại",
-                    style: TextStyle(
-                        color: Color.fromRGBO(154, 15, 15, 1),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                    padding: const EdgeInsets.only(
+                        left: 48, right: 48, top: 16, bottom: 16),
+                    decoration: const BoxDecoration(
+                      color: AppColors.colorFFFFFFFF,
+                      borderRadius: BorderRadius.all(Radius.circular(32)),
+                    ),
+                    child: const Text(
+                      "Đăng nhập với số điện thoại",
+                      style: TextStyles.boldRed1S18,
+                    )),
               ),
               const SizedBox(
                 height: 32,
@@ -74,8 +76,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                       )),
                   const Text(
                     "Hoặc",
-                    style: TextStyle(
-                        color: Color.fromRGBO(47, 57, 75, 1), fontSize: 18),
+                    style: TextStyles.regularBlueS18,
                   ),
                   Container(
                       width: 115,
@@ -105,21 +106,21 @@ class _WelcomeViewState extends State<WelcomeView> {
               ),
               RichText(
                 textAlign: TextAlign.center,
-                selectionColor: AppColors.color_0_0_0_1,
+                selectionColor: AppColors.colorFF000000,
                 text: const TextSpan(
                   children: <TextSpan>[
                     TextSpan(
                         text: 'Khi đăng nhập là bạn đã đồng ý với\n',
                         style: TextStyle(
-                          color: AppColors.color_0_0_0_1,
+                          color: AppColors.colorFF000000,
                         )),
                     TextSpan(
                       text: 'điều khoản',
-                      style: TextStyle(color: AppColors.color_148_0_0_1),
+                      style: TextStyle(color: AppColors.colorFF940000),
                     ),
                     TextSpan(
                         text: ' của chúng tôi ',
-                        style: TextStyle(color: AppColors.color_0_0_0_1)),
+                        style: TextStyle(color: AppColors.colorFF000000)),
                   ],
                 ),
               )

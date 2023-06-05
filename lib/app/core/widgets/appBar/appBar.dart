@@ -32,7 +32,7 @@ class CustomAppBarWidget extends StatelessWidget {
               ),
             )
           ],
-          backgroundColor: AppColors.color_148_0_0_1,
+          backgroundColor: AppColors.colorFF940000,
         ),
       ),
     );

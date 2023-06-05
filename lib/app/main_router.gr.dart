@@ -23,7 +23,7 @@ class _$MainRouter extends RootStackRouter {
         routeData: routeData,
         child: ConfirmView(
           key: args.key,
-          registrationState: args.registrationState,
+          cubit: args.cubit,
         ),
       );
     },
@@ -33,7 +33,7 @@ class _$MainRouter extends RootStackRouter {
         routeData: routeData,
         child: RegisterInfoView(
           key: args.key,
-          registrationState: args.registrationState,
+          cubit: args.cubit,
         ),
       );
     },
@@ -79,31 +79,31 @@ class _$MainRouter extends RootStackRouter {
   List<RouteConfig> get routes => [
         RouteConfig(
           ConfirmViewRoute.name,
-          path: '/confirm-view',
+          path: 'confirm',
         ),
         RouteConfig(
           RegisterInfoViewRoute.name,
-          path: '/register-info-view',
+          path: 'register',
         ),
         RouteConfig(
           RegisterPhoneViewRoute.name,
-          path: '/register-phone-view',
+          path: 'phone',
         ),
         RouteConfig(
           HomeViewRoute.name,
-          path: '/home-view',
+          path: 'home',
         ),
         RouteConfig(
           TreeCreateViewRoute.name,
-          path: '/tree-create-view',
+          path: 'create_tree',
         ),
         RouteConfig(
           TreeDetailViewRoute.name,
-          path: '/tree-detail-view',
+          path: 'tree_detail',
         ),
         RouteConfig(
           ScanQRViewRoute.name,
-          path: '/scan-qr-view',
+          path: 'scan_qr',
         ),
         RouteConfig(
           WelcomeViewRoute.name,
@@ -117,13 +117,13 @@ class _$MainRouter extends RootStackRouter {
 class ConfirmViewRoute extends PageRouteInfo<ConfirmViewRouteArgs> {
   ConfirmViewRoute({
     Key? key,
-    required RegistrationState registrationState,
+    required RegistrationCubit cubit,
   }) : super(
           ConfirmViewRoute.name,
-          path: '/confirm-view',
+          path: 'confirm',
           args: ConfirmViewRouteArgs(
             key: key,
-            registrationState: registrationState,
+            cubit: cubit,
           ),
         );
 
@@ -133,16 +133,16 @@ class ConfirmViewRoute extends PageRouteInfo<ConfirmViewRouteArgs> {
 class ConfirmViewRouteArgs {
   const ConfirmViewRouteArgs({
     this.key,
-    required this.registrationState,
+    required this.cubit,
   });
 
   final Key? key;
 
-  final RegistrationState registrationState;
+  final RegistrationCubit cubit;
 
   @override
   String toString() {
-    return 'ConfirmViewRouteArgs{key: $key, registrationState: $registrationState}';
+    return 'ConfirmViewRouteArgs{key: $key, cubit: $cubit}';
   }
 }
 
@@ -151,13 +151,13 @@ class ConfirmViewRouteArgs {
 class RegisterInfoViewRoute extends PageRouteInfo<RegisterInfoViewRouteArgs> {
   RegisterInfoViewRoute({
     Key? key,
-    required RegistrationState registrationState,
+    required RegistrationCubit cubit,
   }) : super(
           RegisterInfoViewRoute.name,
-          path: '/register-info-view',
+          path: 'register',
           args: RegisterInfoViewRouteArgs(
             key: key,
-            registrationState: registrationState,
+            cubit: cubit,
           ),
         );
 
@@ -167,16 +167,16 @@ class RegisterInfoViewRoute extends PageRouteInfo<RegisterInfoViewRouteArgs> {
 class RegisterInfoViewRouteArgs {
   const RegisterInfoViewRouteArgs({
     this.key,
-    required this.registrationState,
+    required this.cubit,
   });
 
   final Key? key;
 
-  final RegistrationState registrationState;
+  final RegistrationCubit cubit;
 
   @override
   String toString() {
-    return 'RegisterInfoViewRouteArgs{key: $key, registrationState: $registrationState}';
+    return 'RegisterInfoViewRouteArgs{key: $key, cubit: $cubit}';
   }
 }
 
@@ -186,7 +186,7 @@ class RegisterPhoneViewRoute extends PageRouteInfo<void> {
   const RegisterPhoneViewRoute()
       : super(
           RegisterPhoneViewRoute.name,
-          path: '/register-phone-view',
+          path: 'phone',
         );
 
   static const String name = 'RegisterPhoneViewRoute';
@@ -198,7 +198,7 @@ class HomeViewRoute extends PageRouteInfo<void> {
   const HomeViewRoute()
       : super(
           HomeViewRoute.name,
-          path: '/home-view',
+          path: 'home',
         );
 
   static const String name = 'HomeViewRoute';
@@ -210,7 +210,7 @@ class TreeCreateViewRoute extends PageRouteInfo<void> {
   const TreeCreateViewRoute()
       : super(
           TreeCreateViewRoute.name,
-          path: '/tree-create-view',
+          path: 'create_tree',
         );
 
   static const String name = 'TreeCreateViewRoute';
@@ -222,7 +222,7 @@ class TreeDetailViewRoute extends PageRouteInfo<void> {
   const TreeDetailViewRoute()
       : super(
           TreeDetailViewRoute.name,
-          path: '/tree-detail-view',
+          path: 'tree_detail',
         );
 
   static const String name = 'TreeDetailViewRoute';
@@ -234,7 +234,7 @@ class ScanQRViewRoute extends PageRouteInfo<void> {
   const ScanQRViewRoute()
       : super(
           ScanQRViewRoute.name,
-          path: '/scan-qr-view',
+          path: 'scan_qr',
         );
 
   static const String name = 'ScanQRViewRoute';
