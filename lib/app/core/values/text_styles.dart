@@ -24,37 +24,121 @@ abstract class TextStyles {
     fontFamily: defaultFontFamily,
     fontFamilyFallback: defaultFontFamilyFallback,
   );
-  static const bold14_titleBold = _medium14_07;
-  static const _medium16_lineHeight24 = TextStyle(
+
+  static const bold14TitleBold = _medium14_07;
+
+  static const _medium16LineHeight24 = TextStyle(
     fontWeight: FontW.mediumM,
     fontSize: 16,
     letterSpacing: 0.7,
     color: AppColors.c1D1D1D_onSurface,
     fontFamily: defaultFontFamily,
   );
-  static const medium16_lineHeight24_sur = _medium16_lineHeight24;
-  static const _medium14_lineHeight21 = TextStyle(
+
+  static const medium16LineHeight24Sur = _medium16LineHeight24;
+
+  static const _medium14LineHeight21 = TextStyle(
     fontWeight: FontW.medium,
     fontSize: 14,
     letterSpacing: 0.7,
     color: AppColors.c1D1D1D_onSurface,
     fontFamily: defaultFontFamily,
   );
-  static const medium14_lineHeight21_sur = _medium14_lineHeight21;
-  static const _small12_lineHeight18 = TextStyle(
+  static const medium14LineHeight21Sur = _medium14LineHeight21;
+  static const _small12LineHeight18 = TextStyle(
     fontWeight: FontW.regular,
     fontSize: 12,
     letterSpacing: 0.7,
-    color: AppColors.color_255_128_128_137,
+    color: AppColors.colorFF808089,
     fontFamily: defaultFontFamily,
   );
-  static const small12_lineHeight18_sur = _small12_lineHeight18;
-  static const _small12_lineHeight18_black = TextStyle(
+
+  static const small12LineHeight18Sur = _small12LineHeight18;
+
+  static const small12LineHeight18BlackSur = _small12LineHeight18;
+
+  static const regularWhiteS20 = TextStyle(
+    fontSize: 20,
+    color: AppColors.colorFFFFFFFF,
+  );
+
+  static const boldBlackS18 = TextStyle(
+    color: AppColors.colorFF000000,
+    fontSize: 18,
+    fontWeight: FontW.bold,
+  );
+  static const boldRedS18 = TextStyle(
+    color: AppColors.colorFFFF0000,
+    fontSize: 18,
+    fontWeight: FontW.bold,
+  );
+
+  static const size15 = TextStyle(
+    fontSize: 15,
+  );
+
+  static const size14 = TextStyle(
+    fontSize: 14,
+  );
+
+  static const size20 = TextStyle(
+    fontSize: 20,
+  );
+
+  static const mediumMBlackS18 = TextStyle(
+    fontWeight: FontW.mediumM,
+    fontSize: 18,
+  );
+
+  static const mediumMBlueS16 = TextStyle(
+    fontWeight: FontW.mediumM,
+    fontSize: 16,
+    color: AppColors.colorFF344054,
+  );
+
+  static const boldRedS20 = TextStyle(
+    color: AppColors.colorFF940000,
+    fontSize: 20,
+    fontWeight: FontW.bold,
+  );
+
+  static const boldRed1S18 = TextStyle(
+    color: AppColors.colorFF9A0F0F,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const regularBlueS18 = TextStyle(
+    color: AppColors.colorFF2F394B,
+    fontSize: 18,
+  );
+
+  static const mediumBlackS20 = TextStyle(
+    fontWeight: FontW.medium,
+    fontSize: 20,
+  );
+
+  static const mediumWhiteS14 = TextStyle(
+    fontSize: 14,
+    fontWeight: FontW.medium,
+    color: AppColors.colorFFFFFFFF,
+  );
+
+  static const regularRedS13 = TextStyle(
+    fontSize: 13,
     fontWeight: FontW.regular,
-    fontSize: 12,
-    letterSpacing: 0.7,
-    color: Color.fromARGB(255, 0, 0, 0),
-    fontFamily: defaultFontFamily,
+    color: AppColors.colorFFFF0000,
   );
-  static const small12_lineHeight18_black_sur = _small12_lineHeight18;
+
+  static const mediumWhiteS36 = TextStyle(
+    fontWeight: FontW.medium,
+    fontSize: 36,
+    color: AppColors.colorFFFFFFFF,
+  );
+
+  static const regularBlackS14 = TextStyle(
+    fontWeight: FontW.regular,
+    fontSize: 14,
+    color: AppColors.colorFF424242,
+  );
 }

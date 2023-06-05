@@ -78,7 +78,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                 );
               })
             ],
-            backgroundColor: AppColors.color_148_0_0_1,
+            backgroundColor: AppColors.colorFF940000,
           ),
           backgroundColor: const Color.fromRGBO(251, 239, 239, 1),
           body: Stack(
@@ -171,7 +171,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                 child: const Text("Tạo ngay",
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.color_148_0_0_1,
+                      color: AppColors.colorFF940000,
                     ))),
             const Text("hoặc"),
             TextButton(
@@ -179,7 +179,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                 child: const Text("Tham gia vào gia phả",
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.color_148_0_0_1,
+                      color: AppColors.colorFF940000,
                     ))),
           ],
         )
@@ -245,14 +245,14 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                         children: [
                           const Text(
                             'Mời bạn bè vào gia tộc',
-                            style: TextStyles.medium16_lineHeight24_sur,
+                            style: TextStyles.medium16LineHeight24Sur,
                           ),
                           const SizedBox(
                             height: 4,
                           ),
                           const Text(
                             'Hiển thị hoặc gửi mã QR này cho bạn bè để thêm họ vào gia tộc Trần Viết Gia',
-                            style: TextStyles.small12_lineHeight18_sur,
+                            style: TextStyles.small12LineHeight18Sur,
                           ),
                           const SizedBox(
                             height: 20,
@@ -403,12 +403,12 @@ class _TreeDetailViewState extends State<TreeDetailView> {
               title != ''
                   ? Text(
                       title,
-                      style: TextStyles.medium16_lineHeight24_sur,
+                      style: TextStyles.medium16LineHeight24Sur,
                     )
                   : Container(),
               Text(
                 content,
-                style: TextStyles.small12_lineHeight18_sur,
+                style: TextStyles.small12LineHeight18Sur,
               )
             ],
           ),
@@ -442,7 +442,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                 children: [
                   Text(
                     content,
-                    style: TextStyles.medium14_lineHeight21_sur,
+                    style: TextStyles.medium14LineHeight21Sur,
                   )
                 ],
               ),
@@ -477,7 +477,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
               children: [
                 Text(
                   content,
-                  style: TextStyles.medium14_lineHeight21_sur,
+                  style: TextStyles.medium14LineHeight21Sur,
                 )
               ],
             ),
@@ -528,11 +528,11 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                       children: [
                         Text(
                           state.treeDetail.user.name,
-                          style: TextStyles.medium16_lineHeight24_sur,
+                          style: TextStyles.medium16LineHeight24Sur,
                         ),
                         Text(
                           state.treeDetail.familyInfo,
-                          style: TextStyles.medium14_lineHeight21_sur,
+                          style: TextStyles.medium14LineHeight21Sur,
                         )
                       ]),
                   const CustomButton(),
@@ -542,7 +542,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
                   state.treeDetail.familyInfoContent,
-                  style: TextStyles.small12_lineHeight18_sur,
+                  style: TextStyles.small12LineHeight18Sur,
                 ),
               )
             ]))
@@ -615,7 +615,7 @@ class CustomIconButton extends StatelessWidget {
             icon,
             Text(
               name,
-              style: TextStyles.small12_lineHeight18_black_sur,
+              style: TextStyles.small12LineHeight18BlackSur,
             )
           ])),
     );

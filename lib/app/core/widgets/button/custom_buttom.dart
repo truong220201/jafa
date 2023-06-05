@@ -28,11 +28,11 @@ enum ButtonSize {
   TextStyle get primaryTextStyle {
     switch (this) {
       case large:
-        return TextStyles.bold14_titleBold;
+        return TextStyles.bold14TitleBold;
       case small:
-        return TextStyles.bold14_titleBold;
+        return TextStyles.bold14TitleBold;
       case extraSmall:
-        return TextStyles.bold14_titleBold;
+        return TextStyles.bold14TitleBold;
     }
   }
 
@@ -42,7 +42,7 @@ enum ButtonSize {
         throw UnimplementedError('No TextStyle for large SecondaryButton');
       case small:
       case extraSmall:
-        return TextStyles.bold14_titleBold;
+        return TextStyles.bold14TitleBold;
     }
   }
 
@@ -52,7 +52,7 @@ enum ButtonSize {
         throw UnimplementedError('No TextStyle for large TertiaryButton');
       case small:
       case extraSmall:
-        return TextStyles.bold14_titleBold;
+        return TextStyles.bold14TitleBold;
     }
   }
 }
@@ -70,7 +70,7 @@ class CustomButton extends StatelessWidget {
     required this.textColor,
     required this.textSize,
     this.textWeight = FontWeight.w400,
-    this.borderColor = AppColors.color_0_0_0_1,
+    this.borderColor = AppColors.colorFF000000,
     required this.icon,
     //this.fontSize = 14,
   }) : super(key: key);

@@ -26,7 +26,7 @@ class CustomModal extends Dialog {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(message,
-                    style: messageTextStyle ?? TextStyles.bold14_titleBold,
+                    style: messageTextStyle ?? TextStyles.bold14TitleBold,
                     textAlign: TextAlign.center),
                 const SizedBox(
                   height: 30,
@@ -63,7 +63,7 @@ class ForceLogoutDialog extends AlertDialog {
               if (titleDialog.isNotEmpty) ...[
                 Text(
                   titleDialog,
-                  style: TextStyles.bold14_titleBold
+                  style: TextStyles.bold14TitleBold
                       .copyWith(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -73,7 +73,7 @@ class ForceLogoutDialog extends AlertDialog {
               ],
               Text(
                 body,
-                style: TextStyles.bold14_titleBold,
+                style: TextStyles.bold14TitleBold,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -101,7 +101,7 @@ class ErrorDialog extends AlertDialog {
             children: [
               Text(
                 'エラー',
-                style: TextStyles.bold14_titleBold
+                style: TextStyles.bold14TitleBold
                     .copyWith(fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -110,7 +110,7 @@ class ErrorDialog extends AlertDialog {
               ),
               Text(
                 message,
-                style: TextStyles.bold14_titleBold,
+                style: TextStyles.bold14TitleBold,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),

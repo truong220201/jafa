@@ -35,16 +35,8 @@ class _RouteAppState extends State<RouteApp> {
             create: (context) => MockHomeRepository()),
         RepositoryProvider<MockTreeDetailRepository>(
             create: (context) => MockTreeDetailRepository()),
-        RepositoryProvider(
-          create: (context) => RegistrationRepository(),
-        ),
-        RepositoryProvider(
-          create: (context) => TreeCreateRepository(),
-        ),
-        RepositoryProvider<MockHomeRepository>(
-            create: (context) => MockHomeRepository()),
-        RepositoryProvider<MockTreeDetailRepository>(
-            create: (context) => MockTreeDetailRepository()),
+        RepositoryProvider(create: (context) => RegistrationRepository()),
+        RepositoryProvider(create: (context) => TreeCreateRepository()),
       ],
       child: MaterialApp.router(
         routeInformationParser: _appRouter.defaultRouteParser(),

@@ -29,6 +29,12 @@ class _HomeViewState extends State<HomeView> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +60,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           )
         ],
-        backgroundColor: AppColors.color_148_0_0_1,
+        backgroundColor: AppColors.colorFF940000,
       ),
       bottomNavigationBar: const BottomTab(),
       backgroundColor: const Color.fromRGBO(251, 239, 239, 1),
@@ -116,7 +122,7 @@ class _HomeViewState extends State<HomeView> {
                                 child: const Text("Tạo ngay",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: AppColors.color_148_0_0_1,
+                                      color: AppColors.colorFF940000,
                                     ))),
                             const Text("hoặc"),
                             TextButton(
@@ -124,7 +130,7 @@ class _HomeViewState extends State<HomeView> {
                                 child: const Text("Tham gia vào gia phả",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: AppColors.color_148_0_0_1,
+                                      color: AppColors.colorFF940000,
                                     ))),
                           ],
                         )
@@ -148,7 +154,7 @@ class _HomeViewState extends State<HomeView> {
           onPressed: () async {
             await context.router.push(const TreeCreateViewRoute());
           },
-          backgroundColor: AppColors.color_178_0_0_1,
+          backgroundColor: AppColors.colorFFB20000,
           foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
           mini: false,
           child: const Icon(
