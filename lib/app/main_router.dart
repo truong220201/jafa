@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'app_routes.dart';
 import 'modules/detail_jafa/views/tree_detail_view.dart';
-import 'modules/home/views/home_default.dart';
+import 'modules/home/views/home_default_view.dart';
 import 'modules/register/cubit/registration_cubit.dart';
 import 'modules/register/cubit/registration_state.dart';
 import 'modules/register/views/home/registration_info_view.dart';
@@ -14,13 +14,13 @@ import 'modules/tree_create/view/tree_create_view.dart';
 part 'main_router.gr.dart';
 
 @MaterialAutoRouter(routes: <AutoRoute>[
-  MaterialRoute(page: ConfirmView,path: Routes.confirm),
-  MaterialRoute(page: RegisterInfoView,path: Routes.register),
-  MaterialRoute(page: RegisterPhoneView,path: Routes.phone),
-  MaterialRoute(page: HomeView,path: Routes.home),
-  MaterialRoute(page: TreeCreateView,path: Routes.createTree),
-  MaterialRoute(page: TreeDetailView,path: Routes.treeDetail),
-  MaterialRoute(page: ScanQRView,path: Routes.scanQR),
+  MaterialRoute(page: ConfirmView, path: Routes.confirm),
+  MaterialRoute(page: RegisterInfoView, path: Routes.register),
+  MaterialRoute(page: RegisterPhoneView, path: Routes.phone),
+  MaterialRoute(page: HomeView, path: Routes.home),
+  MaterialRoute(page: TreeCreateView, path: Routes.createTree),
+  MaterialRoute(page: TreeDetailView, path: Routes.treeDetail),
+  MaterialRoute(page: ScanQRView, path: Routes.scanQR),
   MaterialRoute(page: WelcomeView, initial: true),
 ])
 class MainRouter extends _$MainRouter {

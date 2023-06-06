@@ -1,14 +1,13 @@
-import 'package:genealogy_management/app/data/model/user_model.dart';
+import 'package:genealogy_management/app/data/model/jafa_model.dart';
 
 import '../../../data/model/tree_detail_model.dart';
-
 
 class MockTreeDetailRepository {
   TreeDetailModel _treeDetail = const TreeDetailModel();
   @override
   Future<TreeDetailModel> getTreeDetailModel() async {
     _treeDetail = const TreeDetailModel(
-        user: UserModel(name: 'Trần Viết Gia', content: 'Nhà Ngoại bên mẹ'),
+        jafa: JafaModel(name: 'Trần Viết Gia', content: 'Nhà Ngoại bên mẹ'),
         familyInfo: '9 Đời 200 Thành viên',
         familyInfoContent:
             'Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi.',

@@ -6,7 +6,7 @@ import '../../../data/model/jafa_model.dart';
 final apiHelper = ApiHelper();
 
 class HomeApi {
-  Future<List<JafaModel>> getConservations() async {
+  Future<List<JafaModel>> getHomeDetail() async {
     final responseData =
         await apiHelper.get(path: '/api/genealogy/?per_page=23&page=5');
     List<JafaModel> data = responseData.data['data']

@@ -20,11 +20,8 @@ JafaModel _$JafaModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JafaModel {
-  @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'relation_name')
   String get content => throw _privateConstructorUsedError;
-  @JsonKey(name: 'image')
   String get imageJafa => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,10 +35,7 @@ abstract class $JafaModelCopyWith<$Res> {
   factory $JafaModelCopyWith(JafaModel value, $Res Function(JafaModel) then) =
       _$JafaModelCopyWithImpl<$Res, JafaModel>;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'name') String name,
-      @JsonKey(name: 'relation_name') String content,
-      @JsonKey(name: 'image') String imageJafa});
+  $Res call({String name, String content, String imageJafa});
 }
 
 /// @nodoc
@@ -85,10 +79,7 @@ abstract class _$$_JafaModelCopyWith<$Res> implements $JafaModelCopyWith<$Res> {
       __$$_JafaModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'name') String name,
-      @JsonKey(name: 'relation_name') String content,
-      @JsonKey(name: 'image') String imageJafa});
+  $Res call({String name, String content, String imageJafa});
 }
 
 /// @nodoc
@@ -126,23 +117,20 @@ class __$$_JafaModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_JafaModel extends _JafaModel {
-  const _$_JafaModel(
-      {@JsonKey(name: 'name') this.name = '',
-      @JsonKey(name: 'relation_name') this.content = '',
-      @JsonKey(name: 'image') this.imageJafa = ''})
+  const _$_JafaModel({this.name = '', this.content = '', this.imageJafa = ''})
       : super._();
 
   factory _$_JafaModel.fromJson(Map<String, dynamic> json) =>
       _$$_JafaModelFromJson(json);
 
   @override
-  @JsonKey(name: 'name')
+  @JsonKey()
   final String name;
   @override
-  @JsonKey(name: 'relation_name')
+  @JsonKey()
   final String content;
   @override
-  @JsonKey(name: 'image')
+  @JsonKey()
   final String imageJafa;
 
   @override
@@ -181,22 +169,19 @@ class _$_JafaModel extends _JafaModel {
 
 abstract class _JafaModel extends JafaModel {
   const factory _JafaModel(
-      {@JsonKey(name: 'name') final String name,
-      @JsonKey(name: 'relation_name') final String content,
-      @JsonKey(name: 'image') final String imageJafa}) = _$_JafaModel;
+      {final String name,
+      final String content,
+      final String imageJafa}) = _$_JafaModel;
   const _JafaModel._() : super._();
 
   factory _JafaModel.fromJson(Map<String, dynamic> json) =
       _$_JafaModel.fromJson;
 
   @override
-  @JsonKey(name: 'name')
   String get name;
   @override
-  @JsonKey(name: 'relation_name')
   String get content;
   @override
-  @JsonKey(name: 'image')
   String get imageJafa;
   @override
   @JsonKey(ignore: true)

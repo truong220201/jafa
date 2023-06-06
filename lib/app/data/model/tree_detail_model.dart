@@ -8,7 +8,7 @@ part 'tree_detail_model.g.dart';
 class TreeDetailModel with _$TreeDetailModel {
   const TreeDetailModel._();
   const factory TreeDetailModel({
-    @Default(JafaModel()) JafaModel jafa,
+    JafaModel? jafa,
     @Default('') String familyInfo,
     @Default('') String familyInfoContent,
     @Default('') String imageUrl,

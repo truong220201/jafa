@@ -527,7 +527,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.treeDetail.user.name,
+                          state.treeDetail.jafa!.name,
                           style: TextStyles.medium16LineHeight24Sur,
                         ),
                         Text(

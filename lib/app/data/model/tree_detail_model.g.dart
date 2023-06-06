@@ -9,7 +9,7 @@ part of 'tree_detail_model.dart';
 _$_TreeDetailModel _$$_TreeDetailModelFromJson(Map<String, dynamic> json) =>
     _$_TreeDetailModel(
       jafa: json['jafa'] == null
-          ? const JafaModel()
+          ? null
           : JafaModel.fromJson(json['jafa'] as Map<String, dynamic>),
       familyInfo: json['familyInfo'] as String? ?? '',
       familyInfoContent: json['familyInfoContent'] as String? ?? '',

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_network/image_network.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomCard extends StatelessWidget {
   CustomCard({
@@ -12,8 +11,7 @@ class CustomCard extends StatelessWidget {
   });
   String name;
   String content;
-  String? image =
-      "https://www.imagenetwork.scaffoldtecnologia.com.br/flutter.jpg";
+  String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -39,30 +37,12 @@ class CustomCard extends StatelessWidget {
                             "assets/images/imagepng/image_scroll.png"),
                       )
                     : CircleAvatar(
-                        child: ImageNetwork(
-                        image: image!,
-                        imageCache: CachedNetworkImageProvider(image!),
-                        height: 150,
-                        width: 150,
-                        duration: 1500,
-                        curve: Curves.easeIn,
-                        onPointer: true,
-                        debugPrint: false,
-                        fullScreen: false,
-                        fitAndroidIos: BoxFit.cover,
-                        fitWeb: BoxFitWeb.cover,
-                        borderRadius: BorderRadius.circular(70),
-                        onLoading: const CircularProgressIndicator(
-                          color: Colors.indigoAccent,
+                        child: FadeInImage.assetNetwork(
+                          placeholder:
+                              "assets/images/imagepng/image_scroll.png",
+                          image: image!,
                         ),
-                        onError: const Icon(
-                          Icons.error,
-                          color: Colors.red,
-                        ),
-                        onTap: () {
-                          debugPrint("©gabriel_patrick_souza");
-                        },
-                      )),
+                      ),
               ),
               Expanded(
                 child: Padding(

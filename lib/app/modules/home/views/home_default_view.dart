@@ -11,9 +11,10 @@ import '../../../core/widgets/card/custom_card.dart';
 import '../../../core/widgets/search/custom_search.dart';
 import '../../../data/model/jafa_model.dart';
 import '../../scan_QR/scan_qr_view.dart';
+import '../api/home_api.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
-import '../repository/mock_home_repository.dart';
+import '../repository/home_repository.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -26,7 +27,7 @@ class _HomeViewState extends State<HomeView> {
   bool haveJaFa = true;
   void openScan() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const ScanQRView()));
+        context, MaterialPageRoute(builder: (context) => ScanQRView()));
   }
 
   @override
@@ -65,11 +66,11 @@ class _HomeViewState extends State<HomeView> {
       bottomNavigationBar: const BottomTab(),
       backgroundColor: const Color.fromRGBO(251, 239, 239, 1),
       body: BlocProvider(
-          create: (context) =>
-              HomeCubit(context.read<MockHomeRepository>())..initData(),
+          create: (context) => HomeCubit(context.read<HomeApi>())..initData(),
           child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-            return state.hasInfoJaFa
-                ? Column(children: [
+            return state.userList.isNotEmpty
+                ? _ifEmpty()
+                : Column(children: [
                     const Padding(
                       padding: EdgeInsets.all(19),
                       child: SearchWidget(),
@@ -80,8 +81,7 @@ class _HomeViewState extends State<HomeView> {
                                 child: _listCard(context, state.userList)),
                           )
                         : const Center(child: CircularProgressIndicator())
-                  ])
-                : _ifEmpty();
+                  ]);
           })),
       floatingActionButton: SizedBox(
         width: 68,

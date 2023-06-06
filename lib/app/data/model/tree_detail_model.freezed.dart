@@ -20,7 +20,7 @@ TreeDetailModel _$TreeDetailModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreeDetailModel {
-  JafaModel get jafa => throw _privateConstructorUsedError;
+  JafaModel? get jafa => throw _privateConstructorUsedError;
   String get familyInfo => throw _privateConstructorUsedError;
   String get familyInfoContent => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
@@ -38,12 +38,12 @@ abstract class $TreeDetailModelCopyWith<$Res> {
       _$TreeDetailModelCopyWithImpl<$Res, TreeDetailModel>;
   @useResult
   $Res call(
-      {JafaModel jafa,
+      {JafaModel? jafa,
       String familyInfo,
       String familyInfoContent,
       String imageUrl});
 
-  $JafaModelCopyWith<$Res> get jafa;
+  $JafaModelCopyWith<$Res>? get jafa;
 }
 
 /// @nodoc
@@ -59,16 +59,16 @@ class _$TreeDetailModelCopyWithImpl<$Res, $Val extends TreeDetailModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jafa = null,
+    Object? jafa = freezed,
     Object? familyInfo = null,
     Object? familyInfoContent = null,
     Object? imageUrl = null,
   }) {
     return _then(_value.copyWith(
-      jafa: null == jafa
+      jafa: freezed == jafa
           ? _value.jafa
           : jafa // ignore: cast_nullable_to_non_nullable
-              as JafaModel,
+              as JafaModel?,
       familyInfo: null == familyInfo
           ? _value.familyInfo
           : familyInfo // ignore: cast_nullable_to_non_nullable
@@ -86,8 +86,12 @@ class _$TreeDetailModelCopyWithImpl<$Res, $Val extends TreeDetailModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $JafaModelCopyWith<$Res> get jafa {
-    return $JafaModelCopyWith<$Res>(_value.jafa, (value) {
+  $JafaModelCopyWith<$Res>? get jafa {
+    if (_value.jafa == null) {
+      return null;
+    }
+
+    return $JafaModelCopyWith<$Res>(_value.jafa!, (value) {
       return _then(_value.copyWith(jafa: value) as $Val);
     });
   }
@@ -102,13 +106,13 @@ abstract class _$$_TreeDetailModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {JafaModel jafa,
+      {JafaModel? jafa,
       String familyInfo,
       String familyInfoContent,
       String imageUrl});
 
   @override
-  $JafaModelCopyWith<$Res> get jafa;
+  $JafaModelCopyWith<$Res>? get jafa;
 }
 
 /// @nodoc
@@ -122,16 +126,16 @@ class __$$_TreeDetailModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jafa = null,
+    Object? jafa = freezed,
     Object? familyInfo = null,
     Object? familyInfoContent = null,
     Object? imageUrl = null,
   }) {
     return _then(_$_TreeDetailModel(
-      jafa: null == jafa
+      jafa: freezed == jafa
           ? _value.jafa
           : jafa // ignore: cast_nullable_to_non_nullable
-              as JafaModel,
+              as JafaModel?,
       familyInfo: null == familyInfo
           ? _value.familyInfo
           : familyInfo // ignore: cast_nullable_to_non_nullable
@@ -152,7 +156,7 @@ class __$$_TreeDetailModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TreeDetailModel extends _TreeDetailModel {
   const _$_TreeDetailModel(
-      {this.jafa = const JafaModel(),
+      {this.jafa,
       this.familyInfo = '',
       this.familyInfoContent = '',
       this.imageUrl = ''})
@@ -162,8 +166,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
       _$$_TreeDetailModelFromJson(json);
 
   @override
-  @JsonKey()
-  final JafaModel jafa;
+  final JafaModel? jafa;
   @override
   @JsonKey()
   final String familyInfo;
@@ -214,7 +217,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
 
 abstract class _TreeDetailModel extends TreeDetailModel {
   const factory _TreeDetailModel(
-      {final JafaModel jafa,
+      {final JafaModel? jafa,
       final String familyInfo,
       final String familyInfoContent,
       final String imageUrl}) = _$_TreeDetailModel;
@@ -224,7 +227,7 @@ abstract class _TreeDetailModel extends TreeDetailModel {
       _$_TreeDetailModel.fromJson;
 
   @override
-  JafaModel get jafa;
+  JafaModel? get jafa;
   @override
   String get familyInfo;
   @override

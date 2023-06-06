@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:genealogy_management/app/modules/home/repository/home_repository.dart';
 import 'package:genealogy_management/app/modules/register/repository/registration_repository.dart';
 import 'core/values/app_theme.dart';
 import 'main_router.dart';
 import 'modules/detail_jafa/repository/mock_tree_detail_repository.dart';
-import 'modules/home/repository/mock_home_repository.dart';
+import 'modules/home/api/home_api.dart';
 import 'modules/tree_create/repository/tree_create_repository.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -31,8 +32,7 @@ class _RouteAppState extends State<RouteApp> {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<MockHomeRepository>(
-            create: (context) => MockHomeRepository()),
+        RepositoryProvider<HomeApi>(create: (context) => HomeApi()),
         RepositoryProvider<MockTreeDetailRepository>(
             create: (context) => MockTreeDetailRepository()),
         RepositoryProvider(create: (context) => RegistrationRepository()),

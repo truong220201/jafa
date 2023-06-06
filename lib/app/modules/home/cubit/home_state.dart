@@ -10,7 +10,6 @@ class HomeState with _$HomeState {
 
   const factory HomeState({
     Object? showUserListError,
-    @Default(false) bool hasInfoJaFa,
     @Default([]) List<JafaModel> userList,
     @Default(false) bool isLoading,
   }) = _HomeState;

@@ -1,7 +1,6 @@
 import 'package:genealogy_management/app/data/model/jafa_model.dart';
 
 import '../api/home_api.dart';
-import 'mock_home_repository.dart';
 
 class HomeRepository {
   final HomeApi _api;

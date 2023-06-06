@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
-import 'package:genealogy_management/app/data/model/user_model.dart';
 
 import '../repository/mock_tree_detail_repository.dart';
 import 'tree_detail_state.dart';
@@ -33,7 +32,6 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
   }
 
   void initData() {
-    debugPrint('init' + state.toString());
     loadData();
     checkHasData();
     debugPrint('state: ' + state.toString());
