@@ -32,10 +32,10 @@ class ApiPath {
       ignorePaths.map((e) => e.toString()).toList();
 }
 
-const String rootPath = 'https://curly-wolves-say.loca.lt';
+const String rootPath = 'https://twelve-dogs-go.loca.lt';
 
 class ApiHelper {
-  final logger = BuildConfig.instance.config.logger;
+  // final logger = BuildConfig.instance.config.logger;
   static const int timeoutDuration = 10;
   final _dio = Dio();
 
@@ -49,10 +49,11 @@ class ApiHelper {
     }
 
     final Map<String, String> headers =
-        _getHeaders('1|InYOqkfZZLcwog5JHyaX7hbnVFBVROj116yRT1iD');
+        _getHeaders('14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw');
     try {
-      return await _dio.get(rootPath + path,
-          options: Options(headers: headers));
+      var response =
+          await _dio.get(rootPath + path, options: Options(headers: headers));
+      return response;
     } catch (e) {
       throw Exception('exception in GET HTTP request. $e');
     }
@@ -66,7 +67,7 @@ class ApiHelper {
           options: Options(headers: {
             "Content-Type": "application/json",
             "Authorization":
-                "Bearer 1|InYOqkfZZLcwog5JHyaX7hbnVFBVROj116yRT1iD",
+                "Bearer 14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw",
           }));
       debugPrint('a--------------' + response.toString());
       if (response.statusCode == 400) {
@@ -190,7 +191,7 @@ class ApiHelper {
     if (path != null && path == ApiPath.createReport) {
       return;
     }
-    logger.e('=====> Network connection false');
+    // logger.e('=====> Network connection false');
     NetworkAlertView.instance.show();
   }
 

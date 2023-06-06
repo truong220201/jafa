@@ -2,7 +2,7 @@ import 'package:genealogy_management/app/data/model/jafa_model.dart';
 
 import '../api/home_api.dart';
 
-class HomeRepository {
+class Repository {
   final HomeApi _api;
   HomeRepository(this._api);
   Future<List<JafaModel>> getHomeDetail() {

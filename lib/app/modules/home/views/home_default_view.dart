@@ -66,11 +66,11 @@ class _HomeViewState extends State<HomeView> {
       bottomNavigationBar: const BottomTab(),
       backgroundColor: const Color.fromRGBO(251, 239, 239, 1),
       body: BlocProvider(
-          create: (context) => HomeCubit(context.read<HomeApi>())..initData(),
+          create: (context) =>
+              HomeCubit(context.read<HomeRepository>())..initData(),
           child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
             return state.userList.isNotEmpty
-                ? _ifEmpty()
-                : Column(children: [
+                ? Column(children: [
                     const Padding(
                       padding: EdgeInsets.all(19),
                       child: SearchWidget(),
@@ -81,7 +81,8 @@ class _HomeViewState extends State<HomeView> {
                                 child: _listCard(context, state.userList)),
                           )
                         : const Center(child: CircularProgressIndicator())
-                  ]);
+                  ])
+                : _ifEmpty();
           })),
       floatingActionButton: SizedBox(
         width: 68,
@@ -162,7 +163,8 @@ class _HomeViewState extends State<HomeView> {
             .map((i) => GestureDetector(
                 onTap: () async {
                   //context.read<HomeCubit>().getConservations();
-                  await context.router.push(const TreeDetailViewRoute());
+                  await context.router
+                      .push(TreeDetailViewRoute(idTree: i.id ?? 0));
                 },
                 child: CustomCard(
                   name: i.name,

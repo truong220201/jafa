@@ -1,10 +1,5 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/data/model/jafa_model.dart';
-import 'package:genealogy_management/app/modules/home/api/home_api.dart';
 
 import '../repository/home_repository.dart';
 import 'home_state.dart';
@@ -14,8 +9,7 @@ class HomeCubit extends Cubit<HomeState> {
     this._homeRepository,
   ) : super(const HomeState());
 
-  //final HomeRepository _homeRepository;
-  final HomeApi _homeRepository;
+  final HomeRepository _homeRepository;
   bool _isLoading = false;
 
   void initData() {
@@ -44,8 +38,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadDataJaFa() async {
     emit(state.copyWith(isLoading: true));
-    var api = HomeApi();
-    List<JafaModel> listModel = await api.getHomeDetail();
+
+    List<JafaModel> listModel = await _homeRepository.getHomeDetail();
 
     emit(state.copyWith(
       userList: listModel,

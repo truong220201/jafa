@@ -56,9 +56,13 @@ class _$MainRouter extends RootStackRouter {
       );
     },
     TreeDetailViewRoute.name: (routeData) {
+      final args = routeData.argsAs<TreeDetailViewRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const TreeDetailView(),
+        child: TreeDetailView(
+          key: args.key,
+          idTree: args.idTree,
+        ),
       );
     },
     ScanQRViewRoute.name: (routeData) {
@@ -77,6 +81,12 @@ class _$MainRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
+        RouteConfig(
+          '/#redirect',
+          path: '/',
+          redirectTo: 'home',
+          fullMatch: true,
+        ),
         RouteConfig(
           ConfirmViewRoute.name,
           path: 'confirm',
@@ -107,7 +117,7 @@ class _$MainRouter extends RootStackRouter {
         ),
         RouteConfig(
           WelcomeViewRoute.name,
-          path: '/',
+          path: '/welcome-view',
         ),
       ];
 }
@@ -218,14 +228,36 @@ class TreeCreateViewRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [TreeDetailView]
-class TreeDetailViewRoute extends PageRouteInfo<void> {
-  const TreeDetailViewRoute()
-      : super(
+class TreeDetailViewRoute extends PageRouteInfo<TreeDetailViewRouteArgs> {
+  TreeDetailViewRoute({
+    Key? key,
+    required int idTree,
+  }) : super(
           TreeDetailViewRoute.name,
           path: 'tree_detail',
+          args: TreeDetailViewRouteArgs(
+            key: key,
+            idTree: idTree,
+          ),
         );
 
   static const String name = 'TreeDetailViewRoute';
+}
+
+class TreeDetailViewRouteArgs {
+  const TreeDetailViewRouteArgs({
+    this.key,
+    required this.idTree,
+  });
+
+  final Key? key;
+
+  final int idTree;
+
+  @override
+  String toString() {
+    return 'TreeDetailViewRouteArgs{key: $key, idTree: $idTree}';
+  }
 }
 
 /// generated route for
@@ -246,7 +278,7 @@ class WelcomeViewRoute extends PageRouteInfo<void> {
   const WelcomeViewRoute()
       : super(
           WelcomeViewRoute.name,
-          path: '/',
+          path: '/welcome-view',
         );
 
   static const String name = 'WelcomeViewRoute';

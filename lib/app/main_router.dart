@@ -17,11 +17,11 @@ part 'main_router.gr.dart';
   MaterialRoute(page: ConfirmView, path: Routes.confirm),
   MaterialRoute(page: RegisterInfoView, path: Routes.register),
   MaterialRoute(page: RegisterPhoneView, path: Routes.phone),
-  MaterialRoute(page: HomeView, path: Routes.home),
+  MaterialRoute(page: HomeView, path: Routes.home, initial: true),
   MaterialRoute(page: TreeCreateView, path: Routes.createTree),
   MaterialRoute(page: TreeDetailView, path: Routes.treeDetail),
   MaterialRoute(page: ScanQRView, path: Routes.scanQR),
-  MaterialRoute(page: WelcomeView, initial: true),
+  MaterialRoute(page: WelcomeView),
 ])
 class MainRouter extends _$MainRouter {
   MainRouter({GlobalKey<NavigatorState>? navigatorKey}) : super(navigatorKey);

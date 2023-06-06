@@ -7,7 +7,9 @@ part 'jafa_model.g.dart';
 class JafaModel with _$JafaModel {
   const JafaModel._();
   const factory JafaModel({
+    int? id,
     @Default('') String name,
+    @JsonKey(name: 'role_id') int? roleId,
     @Default('') String content,
     @Default('') String imageJafa,
   }) = _JafaModel;

@@ -32,7 +32,8 @@ class _RouteAppState extends State<RouteApp> {
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<HomeApi>(create: (context) => HomeApi()),
+        RepositoryProvider<HomeRepository>(
+            create: (context) => HomeRepository(HomeApi())),
         RepositoryProvider<MockTreeDetailRepository>(
             create: (context) => MockTreeDetailRepository()),
         RepositoryProvider(create: (context) => RegistrationRepository()),

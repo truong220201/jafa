@@ -3,16 +3,14 @@ import 'package:flutter/cupertino.dart';
 import '../../../data/api/api_hepler.dart';
 import '../../../data/model/jafa_model.dart';
 
-class HomeApi {
+class TreeDetailApi {
   final apiHelper = ApiHelper();
-  Future<List<JafaModel>> getHomeDetail() async {
+  Future<JafaModel> getTreeDetail(int idTree) async {
     final responseData =
-        await apiHelper.get(path: '/api/genealogy/?per_page=23&page=1');
+        await apiHelper.get(path: '/api/genealogy/$idTree/detail');
+    debugPrint("==============" + responseData.toString());
+    JafaModel data = responseData.data['data'];
 
-    List<JafaModel> data = responseData.data['data']
-        .map<JafaModel>((n) => JafaModel.fromJson(n))
-        .toList();
-    debugPrint('-----------data' + data.toString());
     return data;
   }
 

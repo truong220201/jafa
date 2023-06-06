@@ -12,7 +12,8 @@ import '../repository/mock_tree_detail_repository.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class TreeDetailView extends StatefulWidget {
-  const TreeDetailView({super.key});
+  TreeDetailView({super.key, required this.idTree});
+  int idTree;
 
   @override
   State<TreeDetailView> createState() => _TreeDetailViewState();
@@ -30,9 +31,9 @@ class _TreeDetailViewState extends State<TreeDetailView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-            TreeDetailCubit(context.read<MockTreeDetailRepository>())
-              ..initData(),
+        create: (context) => TreeDetailCubit(
+            context.read<MockTreeDetailRepository>(), widget.idTree)
+          ..initData(),
         child: Scaffold(
           appBar: AppBar(
             leading: SizedBox(
@@ -275,7 +276,7 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                           const SizedBox(
                             height: 2,
                           ),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomIconButton(

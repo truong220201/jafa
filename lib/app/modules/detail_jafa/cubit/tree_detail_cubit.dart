@@ -6,12 +6,12 @@ import '../repository/mock_tree_detail_repository.dart';
 import 'tree_detail_state.dart';
 
 class TreeDetailCubit extends Cubit<TreeDetailState> {
-  TreeDetailCubit(
-    this._mockTreeDetailRepository,
-  ) : super(TreeDetailState());
+  TreeDetailCubit(this._mockTreeDetailRepository, this.idTreeDetail)
+      : super(TreeDetailState());
 
   //final TreeDetailRepository _TreeDetailRepository;
-  final MockTreeDetailRepository _mockTreeDetailRepository;
+  final TreeDetailRepository _mockTreeDetailRepository;
+  final int idTreeDetail;
   bool _isLoading = false;
   checkHasData() async {
     emit(state.copyWith(hasInfoJaFa: true));
@@ -45,7 +45,7 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     try {
       debugPrint('loadata' + state.toString());
       await Future.wait<void>([
-        loadDataJaFa(),
+        loadDataJaFaDetail(),
       ]);
 
       _isLoading = false;
@@ -54,7 +54,7 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     }
   }
 
-  Future<void> loadDataJaFa() async {
+  Future<void> loadDataJaFaDetail() async {
     emit(state.copyWith(treeDetail: TreeDetailModel()));
     debugPrint('state:+++++++++++' + state.toString());
     try {

@@ -20,7 +20,10 @@ JafaModel _$JafaModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JafaModel {
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'role_id')
+  int? get roleId => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String get imageJafa => throw _privateConstructorUsedError;
 
@@ -35,7 +38,12 @@ abstract class $JafaModelCopyWith<$Res> {
   factory $JafaModelCopyWith(JafaModel value, $Res Function(JafaModel) then) =
       _$JafaModelCopyWithImpl<$Res, JafaModel>;
   @useResult
-  $Res call({String name, String content, String imageJafa});
+  $Res call(
+      {int? id,
+      String name,
+      @JsonKey(name: 'role_id') int? roleId,
+      String content,
+      String imageJafa});
 }
 
 /// @nodoc
@@ -51,15 +59,25 @@ class _$JafaModelCopyWithImpl<$Res, $Val extends JafaModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
+    Object? roleId = freezed,
     Object? content = null,
     Object? imageJafa = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      roleId: freezed == roleId
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as int?,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -79,7 +97,12 @@ abstract class _$$_JafaModelCopyWith<$Res> implements $JafaModelCopyWith<$Res> {
       __$$_JafaModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String content, String imageJafa});
+  $Res call(
+      {int? id,
+      String name,
+      @JsonKey(name: 'role_id') int? roleId,
+      String content,
+      String imageJafa});
 }
 
 /// @nodoc
@@ -93,15 +116,25 @@ class __$$_JafaModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
+    Object? roleId = freezed,
     Object? content = null,
     Object? imageJafa = null,
   }) {
     return _then(_$_JafaModel(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      roleId: freezed == roleId
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as int?,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
@@ -117,15 +150,25 @@ class __$$_JafaModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_JafaModel extends _JafaModel {
-  const _$_JafaModel({this.name = '', this.content = '', this.imageJafa = ''})
+  const _$_JafaModel(
+      {this.id,
+      this.name = '',
+      @JsonKey(name: 'role_id') this.roleId,
+      this.content = '',
+      this.imageJafa = ''})
       : super._();
 
   factory _$_JafaModel.fromJson(Map<String, dynamic> json) =>
       _$$_JafaModelFromJson(json);
 
   @override
+  final int? id;
+  @override
   @JsonKey()
   final String name;
+  @override
+  @JsonKey(name: 'role_id')
+  final int? roleId;
   @override
   @JsonKey()
   final String content;
@@ -135,7 +178,7 @@ class _$_JafaModel extends _JafaModel {
 
   @override
   String toString() {
-    return 'JafaModel(name: $name, content: $content, imageJafa: $imageJafa)';
+    return 'JafaModel(id: $id, name: $name, roleId: $roleId, content: $content, imageJafa: $imageJafa)';
   }
 
   @override
@@ -143,7 +186,9 @@ class _$_JafaModel extends _JafaModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_JafaModel &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.imageJafa, imageJafa) ||
                 other.imageJafa == imageJafa));
@@ -151,7 +196,8 @@ class _$_JafaModel extends _JafaModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, content, imageJafa);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, roleId, content, imageJafa);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +215,9 @@ class _$_JafaModel extends _JafaModel {
 
 abstract class _JafaModel extends JafaModel {
   const factory _JafaModel(
-      {final String name,
+      {final int? id,
+      final String name,
+      @JsonKey(name: 'role_id') final int? roleId,
       final String content,
       final String imageJafa}) = _$_JafaModel;
   const _JafaModel._() : super._();
@@ -178,7 +226,12 @@ abstract class _JafaModel extends JafaModel {
       _$_JafaModel.fromJson;
 
   @override
+  int? get id;
+  @override
   String get name;
+  @override
+  @JsonKey(name: 'role_id')
+  int? get roleId;
   @override
   String get content;
   @override

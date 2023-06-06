@@ -33,14 +33,13 @@ class CustomCard extends StatelessWidget {
                     left: 15, top: 10, right: 5, bottom: 10),
                 child: image == null
                     ? CircleAvatar(
-                        child: Image.asset(
-                            "assets/images/imagepng/image_scroll.png"),
+                        child: Image.asset("assets/images/user.png"),
                       )
                     : CircleAvatar(
                         child: FadeInImage.assetNetwork(
-                          placeholder:
-                              "assets/images/imagepng/image_scroll.png",
-                          image: image!,
+                          placeholder: "assets/images/user.png",
+                          image:
+                              "https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-600x600.jpg",
                         ),
                       ),
               ),
