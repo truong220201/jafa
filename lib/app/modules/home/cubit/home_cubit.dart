@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:genealogy_management/app/data/model/user_model.dart';
+import 'package:genealogy_management/app/data/model/jafa_model.dart';
+import 'package:genealogy_management/app/modules/home/api/home_api.dart';
 
 import '../repository/home_repository.dart';
 import '../repository/mock_home_repository.dart';
@@ -9,7 +13,7 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(
     this._mockHomeRepository,
-  ) : super(HomeState());
+  ) : super(const HomeState());
 
   //final HomeRepository _homeRepository;
   final MockHomeRepository _mockHomeRepository;
@@ -19,10 +23,11 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void initData() {
-    debugPrint('init' + state.toString());
+    //debugPrint('init' + state.toString());
+
     loadData();
     checkHasUser();
-    debugPrint('state: ' + state.toString());
+    //debugPrint('state: ' + state.toString());
   }
 
   Future<void> loadData() async {
@@ -31,7 +36,6 @@ class HomeCubit extends Cubit<HomeState> {
     }
     _isLoading = true;
     try {
-      debugPrint('loadata' + state.toString());
       await Future.wait<void>([
         loadDataJaFa(),
       ]);
@@ -43,17 +47,22 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> loadDataJaFa() async {
-    List<UserModel> listModel = [];
+    emit(state.copyWith(isLoading: true));
+    var api = HomeApi();
+    List<JafaModel> listModel = await api.getConservations();
 
     emit(state.copyWith(
-      userList: [],
+      userList: listModel,
     ));
-    debugPrint('state:+++++++++++' + state.toString());
-    try {
-      final userListReponse = await _mockHomeRepository.getUserModel();
-      emit(state.copyWith(userList: List.of(userListReponse)));
-    } catch (e) {
-      emit(state.copyWith(showUserListError: e));
+    if (state.userList.isEmpty) {
+      emit(state.copyWith(
+        hasInfoJaFa: false,
+      ));
+    } else {
+      emit(state.copyWith(
+        hasInfoJaFa: true,
+      ));
     }
+    emit(state.copyWith(isLoading: false));
   }
 }

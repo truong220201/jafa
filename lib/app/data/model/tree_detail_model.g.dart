@@ -8,9 +8,9 @@ part of 'tree_detail_model.dart';
 
 _$_TreeDetailModel _$$_TreeDetailModelFromJson(Map<String, dynamic> json) =>
     _$_TreeDetailModel(
-      user: json['user'] == null
-          ? const UserModel()
-          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      jafa: json['jafa'] == null
+          ? const JafaModel()
+          : JafaModel.fromJson(json['jafa'] as Map<String, dynamic>),
       familyInfo: json['familyInfo'] as String? ?? '',
       familyInfoContent: json['familyInfoContent'] as String? ?? '',
       imageUrl: json['imageUrl'] as String? ?? '',
@@ -18,7 +18,7 @@ _$_TreeDetailModel _$$_TreeDetailModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_TreeDetailModelToJson(_$_TreeDetailModel instance) =>
     <String, dynamic>{
-      'user': instance.user,
+      'jafa': instance.jafa,
       'familyInfo': instance.familyInfo,
       'familyInfoContent': instance.familyInfoContent,
       'imageUrl': instance.imageUrl,

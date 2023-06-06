@@ -20,7 +20,7 @@ TreeDetailModel _$TreeDetailModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreeDetailModel {
-  UserModel get user => throw _privateConstructorUsedError;
+  JafaModel get jafa => throw _privateConstructorUsedError;
   String get familyInfo => throw _privateConstructorUsedError;
   String get familyInfoContent => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
@@ -38,12 +38,12 @@ abstract class $TreeDetailModelCopyWith<$Res> {
       _$TreeDetailModelCopyWithImpl<$Res, TreeDetailModel>;
   @useResult
   $Res call(
-      {UserModel user,
+      {JafaModel jafa,
       String familyInfo,
       String familyInfoContent,
       String imageUrl});
 
-  $UserModelCopyWith<$Res> get user;
+  $JafaModelCopyWith<$Res> get jafa;
 }
 
 /// @nodoc
@@ -59,16 +59,16 @@ class _$TreeDetailModelCopyWithImpl<$Res, $Val extends TreeDetailModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? jafa = null,
     Object? familyInfo = null,
     Object? familyInfoContent = null,
     Object? imageUrl = null,
   }) {
     return _then(_value.copyWith(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      jafa: null == jafa
+          ? _value.jafa
+          : jafa // ignore: cast_nullable_to_non_nullable
+              as JafaModel,
       familyInfo: null == familyInfo
           ? _value.familyInfo
           : familyInfo // ignore: cast_nullable_to_non_nullable
@@ -86,9 +86,9 @@ class _$TreeDetailModelCopyWithImpl<$Res, $Val extends TreeDetailModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
+  $JafaModelCopyWith<$Res> get jafa {
+    return $JafaModelCopyWith<$Res>(_value.jafa, (value) {
+      return _then(_value.copyWith(jafa: value) as $Val);
     });
   }
 }
@@ -102,13 +102,13 @@ abstract class _$$_TreeDetailModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UserModel user,
+      {JafaModel jafa,
       String familyInfo,
       String familyInfoContent,
       String imageUrl});
 
   @override
-  $UserModelCopyWith<$Res> get user;
+  $JafaModelCopyWith<$Res> get jafa;
 }
 
 /// @nodoc
@@ -122,16 +122,16 @@ class __$$_TreeDetailModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? jafa = null,
     Object? familyInfo = null,
     Object? familyInfoContent = null,
     Object? imageUrl = null,
   }) {
     return _then(_$_TreeDetailModel(
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      jafa: null == jafa
+          ? _value.jafa
+          : jafa // ignore: cast_nullable_to_non_nullable
+              as JafaModel,
       familyInfo: null == familyInfo
           ? _value.familyInfo
           : familyInfo // ignore: cast_nullable_to_non_nullable
@@ -152,7 +152,7 @@ class __$$_TreeDetailModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TreeDetailModel extends _TreeDetailModel {
   const _$_TreeDetailModel(
-      {this.user = const UserModel(),
+      {this.jafa = const JafaModel(),
       this.familyInfo = '',
       this.familyInfoContent = '',
       this.imageUrl = ''})
@@ -163,7 +163,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
 
   @override
   @JsonKey()
-  final UserModel user;
+  final JafaModel jafa;
   @override
   @JsonKey()
   final String familyInfo;
@@ -176,7 +176,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
 
   @override
   String toString() {
-    return 'TreeDetailModel(user: $user, familyInfo: $familyInfo, familyInfoContent: $familyInfoContent, imageUrl: $imageUrl)';
+    return 'TreeDetailModel(jafa: $jafa, familyInfo: $familyInfo, familyInfoContent: $familyInfoContent, imageUrl: $imageUrl)';
   }
 
   @override
@@ -184,7 +184,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TreeDetailModel &&
-            (identical(other.user, user) || other.user == user) &&
+            (identical(other.jafa, jafa) || other.jafa == jafa) &&
             (identical(other.familyInfo, familyInfo) ||
                 other.familyInfo == familyInfo) &&
             (identical(other.familyInfoContent, familyInfoContent) ||
@@ -196,7 +196,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, user, familyInfo, familyInfoContent, imageUrl);
+      Object.hash(runtimeType, jafa, familyInfo, familyInfoContent, imageUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +214,7 @@ class _$_TreeDetailModel extends _TreeDetailModel {
 
 abstract class _TreeDetailModel extends TreeDetailModel {
   const factory _TreeDetailModel(
-      {final UserModel user,
+      {final JafaModel jafa,
       final String familyInfo,
       final String familyInfoContent,
       final String imageUrl}) = _$_TreeDetailModel;
@@ -224,7 +224,7 @@ abstract class _TreeDetailModel extends TreeDetailModel {
       _$_TreeDetailModel.fromJson;
 
   @override
-  UserModel get user;
+  JafaModel get jafa;
   @override
   String get familyInfo;
   @override

@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../data/model/user_model.dart';
-
+import '../../../data/model/jafa_model.dart';
 
 part 'home_state.freezed.dart';
 
@@ -12,6 +11,7 @@ class HomeState with _$HomeState {
   const factory HomeState({
     Object? showUserListError,
     @Default(false) bool hasInfoJaFa,
-    @Default([]) List<UserModel> userList,
+    @Default([]) List<JafaModel> userList,
+    @Default(false) bool isLoading,
   }) = _HomeState;
 }

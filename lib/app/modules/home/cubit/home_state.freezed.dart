@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeState {
   Object? get showUserListError => throw _privateConstructorUsedError;
   bool get hasInfoJaFa => throw _privateConstructorUsedError;
-  List<UserModel> get userList => throw _privateConstructorUsedError;
+  List<JafaModel> get userList => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -31,7 +32,10 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {Object? showUserListError, bool hasInfoJaFa, List<UserModel> userList});
+      {Object? showUserListError,
+      bool hasInfoJaFa,
+      List<JafaModel> userList,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? showUserListError = freezed,
     Object? hasInfoJaFa = null,
     Object? userList = null,
+    Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
       showUserListError: freezed == showUserListError
@@ -62,7 +67,11 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       userList: null == userList
           ? _value.userList
           : userList // ignore: cast_nullable_to_non_nullable
-              as List<UserModel>,
+              as List<JafaModel>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -75,7 +84,10 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Object? showUserListError, bool hasInfoJaFa, List<UserModel> userList});
+      {Object? showUserListError,
+      bool hasInfoJaFa,
+      List<JafaModel> userList,
+      bool isLoading});
 }
 
 /// @nodoc
@@ -92,6 +104,7 @@ class __$$_HomeStateCopyWithImpl<$Res>
     Object? showUserListError = freezed,
     Object? hasInfoJaFa = null,
     Object? userList = null,
+    Object? isLoading = null,
   }) {
     return _then(_$_HomeState(
       showUserListError: freezed == showUserListError
@@ -104,7 +117,11 @@ class __$$_HomeStateCopyWithImpl<$Res>
       userList: null == userList
           ? _value._userList
           : userList // ignore: cast_nullable_to_non_nullable
-              as List<UserModel>,
+              as List<JafaModel>,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -115,7 +132,8 @@ class _$_HomeState extends _HomeState {
   const _$_HomeState(
       {this.showUserListError,
       this.hasInfoJaFa = false,
-      final List<UserModel> userList = const []})
+      final List<JafaModel> userList = const [],
+      this.isLoading = false})
       : _userList = userList,
         super._();
 
@@ -124,18 +142,22 @@ class _$_HomeState extends _HomeState {
   @override
   @JsonKey()
   final bool hasInfoJaFa;
-  final List<UserModel> _userList;
+  final List<JafaModel> _userList;
   @override
   @JsonKey()
-  List<UserModel> get userList {
+  List<JafaModel> get userList {
     if (_userList is EqualUnmodifiableListView) return _userList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_userList);
   }
 
   @override
+  @JsonKey()
+  final bool isLoading;
+
+  @override
   String toString() {
-    return 'HomeState(showUserListError: $showUserListError, hasInfoJaFa: $hasInfoJaFa, userList: $userList)';
+    return 'HomeState(showUserListError: $showUserListError, hasInfoJaFa: $hasInfoJaFa, userList: $userList, isLoading: $isLoading)';
   }
 
   @override
@@ -147,7 +169,9 @@ class _$_HomeState extends _HomeState {
                 .equals(other.showUserListError, showUserListError) &&
             (identical(other.hasInfoJaFa, hasInfoJaFa) ||
                 other.hasInfoJaFa == hasInfoJaFa) &&
-            const DeepCollectionEquality().equals(other._userList, _userList));
+            const DeepCollectionEquality().equals(other._userList, _userList) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
@@ -155,7 +179,8 @@ class _$_HomeState extends _HomeState {
       runtimeType,
       const DeepCollectionEquality().hash(showUserListError),
       hasInfoJaFa,
-      const DeepCollectionEquality().hash(_userList));
+      const DeepCollectionEquality().hash(_userList),
+      isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +193,8 @@ abstract class _HomeState extends HomeState {
   const factory _HomeState(
       {final Object? showUserListError,
       final bool hasInfoJaFa,
-      final List<UserModel> userList}) = _$_HomeState;
+      final List<JafaModel> userList,
+      final bool isLoading}) = _$_HomeState;
   const _HomeState._() : super._();
 
   @override
@@ -176,7 +202,9 @@ abstract class _HomeState extends HomeState {
   @override
   bool get hasInfoJaFa;
   @override
-  List<UserModel> get userList;
+  List<JafaModel> get userList;
+  @override
+  bool get isLoading;
   @override
   @JsonKey(ignore: true)
   _$$_HomeStateCopyWith<_$_HomeState> get copyWith =>

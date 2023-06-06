@@ -52,4 +52,39 @@ class StringConstants {
   static String obliProvince = "Vui lòng chọn tỉnh";
   static String relaTree = 'Quan hệ của bạn với gia tộc này';
   static String hintRela = 'Nhà nội, Nhà ngoại, Nhà vợ';
+  //Home
+  static String detailJafa = "Chi Tiết Gia Tộc";
+  static String domicile = "Nguyên quán";
+  static String seeListJafa = "Xem gia phả dạng danh sách";
+  static String jafaInHere = "Các gia tộc của bạn sẽ xuất hiện ở đây";
+  static String youCanMemorize =
+      "Bạn có thể thêm cây gia phả cho gia tộc,\nghi nhớ ngày giỗ, ngày họp mặt\nvà nhiều hơn thế nữa.";
+  //Detail
+  static String createNow = "Tạo ngay";
+  static String lowKeyOr = "hoặc";
+  static String joinJafa = "Tham gia vào gia phả";
+  static String member = "Thành viên";
+  static String agree = "Đồng ý";
+  static String back = "Trở lại";
+  static String sureDeleteJafa = "Bạn đang muốn xóa gia tộc?";
+  static String alertContentDeleteJafa =
+      "Việc này sẽ làm tất cả thông tin các thành viên trong gia tộc này không còn tính liên kết nữa. Bạn có chắc chắn rằng muốn thực hiện thao tác này?";
+  static String deleteJafa = "Xoá gia tộc";
+  static String sureLeaveJafa = "Bạn đang rời khỏi gia tộc?";
+  static String alertContentLeveJafa =
+      'Tất cả thông tin liên kết với tài khoản của bạn sẽ được xóa khỏi gia tộc này. Tên và ngày tháng năm sinh vẫn có thể hiển thị với quản trị viên.';
+  static String leavejafa = "Rời gia tộc";
+  static String editInfo = "Sửa thông tin";
+  static String yourRelationshipWithJafa = "Quan hệ của bạn với gia tộc này";
+  static String invYourFriendToJafa = "Mời bạn bè vào gia tộc";
+  static String showOrSendQrCode =
+      "Hiển thị hoặc gửi mã QR này cho bạn bè để thêm họ vào gia tộc";
+  static String copyLink = "Sao chép link";
+  static String share = "Chia sẻ";
+  static String downLoad = "Tải xuống";
+  static String reset = "Làm mới";
+  static String jafaList = "Danh sách gia tộc";
+  //ScanQR
+  static String scanYourQrCode = "$scanQrCode của gia phả \nbạn muốn tham gia ";
+  static String scanQrCode = "Quét mã QR";
 }

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:genealogy_management/app/data/model/user_model.dart';
+import 'package:genealogy_management/app/data/model/jafa_model.dart';
 
 part 'tree_detail_model.freezed.dart';
 part 'tree_detail_model.g.dart';
@@ -8,7 +8,7 @@ part 'tree_detail_model.g.dart';
 class TreeDetailModel with _$TreeDetailModel {
   const TreeDetailModel._();
   const factory TreeDetailModel({
-    @Default(UserModel()) UserModel user,
+    @Default(JafaModel()) JafaModel jafa,
     @Default('') String familyInfo,
     @Default('') String familyInfoContent,
     @Default('') String imageUrl,

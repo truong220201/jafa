@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:genealogy_management/app/core/values/string_constants.dart';
 import 'package:genealogy_management/app/main_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,7 +9,7 @@ import '../../../core/values/app_colors.dart';
 import '../../../core/widgets/bottom/bottomTab.dart';
 import '../../../core/widgets/card/custom_card.dart';
 import '../../../core/widgets/search/custom_search.dart';
-import '../../../data/model/user_model.dart';
+import '../../../data/model/jafa_model.dart';
 import '../../scan_QR/scan_qr_view.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
@@ -25,12 +26,11 @@ class _HomeViewState extends State<HomeView> {
   bool haveJaFa = true;
   void openScan() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ScanQRView()));
+        context, MaterialPageRoute(builder: (context) => const ScanQRView()));
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -45,9 +45,9 @@ class _HomeViewState extends State<HomeView> {
             "assets/images/tree.svg",
           ),
         ),
-        title: const Text(
-          "Danh sách gia tộc",
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+        title: Text(
+          StringConstants.jafaList,
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
         ),
         actions: [
           IconButton(
@@ -67,86 +67,22 @@ class _HomeViewState extends State<HomeView> {
       body: BlocProvider(
           create: (context) =>
               HomeCubit(context.read<MockHomeRepository>())..initData(),
-          child: Stack(
-            children: [
-              haveJaFa
-                  ? MultiBlocListener(
-                      listeners: [
-                        BlocListener<HomeCubit, HomeState>(
-                            listener: (BuildContext context, state) {
-                          Column(children: [
-                            const Padding(
-                              padding: EdgeInsets.all(19),
-                              child: SearchWidget(),
-                            ),
-                            _listCard(context, state.userList)
-                          ]);
-                        }),
-                      ],
-                      child: Container(),
-                    )
-                  : Column(
-                      children: [
-                        const SizedBox(
-                          height: 200,
-                        ),
-                        const Center(
-                          child: Text(
-                            "Các gia tộc của bạn sẽ xuất hiện ở đây",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16,
-                                color: Color.fromRGBO(0, 0, 0, 1)),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        const Center(
-                          child: Text(
-                            "Bạn có thể thêm cây gia phả cho gia tộc,\nghi nhớ ngày giỗ, ngày họp mặt\nvà nhiều hơn thế nữa.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromRGBO(173, 173, 173, 1)),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 68,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text("Tạo ngay",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: AppColors.colorFF940000,
-                                    ))),
-                            const Text("hoặc"),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text("Tham gia vào gia phả",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: AppColors.colorFF940000,
-                                    ))),
-                          ],
-                        )
-                      ],
+          child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+            return state.hasInfoJaFa
+                ? Column(children: [
+                    const Padding(
+                      padding: EdgeInsets.all(19),
+                      child: SearchWidget(),
                     ),
-              BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-                return Column(children: [
-                  const Padding(
-                    padding: EdgeInsets.all(19),
-                    child: SearchWidget(),
-                  ),
-                  _listCard(context, state.userList)
-                ]);
-              })
-            ],
-          )),
+                    !state.isLoading
+                        ? Expanded(
+                            child: SingleChildScrollView(
+                                child: _listCard(context, state.userList)),
+                          )
+                        : const Center(child: CircularProgressIndicator())
+                  ])
+                : _ifEmpty();
+          })),
       floatingActionButton: SizedBox(
         width: 68,
         height: 68,
@@ -166,15 +102,73 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _listCard(BuildContext context, List<UserModel> listUser) {
-    List<UserModel> listCardSelect = listUser;
+  Widget _ifEmpty() {
+    return Column(
+      children: [
+        const SizedBox(
+          height: 200,
+        ),
+        Center(
+          child: Text(
+            StringConstants.jafaInHere,
+            style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                color: Color.fromRGBO(0, 0, 0, 1)),
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Center(
+          child: Text(
+            StringConstants.youCanMemorize,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+                fontSize: 16, color: Color.fromRGBO(173, 173, 173, 1)),
+          ),
+        ),
+        const SizedBox(
+          height: 68,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+                onPressed: () {},
+                child: Text(StringConstants.createNow,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.colorFFB20000,
+                    ))),
+            Text(StringConstants.lowKeyOr),
+            TextButton(
+                onPressed: () {},
+                child: Text(StringConstants.joinJafa,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.colorFFB20000,
+                    ))),
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget _listCard(BuildContext context, List<JafaModel> listUser) {
+    List<JafaModel> listCardSelect = listUser;
     return Column(
         children: listCardSelect
             .map((i) => GestureDetector(
                 onTap: () async {
+                  //context.read<HomeCubit>().getConservations();
                   await context.router.push(const TreeDetailViewRoute());
                 },
-                child: CustomCard(name: i.name, content: i.content)))
+                child: CustomCard(
+                  name: i.name,
+                  content: i.content,
+                  image: i.imageJafa,
+                )))
             .toList());
   }
 }

@@ -1,16 +1,19 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../../../data/api/api_hepler.dart';
+import '../../../data/model/jafa_model.dart';
+
+final apiHelper = ApiHelper();
+
 class HomeApi {
-  // Future<List<Conservation>> getConservations({
-  //   required ConservationKindId conservationKindId,
-  //   required ConservationTabType conservationTabType,
-  // }
-  // ) async {
-  //   final data = await apiHelper.get(
-  //       path:
-  //           '/account/conservation-rule/${conservationKindId.id}/$conservationTabType');
-  //   return (data as List).map((e) => Conservation.fromJson(e)).toList();
-  // }
+  Future<List<JafaModel>> getConservations() async {
+    final responseData =
+        await apiHelper.get(path: '/api/genealogy/?per_page=23&page=5');
+    List<JafaModel> data = responseData.data['data']
+        .map<JafaModel>((n) => JafaModel.fromJson(n))
+        .toList();
+    return data;
+  }
 
   // Future<List<EmailNotification>> getEmailNotifications() async {
   //   final data = await apiHelper.get(path: '/account/email-notification');
