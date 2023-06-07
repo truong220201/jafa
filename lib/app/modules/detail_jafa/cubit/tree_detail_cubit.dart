@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:genealogy_management/app/data/model/jafa_model.dart';
 import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
 
 import '../repository/mock_tree_detail_repository.dart';
@@ -10,7 +11,7 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
       : super(TreeDetailState());
 
   //final TreeDetailRepository _TreeDetailRepository;
-  final TreeDetailRepository _mockTreeDetailRepository;
+  final MockTreeDetailRepository _mockTreeDetailRepository;
   final int idTreeDetail;
   bool _isLoading = false;
   checkHasData() async {
@@ -43,7 +44,6 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     }
     _isLoading = true;
     try {
-      debugPrint('loadata' + state.toString());
       await Future.wait<void>([
         loadDataJaFaDetail(),
       ]);
@@ -55,11 +55,11 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
   }
 
   Future<void> loadDataJaFaDetail() async {
-    emit(state.copyWith(treeDetail: TreeDetailModel()));
-    debugPrint('state:+++++++++++' + state.toString());
+    emit(state.copyWith(treeDetail: const TreeDetailModel(jafa: JafaModel())));
     try {
       final treeDetailReponse =
           await _mockTreeDetailRepository.getTreeDetailModel();
+      debugPrint(treeDetailReponse.jafa!.name);
       emit(state.copyWith(treeDetail: treeDetailReponse));
     } catch (e) {
       emit(state.copyWith(showUserListError: e));

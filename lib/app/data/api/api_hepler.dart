@@ -32,10 +32,10 @@ class ApiPath {
       ignorePaths.map((e) => e.toString()).toList();
 }
 
-const String rootPath = 'https://twelve-dogs-go.loca.lt';
+const String rootPath = 'https://f5fc-117-6-130-156.ngrok-free.app';
 
 class ApiHelper {
-  // final logger = BuildConfig.instance.config.logger;
+  //final roothPath = BuildConfig.instance.config.logger;
   static const int timeoutDuration = 10;
   final _dio = Dio();
 

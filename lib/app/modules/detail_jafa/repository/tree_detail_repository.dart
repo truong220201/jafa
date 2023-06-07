@@ -1,13 +1,13 @@
 import 'package:genealogy_management/app/data/model/jafa_model.dart';
 
-import '../api/home_api.dart';
+// import '../api/home_api.dart';
 
 class Repository {
-  final HomeApi _api;
-  HomeRepository(this._api);
-  Future<List<JafaModel>> getHomeDetail() {
-    return _api.getHomeDetail();
-  }
+  // final HomeApi _api;
+  // HomeRepository(this._api);
+  // Future<List<JafaModel>> getHomeDetail() {
+  //   return _api.getHomeDetail();
+  // }
 
   // Future<List<Conservation>> getConservations({
   //   required ConservationKindId conservationKindId,
