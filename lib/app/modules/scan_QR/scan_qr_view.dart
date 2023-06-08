@@ -4,10 +4,14 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:genealogy_management/app/core/values/string_constants.dart';
+import 'package:genealogy_management/app/core/widgets/asset_image/asset_image_view.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../core/values/app_colors.dart';
 import '../../core/values/text_styles.dart';
@@ -15,6 +19,8 @@ import '../../core/values/text_styles.dart';
 late List<CameraDescription> cameras;
 
 class ScanQRView extends StatefulWidget {
+  const ScanQRView({super.key});
+
   @override
   State<ScanQRView> createState() => _ScanQRViewState();
 }
@@ -23,10 +29,10 @@ class _ScanQRViewState extends State<ScanQRView> {
   DateTime? detectedTime;
   CameraController? _controller;
   String? _parentFacilityId;
-  bool _showCountdownText = false;
+  final bool _showCountdownText = false;
   Timer? _timer;
   int _start = 5;
-  bool _isDetecting = true;
+  final bool _isDetecting = true;
 
   @override
   void initState() {
@@ -135,7 +141,7 @@ class _ScanQRViewState extends State<ScanQRView> {
           // );
         });
       }).catchError((Object e) {
-        log(e.toString());
+        log('aaaa' + e.toString());
       });
     }
   }
@@ -153,63 +159,79 @@ class _ScanQRViewState extends State<ScanQRView> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(162, 169, 169, 169),
       appBar: AppBar(
-        backgroundColor: AppColors.c1D1D1D_onSurface,
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.only(
-        //       right: 15,
-        //     ),
-        //     child: Center(
-        //         child: InkWell(
-        //       onTap: () {
-        //         if (_controller != null) {
-        //           _controller!.setFlashMode(FlashMode.always);
-        //         }
-        //       },
-        //       child: SvgPicture.asset(
-        //         "assets/images/scanqr.svg",
-        //       ),
-        //     )),
-        //   ),
-        // ],
-      ),
+          actions: const [
+            SizedBox(
+              width: 50,
+            )
+          ],
+          backgroundColor: const Color.fromARGB(255, 148, 0, 0),
+          leading: Center(
+              child: InkWell(
+            onTap: () {
+              context.router.pop();
+            },
+            child: SvgPicture.asset(
+              "assets/images/back_arrow.svg",
+            ),
+          )),
+          title: Center(
+            child: Text(StringConstants.scanQrCode),
+          )),
       body: _buildPage(context),
     );
+  }
+
+  Future<String> postQr(String qrCode) async {
+    final dio = Dio();
+    try {
+      var response = await dio.post(
+          'https://73f3-117-6-130-156.ngrok-free.app/api/genealogy/10/join',
+          data: {},
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization":
+                "Bearer 14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw",
+          }));
+      _snackSample("Gia nhập thành công!");
+      return response.toString();
+    } on DioException catch (e) {
+      _snackSample("Bạn đã gia nhập gia tộc này rồi.");
+      return e.toString().contains('400').toString();
+    }
   }
 
   _buildQRCodeScanner() {
     return MobileScanner(
       allowDuplicates: true,
       onDetect: (barcode, args) async {
-        log(barcode.rawValue ?? '');
         // debounce
         if (detectedTime != null &&
             DateTime.now().difference(detectedTime!).inSeconds <= 1) {
           return;
         }
+
         detectedTime = DateTime.now();
         final url = barcode.rawValue;
         if (url != null) {
-          final indParent = url.indexOf('/facility/detail/');
-          if (indParent >= 0) {
-            final parentFacilityId =
-                url.substring(indParent + '/facility/detail/'.length);
-            initCamera(parentFacilityId);
-          } else {
-            final indChild = url.indexOf('/facility/');
-            if (indChild >= 0) {
-              final ids =
-                  url.substring(indChild + '/facility/'.length).split('/');
-              // ids[0] == parentFacilityId, ids[1] == childFacilityId
-              if (ids.length == 2) {
-                initCamera(int.parse(ids[1]).toString());
-              }
-            }
-          }
-        }
+          log(url);
+          await postQr(url.toString());
+          // ignore: use_build_context_synchronously
+          context.router.popUntilRoot();
+        } else {}
       },
     );
   }
+
+  Widget _snackSample(String response) => SnackBar(
+        content: Text(
+          response,
+          style: const TextStyle(
+            fontSize: 20,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: AppColors.c1D1D1D_onSurface,
+      );
 
   _buildCamera() {
     final width = MediaQuery.of(context).size.width;
@@ -258,46 +280,102 @@ class _ScanQRViewState extends State<ScanQRView> {
   }
 
   _buildPage(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      fit: StackFit.expand,
       children: [
-        const SizedBox(
-          height: 48,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: _parentFacilityId != null
+              ? _buildCamera()
+              : _buildQRCodeScanner(),
         ),
-        Text(
-          '設定用メーター撮影',
-          style: TextStyles.bold14TitleBold.copyWith(
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(
-          height: 49,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30,
-          ),
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white,
+        const OverlayShape(),
+        Positioned(
+            top: MediaQuery.of(context).size.height - 290, child: _content()),
+      ],
+    );
+  }
+
+  Widget _content() {
+    return Container(
+      padding:
+          const EdgeInsetsDirectional.symmetric(vertical: 20, horizontal: 13.5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+      ),
+      child: Text(
+        StringConstants.scanYourQrCode,
+        textAlign: TextAlign.center,
+        style: TextStyles.medium16LineHeight24Sur
+            .copyWith(color: const Color.fromARGB(255, 0, 0, 0)),
+      ),
+    );
+  }
+}
+
+class OverlayShape extends StatelessWidget {
+  const OverlayShape({Key? key}) : super(key: key);
+
+  //final OverlayModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    var media = MediaQuery.of(context);
+    var size = media.size;
+    double width = media.orientation == Orientation.portrait
+        ? size.shortestSide * .9
+        : size.longestSide * .5;
+    double padding = (size.width - width) / 2;
+
+    double ratio = 9;
+    double height = width;
+    double radius = 9;
+    if (media.orientation == Orientation.portrait) {}
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        ColorFiltered(
+          colorFilter: const ColorFilter.mode(
+              Color.fromARGB(200, 217, 217, 217), BlendMode.srcOut),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.transparent,
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 128,
+                  right: padding,
+                  left: padding,
+                  child: Container(
+                    width: width,
+                    height: width,
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(radius)),
+                    child: const Center(),
+                  ),
                 ),
-              ),
-              child: _parentFacilityId != null
-                  ? _buildCamera()
-                  : _buildQRCodeScanner(),
+              ],
             ),
           ),
         ),
-        const SizedBox(
-          height: 30,
-        ),
-        Text(
-          'QRを読み取ってください',
-          style: TextStyles.bold14TitleBold.copyWith(color: Colors.white),
-        ),
+        Positioned(
+            top: 128,
+            left: padding,
+            child: Container(
+              width: width,
+              height: width,
+              decoration: ShapeDecoration(
+                color: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(radius),
+                  side: const BorderSide(width: 1, color: Colors.white),
+                ),
+              ),
+            )),
       ],
     );
   }

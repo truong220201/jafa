@@ -29,7 +29,7 @@ abstract class TextStyles {
 
   static const _medium16LineHeight24 = TextStyle(
     fontWeight: FontW.mediumM,
-    fontSize: 16,
+    fontSize: 14,
     letterSpacing: 0.7,
     color: AppColors.c1D1D1D_onSurface,
     fontFamily: defaultFontFamily,
