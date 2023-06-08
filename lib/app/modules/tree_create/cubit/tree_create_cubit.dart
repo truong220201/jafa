@@ -2,17 +2,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/modules/tree_create/cubit/tree_create_state.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../data/model/province.dart';
 import '../repository/tree_create_repository.dart';
 
 class TreeCreateCubit extends Cubit<TreeCreateState> {
-  TreeCreateCubit(this._TreeCreateRepository)
-      : super(const TreeCreateState());
+  TreeCreateCubit(this._treeCreateRepository) : super(const TreeCreateState());
 
-  final TreeCreateRepository _TreeCreateRepository;
+  final TreeCreateRepository _treeCreateRepository;
 
   void setName(String name) {
     emit(state.copyWith(name: name));
-    if(name!='') {
+    if (name != '') {
       emit(state.copyWith(pass: true));
     } else {
       emit(state.copyWith(pass: false));
@@ -27,15 +27,12 @@ class TreeCreateCubit extends Cubit<TreeCreateState> {
     emit(state.copyWith(avatar: avatar));
   }
 
-  void setAddress(String province) {
-    emit(state.copyWith(province: province));
-  }
 
-  void setDistrict(String district) {
+  void setDistrict(int district) {
     emit(state.copyWith(district: district));
   }
 
-  void setProvince(String province) {
+  void setProvince(int province) {
     emit(state.copyWith(province: province));
   }
 
@@ -57,6 +54,31 @@ class TreeCreateCubit extends Cubit<TreeCreateState> {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     if (pickedFile != null) {
       emit(state.copyWith(avatar: pickedFile.path));
+    }
+  }
+
+  void getProvinces() async {
+    try {
+      final provinces = await _treeCreateRepository.getProvinces();
+      emit(state.copyWith(provinces: provinces));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> treeCreate() async {
+    try {
+      final tree = await _treeCreateRepository.treeCreate(
+          name: state.name,
+          description: state.history,
+          image: state.avatar,
+          province: state.province,
+          district: state.district,
+          address: state.address,
+          relationship: state.relationship);
+      print(tree.toString());
+    } catch (e) {
+      rethrow;
     }
   }
 }

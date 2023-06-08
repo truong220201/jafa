@@ -16,13 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TreeCreateState {
-  String get avatar => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get history => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String get province => throw _privateConstructorUsedError;
-  String get district => throw _privateConstructorUsedError;
-  String get relationship => throw _privateConstructorUsedError;
+  String? get history => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
+  int? get province => throw _privateConstructorUsedError;
+  int? get district => throw _privateConstructorUsedError;
+  String? get relationship => throw _privateConstructorUsedError;
+  List<Province>? get provinces => throw _privateConstructorUsedError;
   bool get pass => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
@@ -38,13 +39,14 @@ abstract class $TreeCreateStateCopyWith<$Res> {
       _$TreeCreateStateCopyWithImpl<$Res, TreeCreateState>;
   @useResult
   $Res call(
-      {String avatar,
+      {String? avatar,
       String name,
-      String history,
-      String address,
-      String province,
-      String district,
-      String relationship,
+      String? history,
+      String? address,
+      int? province,
+      int? district,
+      String? relationship,
+      List<Province>? provinces,
       bool pass,
       Object? error});
 }
@@ -62,45 +64,50 @@ class _$TreeCreateStateCopyWithImpl<$Res, $Val extends TreeCreateState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? avatar = null,
+    Object? avatar = freezed,
     Object? name = null,
-    Object? history = null,
-    Object? address = null,
-    Object? province = null,
-    Object? district = null,
-    Object? relationship = null,
+    Object? history = freezed,
+    Object? address = freezed,
+    Object? province = freezed,
+    Object? district = freezed,
+    Object? relationship = freezed,
+    Object? provinces = freezed,
     Object? pass = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      avatar: null == avatar
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      history: null == history
+      history: freezed == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      province: null == province
+              as String?,
+      province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
-              as String,
-      district: null == district
+              as int?,
+      district: freezed == district
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
-              as String,
-      relationship: null == relationship
+              as int?,
+      relationship: freezed == relationship
           ? _value.relationship
           : relationship // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      provinces: freezed == provinces
+          ? _value.provinces
+          : provinces // ignore: cast_nullable_to_non_nullable
+              as List<Province>?,
       pass: null == pass
           ? _value.pass
           : pass // ignore: cast_nullable_to_non_nullable
@@ -119,13 +126,14 @@ abstract class _$$_TreeCreateStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String avatar,
+      {String? avatar,
       String name,
-      String history,
-      String address,
-      String province,
-      String district,
-      String relationship,
+      String? history,
+      String? address,
+      int? province,
+      int? district,
+      String? relationship,
+      List<Province>? provinces,
       bool pass,
       Object? error});
 }
@@ -141,45 +149,50 @@ class __$$_TreeCreateStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? avatar = null,
+    Object? avatar = freezed,
     Object? name = null,
-    Object? history = null,
-    Object? address = null,
-    Object? province = null,
-    Object? district = null,
-    Object? relationship = null,
+    Object? history = freezed,
+    Object? address = freezed,
+    Object? province = freezed,
+    Object? district = freezed,
+    Object? relationship = freezed,
+    Object? provinces = freezed,
     Object? pass = null,
     Object? error = freezed,
   }) {
     return _then(_$_TreeCreateState(
-      avatar: null == avatar
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      history: null == history
+      history: freezed == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
+              as String?,
+      address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      province: null == province
+              as String?,
+      province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
-              as String,
-      district: null == district
+              as int?,
+      district: freezed == district
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
-              as String,
-      relationship: null == relationship
+              as int?,
+      relationship: freezed == relationship
           ? _value.relationship
           : relationship // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      provinces: freezed == provinces
+          ? _value._provinces
+          : provinces // ignore: cast_nullable_to_non_nullable
+              as List<Province>?,
       pass: null == pass
           ? _value.pass
           : pass // ignore: cast_nullable_to_non_nullable
@@ -193,38 +206,44 @@ class __$$_TreeCreateStateCopyWithImpl<$Res>
 
 class _$_TreeCreateState extends _TreeCreateState {
   const _$_TreeCreateState(
-      {this.avatar = '',
+      {this.avatar,
       this.name = '',
-      this.history = '',
-      this.address = '',
-      this.province = '',
-      this.district = '',
-      this.relationship = '',
+      this.history,
+      this.address,
+      this.province,
+      this.district,
+      this.relationship,
+      final List<Province>? provinces,
       this.pass = false,
       this.error})
-      : super._();
+      : _provinces = provinces,
+        super._();
 
   @override
-  @JsonKey()
-  final String avatar;
+  final String? avatar;
   @override
   @JsonKey()
   final String name;
   @override
-  @JsonKey()
-  final String history;
+  final String? history;
   @override
-  @JsonKey()
-  final String address;
+  final String? address;
   @override
-  @JsonKey()
-  final String province;
+  final int? province;
   @override
-  @JsonKey()
-  final String district;
+  final int? district;
   @override
-  @JsonKey()
-  final String relationship;
+  final String? relationship;
+  final List<Province>? _provinces;
+  @override
+  List<Province>? get provinces {
+    final value = _provinces;
+    if (value == null) return null;
+    if (_provinces is EqualUnmodifiableListView) return _provinces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey()
   final bool pass;
@@ -233,7 +252,7 @@ class _$_TreeCreateState extends _TreeCreateState {
 
   @override
   String toString() {
-    return 'TreeCreateState(avatar: $avatar, name: $name, history: $history, address: $address, province: $province, district: $district, relationship: $relationship, pass: $pass, error: $error)';
+    return 'TreeCreateState(avatar: $avatar, name: $name, history: $history, address: $address, province: $province, district: $district, relationship: $relationship, provinces: $provinces, pass: $pass, error: $error)';
   }
 
   @override
@@ -251,6 +270,8 @@ class _$_TreeCreateState extends _TreeCreateState {
                 other.district == district) &&
             (identical(other.relationship, relationship) ||
                 other.relationship == relationship) &&
+            const DeepCollectionEquality()
+                .equals(other._provinces, _provinces) &&
             (identical(other.pass, pass) || other.pass == pass) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
@@ -265,6 +286,7 @@ class _$_TreeCreateState extends _TreeCreateState {
       province,
       district,
       relationship,
+      const DeepCollectionEquality().hash(_provinces),
       pass,
       const DeepCollectionEquality().hash(error));
 
@@ -277,31 +299,34 @@ class _$_TreeCreateState extends _TreeCreateState {
 
 abstract class _TreeCreateState extends TreeCreateState {
   const factory _TreeCreateState(
-      {final String avatar,
+      {final String? avatar,
       final String name,
-      final String history,
-      final String address,
-      final String province,
-      final String district,
-      final String relationship,
+      final String? history,
+      final String? address,
+      final int? province,
+      final int? district,
+      final String? relationship,
+      final List<Province>? provinces,
       final bool pass,
       final Object? error}) = _$_TreeCreateState;
   const _TreeCreateState._() : super._();
 
   @override
-  String get avatar;
+  String? get avatar;
   @override
   String get name;
   @override
-  String get history;
+  String? get history;
   @override
-  String get address;
+  String? get address;
   @override
-  String get province;
+  int? get province;
   @override
-  String get district;
+  int? get district;
   @override
-  String get relationship;
+  String? get relationship;
+  @override
+  List<Province>? get provinces;
   @override
   bool get pass;
   @override

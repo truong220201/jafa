@@ -8,6 +8,9 @@ import 'core/values/app_theme.dart';
 import 'main_router.dart';
 import 'modules/detail_jafa/repository/tree_detail_repository.dart';
 import 'modules/home/api/home_api.dart';
+import 'modules/register/api/login_api.dart';
+import 'modules/register/api/register_api.dart';
+import 'modules/tree_create/api/tree_create_api.dart';
 import 'modules/tree_create/repository/tree_create_repository.dart';
 import 'modules/tree_edit/repository/tree_edit_repository.dart';
 
@@ -35,12 +38,21 @@ class _RouteAppState extends State<RouteApp> {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<HomeRepository>(
-            create: (context) => HomeRepository(HomeApi())),
+          create: (context) => HomeRepository(HomeApi()),
+        ),
         RepositoryProvider<TreeDetailRepository>(
-            create: (context) => TreeDetailRepository(TreeDetailApi())),
-        RepositoryProvider(create: (context) => RegistrationRepository()),
-        RepositoryProvider(create: (context) => TreeCreateRepository()),
-        RepositoryProvider(create: (context) => TreeEditRepository()),
+          create: (context) => TreeDetailRepository(TreeDetailApi()),
+        ),
+        RepositoryProvider(
+          create: (context) =>
+              RegistrationRepository(LoginApi(), RegisterApi()),
+        ),
+        RepositoryProvider(
+          create: (context) => TreeCreateRepository(TreeCreateApi()),
+        ),
+        RepositoryProvider(
+          create: (context) => TreeEditRepository(),
+        ),
       ],
       child: MaterialApp.router(
         routeInformationParser: _appRouter.defaultRouteParser(),

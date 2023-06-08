@@ -30,13 +30,15 @@ class CustomTextField extends StatelessWidget {
       this.maxLines = 1,
       this.textAlignVertical,
       this.padding = const EdgeInsets.only(left: 0, right: 0),
-      this.enabled = true});
-  final CustomTitle customTitle;
+      this.enabled = true,
+      this.border,
+      this.readOnly = false});
+  final CustomTitle? customTitle;
   final Function(String)? onChanged;
   final TextEditingController? controller;
   final String hintText;
   final TextStyle hintTextStyle;
-  final InputBorder inputBorder;
+  final InputBorder? inputBorder;
   final IconButton? iconButton;
   final Color cursorColor;
   final Widget? suffixIcon;
@@ -51,17 +53,20 @@ class CustomTextField extends StatelessWidget {
   final TextAlignVertical? textAlignVertical;
   final EdgeInsetsGeometry padding;
   final bool enabled;
+  final InputBorder? border;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        customTitle,
+        customTitle??const SizedBox(),
         Padding(
           padding: padding,
           child: TextField(
             enabled: enabled,
+            readOnly: readOnly,
             style: hintTextStyle,
             onChanged: onChanged,
             controller: controller,
@@ -78,6 +83,7 @@ class CustomTextField extends StatelessWidget {
               labelText: labelText,
               contentPadding: contentPadding,
               counterText: counterText,
+              border: border,
             ),
             cursorColor: cursorColor,
           ),

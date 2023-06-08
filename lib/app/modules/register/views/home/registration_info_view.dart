@@ -280,6 +280,9 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
             return Container(
                 alignment: Alignment.center,
                 child: FloatingTextButton(
+                  loading: (cubit.state.isLoading)
+                      ? const CircularProgressIndicator()
+                      : null,
                   icon: Icons.done,
                   height: 80,
                   onPressed: () async {
@@ -287,8 +290,9 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
                       cubit.setShowHomePage(false);
                     }
                     if (state.showHomePage && state.name.isNotEmpty) {
-                      await context.router
-                          .push(const HomeViewRoute());
+                      cubit.register().then((_) async {
+                        await context.router.push(const HomeViewRoute());
+                      });
                     }
                   },
                   pass: state.showHomePage,
@@ -305,7 +309,7 @@ class _RegisterInfoViewState extends State<RegisterInfoView> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      lastDate: DateTime.now(),
     );
     if (picked != null) {
       cubit.setBirthday(picked.toFormattedDate());

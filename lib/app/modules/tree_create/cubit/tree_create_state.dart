@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../data/model/province.dart';
+
 
 part 'tree_create_state.freezed.dart';
 
@@ -7,13 +9,14 @@ part 'tree_create_state.freezed.dart';
 class TreeCreateState with _$TreeCreateState {
   const TreeCreateState._();
   const factory TreeCreateState({
-    @Default('') String avatar,
+    String? avatar,
     @Default('') String name,
-    @Default('') String history,
-    @Default('') String address,
-    @Default('') String province,
-    @Default('') String district,
-    @Default('') String relationship,
+    String? history,
+    String? address,
+    int? province,
+    int? district,
+    String? relationship,
+    List<Province>? provinces,
     @Default(false) bool pass,
     Object? error,
   }) = _TreeCreateState;

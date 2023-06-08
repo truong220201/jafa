@@ -19,6 +19,19 @@ extension GenderExtension on Gender {
         return '';
     }
   }
+
+  int getGenderNumber() {
+    switch (this) {
+      case Gender.man:
+        return 1;
+      case Gender.woman:
+        return 0;
+      case Gender.other:
+        return 3;
+      default:
+        return 0;
+    }
+  }
 }
 
 extension GenderListExtension on List<Gender> {

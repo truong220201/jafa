@@ -24,12 +24,15 @@ mixin _$RegistrationState {
   String get name => throw _privateConstructorUsedError;
   Gender get gender => throw _privateConstructorUsedError;
   String? get birthday => throw _privateConstructorUsedError;
+  String get fUid => throw _privateConstructorUsedError;
   String? get verificationId => throw _privateConstructorUsedError;
   UserCredential? get userCredential => throw _privateConstructorUsedError;
-  bool get showHomePage =>
-      throw _privateConstructorUsedError; // @Default(false) bool showImageLoading,
-  UserModel? get userModel =>
-      throw _privateConstructorUsedError; // List<String>? imageList,
+  bool get checkOtp => throw _privateConstructorUsedError;
+  bool get expireOtp => throw _privateConstructorUsedError;
+  bool get hasUser => throw _privateConstructorUsedError;
+  bool get showHomePage => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  UserModel? get userModel => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -52,9 +55,14 @@ abstract class $RegistrationStateCopyWith<$Res> {
       String name,
       Gender gender,
       String? birthday,
+      String fUid,
       String? verificationId,
       UserCredential? userCredential,
+      bool checkOtp,
+      bool expireOtp,
+      bool hasUser,
       bool showHomePage,
+      bool isLoading,
       UserModel? userModel,
       Object? error});
 }
@@ -80,9 +88,14 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
     Object? name = null,
     Object? gender = null,
     Object? birthday = freezed,
+    Object? fUid = null,
     Object? verificationId = freezed,
     Object? userCredential = freezed,
+    Object? checkOtp = null,
+    Object? expireOtp = null,
+    Object? hasUser = null,
     Object? showHomePage = null,
+    Object? isLoading = null,
     Object? userModel = freezed,
     Object? error = freezed,
   }) {
@@ -119,6 +132,10 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String?,
+      fUid: null == fUid
+          ? _value.fUid
+          : fUid // ignore: cast_nullable_to_non_nullable
+              as String,
       verificationId: freezed == verificationId
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
@@ -127,9 +144,25 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
           ? _value.userCredential
           : userCredential // ignore: cast_nullable_to_non_nullable
               as UserCredential?,
+      checkOtp: null == checkOtp
+          ? _value.checkOtp
+          : checkOtp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expireOtp: null == expireOtp
+          ? _value.expireOtp
+          : expireOtp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasUser: null == hasUser
+          ? _value.hasUser
+          : hasUser // ignore: cast_nullable_to_non_nullable
+              as bool,
       showHomePage: null == showHomePage
           ? _value.showHomePage
           : showHomePage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       userModel: freezed == userModel
           ? _value.userModel
@@ -157,9 +190,14 @@ abstract class _$$_RegistrationStateCopyWith<$Res>
       String name,
       Gender gender,
       String? birthday,
+      String fUid,
       String? verificationId,
       UserCredential? userCredential,
+      bool checkOtp,
+      bool expireOtp,
+      bool hasUser,
       bool showHomePage,
+      bool isLoading,
       UserModel? userModel,
       Object? error});
 }
@@ -183,9 +221,14 @@ class __$$_RegistrationStateCopyWithImpl<$Res>
     Object? name = null,
     Object? gender = null,
     Object? birthday = freezed,
+    Object? fUid = null,
     Object? verificationId = freezed,
     Object? userCredential = freezed,
+    Object? checkOtp = null,
+    Object? expireOtp = null,
+    Object? hasUser = null,
     Object? showHomePage = null,
+    Object? isLoading = null,
     Object? userModel = freezed,
     Object? error = freezed,
   }) {
@@ -222,6 +265,10 @@ class __$$_RegistrationStateCopyWithImpl<$Res>
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String?,
+      fUid: null == fUid
+          ? _value.fUid
+          : fUid // ignore: cast_nullable_to_non_nullable
+              as String,
       verificationId: freezed == verificationId
           ? _value.verificationId
           : verificationId // ignore: cast_nullable_to_non_nullable
@@ -230,9 +277,25 @@ class __$$_RegistrationStateCopyWithImpl<$Res>
           ? _value.userCredential
           : userCredential // ignore: cast_nullable_to_non_nullable
               as UserCredential?,
+      checkOtp: null == checkOtp
+          ? _value.checkOtp
+          : checkOtp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expireOtp: null == expireOtp
+          ? _value.expireOtp
+          : expireOtp // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasUser: null == hasUser
+          ? _value.hasUser
+          : hasUser // ignore: cast_nullable_to_non_nullable
+              as bool,
       showHomePage: null == showHomePage
           ? _value.showHomePage
           : showHomePage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       userModel: freezed == userModel
           ? _value.userModel
@@ -255,9 +318,14 @@ class _$_RegistrationState extends _RegistrationState {
       this.name = '',
       this.gender = Gender.woman,
       this.birthday,
+      this.fUid = '',
       this.verificationId,
       this.userCredential,
+      this.checkOtp = true,
+      this.expireOtp = false,
+      this.hasUser = false,
       this.showHomePage = true,
+      this.isLoading = false,
       this.userModel,
       this.error})
       : super._();
@@ -285,22 +353,35 @@ class _$_RegistrationState extends _RegistrationState {
   @override
   final String? birthday;
   @override
+  @JsonKey()
+  final String fUid;
+  @override
   final String? verificationId;
   @override
   final UserCredential? userCredential;
   @override
   @JsonKey()
+  final bool checkOtp;
+  @override
+  @JsonKey()
+  final bool expireOtp;
+  @override
+  @JsonKey()
+  final bool hasUser;
+  @override
+  @JsonKey()
   final bool showHomePage;
-// @Default(false) bool showImageLoading,
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   final UserModel? userModel;
-// List<String>? imageList,
   @override
   final Object? error;
 
   @override
   String toString() {
-    return 'RegistrationState(phone: $phone, phonePass: $phonePass, confirmCode: $confirmCode, confirmCodePass: $confirmCodePass, avatar: $avatar, name: $name, gender: $gender, birthday: $birthday, verificationId: $verificationId, userCredential: $userCredential, showHomePage: $showHomePage, userModel: $userModel, error: $error)';
+    return 'RegistrationState(phone: $phone, phonePass: $phonePass, confirmCode: $confirmCode, confirmCodePass: $confirmCodePass, avatar: $avatar, name: $name, gender: $gender, birthday: $birthday, fUid: $fUid, verificationId: $verificationId, userCredential: $userCredential, checkOtp: $checkOtp, expireOtp: $expireOtp, hasUser: $hasUser, showHomePage: $showHomePage, isLoading: $isLoading, userModel: $userModel, error: $error)';
   }
 
   @override
@@ -320,12 +401,20 @@ class _$_RegistrationState extends _RegistrationState {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.birthday, birthday) ||
                 other.birthday == birthday) &&
+            (identical(other.fUid, fUid) || other.fUid == fUid) &&
             (identical(other.verificationId, verificationId) ||
                 other.verificationId == verificationId) &&
             (identical(other.userCredential, userCredential) ||
                 other.userCredential == userCredential) &&
+            (identical(other.checkOtp, checkOtp) ||
+                other.checkOtp == checkOtp) &&
+            (identical(other.expireOtp, expireOtp) ||
+                other.expireOtp == expireOtp) &&
+            (identical(other.hasUser, hasUser) || other.hasUser == hasUser) &&
             (identical(other.showHomePage, showHomePage) ||
                 other.showHomePage == showHomePage) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.userModel, userModel) ||
                 other.userModel == userModel) &&
             const DeepCollectionEquality().equals(other.error, error));
@@ -342,9 +431,14 @@ class _$_RegistrationState extends _RegistrationState {
       name,
       gender,
       birthday,
+      fUid,
       verificationId,
       userCredential,
+      checkOtp,
+      expireOtp,
+      hasUser,
       showHomePage,
+      isLoading,
       userModel,
       const DeepCollectionEquality().hash(error));
 
@@ -366,9 +460,14 @@ abstract class _RegistrationState extends RegistrationState {
       final String name,
       final Gender gender,
       final String? birthday,
+      final String fUid,
       final String? verificationId,
       final UserCredential? userCredential,
+      final bool checkOtp,
+      final bool expireOtp,
+      final bool hasUser,
       final bool showHomePage,
+      final bool isLoading,
       final UserModel? userModel,
       final Object? error}) = _$_RegistrationState;
   const _RegistrationState._() : super._();
@@ -390,14 +489,24 @@ abstract class _RegistrationState extends RegistrationState {
   @override
   String? get birthday;
   @override
+  String get fUid;
+  @override
   String? get verificationId;
   @override
   UserCredential? get userCredential;
   @override
+  bool get checkOtp;
+  @override
+  bool get expireOtp;
+  @override
+  bool get hasUser;
+  @override
   bool get showHomePage;
-  @override // @Default(false) bool showImageLoading,
+  @override
+  bool get isLoading;
+  @override
   UserModel? get userModel;
-  @override // List<String>? imageList,
+  @override
   Object? get error;
   @override
   @JsonKey(ignore: true)

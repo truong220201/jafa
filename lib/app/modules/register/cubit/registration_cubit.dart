@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:genealogy_management/app/core/extension/stringx_extention.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../core/services/firebase_manager.dart';
 import '../../../core/values/regexp_constant.dart';
@@ -47,8 +48,11 @@ class RegistrationCubit extends Cubit<RegistrationState> {
 
   void setName(String name) {
     emit(state.copyWith(name: name));
-    // ignore: unnecessary_null_comparison
-    if (name != null) emit(state.copyWith(showHomePage: true));
+    if (name.isNotEmpty) {
+      emit(state.copyWith(showHomePage: true));
+    } else {
+      emit(state.copyWith(showHomePage: false));
+    }
   }
 
   void setGender(Gender gender) {
@@ -78,6 +82,40 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     }
   }
 
+  Future<void> login() async {
+    try {
+      final user = await _registrationRepository.login(fUid: state.fUid);
+      user != null
+          ? emit(state.copyWith(hasUser: true))
+          : emit(state.copyWith(hasUser: false));
+      print(state.hasUser);
+    } catch (e) {
+      if (e is Exception && e.toString().contains("400")) {
+        emit(state.copyWith(hasUser: false));
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  Future<void> register() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final user = await _registrationRepository.register(
+          fUid: state.fUid,
+          name: state.name,
+          phone: state.phone,
+          birthday:
+              (state.birthday != null) ? state.birthday!.toFormatDate() : null,
+          avatar: state.avatar,
+          gender: state.gender.getGenderNumber());
+      emit(state.copyWith(isLoading: false));
+      print(user.toString());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> chooseImageFromGallery() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -95,10 +133,9 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     }
   }
 
-  void verify(String phone, String verify, Function? success) {
+  void verify(String phone, Function? success) {
     FirebaseManager.verifyPhoneNumber("+84${phone.substring(1)}",
         (verificationId, forceResendingToken) async {
-      verify = verificationId;
       emit(state.copyWith(verificationId: verificationId));
       if (success != null) {
         success();
@@ -106,22 +143,22 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     });
   }
 
-  Future<void> credential(String verificationId, String otp, Function? success,
-      Function? fail) async {
+  Future<void> credential(String otp) async {
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: verificationId, smsCode: otp);
+          verificationId: state.verificationId!, smsCode: otp);
 
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
+
+      emit(state.copyWith(fUid: userCredential.user!.uid));
+      emit(state.copyWith(checkOtp: true));
       emit(state.copyWith(userCredential: userCredential));
-      if (success != null) {
-        success();
-      }
     } catch (e) {
-      if (fail != null) {
-        fail();
+      if (e is FirebaseAuthException && e.code == "session-expired") {
+        emit(state.copyWith(expireOtp: true));
       }
+      emit(state.copyWith(checkOtp: false));
     }
   }
 

@@ -13,7 +13,6 @@ import '../../../../core/widgets/popup/popup_notice.dart';
 import '../../../../main_router.dart';
 import '../../cubit/registration_cubit.dart';
 import '../../cubit/registration_state.dart';
-import 'registration_phone_view.dart';
 
 class ConfirmView extends StatefulWidget {
   const ConfirmView({super.key, required this.cubit});
@@ -114,7 +113,7 @@ class _ConfirmViewState extends State<ConfirmView> {
                     final cubit = context.read<RegistrationCubit>();
                     return TextButton(
                       onPressed: () {
-                        cubit.verify(phone, RegisterPhoneView.verify, null);
+                        cubit.verify(phone, null);
                       },
                       child: Text(StringConstants.newOtp,
                           style: TextStyles.boldRedS18),
@@ -134,16 +133,23 @@ class _ConfirmViewState extends State<ConfirmView> {
               cubit.setConfirmPass(false);
             }
             if (state.confirmCodePass && state.confirmCode.isNotEmpty) {
-              cubit.credential(
-                  RegisterPhoneView.verify, _confirmController.text, () {
-                ConfirmView.userCredential = state.userCredential;
-              }, () {
-                _showdialogIncorrect(context);
-                return;
+              cubit.credential(_confirmController.text).then((_) {
+                if (state.expireOtp) {
+                  _showdialogTimeout(context);
+                } else if (!state.checkOtp) {
+                  _showdialogIncorrect(context);
+                } else {
+                  cubit.login().then((_) {
+                    if (cubit.state.hasUser) {
+                      context.router.push(const HomeViewRoute());
+                    } else {
+                      context.router.push(RegisterInfoViewRoute(
+                        cubit: context.read<RegistrationCubit>(),
+                      ));
+                    }
+                  });
+                }
               });
-              // ignore: use_build_context_synchronously
-              await context.router.push(RegisterInfoViewRoute(
-                  cubit: context.read<RegistrationCubit>()));
             }
           },
           pass: state.confirmCodePass,
@@ -159,7 +165,7 @@ Future<void> _showdialogIncorrect(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return PopupNotice(
-          textButton: StringConstants.wrongOtp, title: StringConstants.ok);
+          textButton: StringConstants.ok, title: StringConstants.wrongOtp);
     },
   );
 }
@@ -169,7 +175,7 @@ Future<void> _showdialogTimeout(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return PopupNotice(
-          textButton: StringConstants.dieOtp, title: StringConstants.ok);
+          textButton: StringConstants.ok, title: StringConstants.dieOtp);
     },
   );
 }

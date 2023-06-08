@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RequestHeaderInterceptor extends InterceptorsWrapper {
   @override
@@ -13,8 +14,13 @@ class RequestHeaderInterceptor extends InterceptorsWrapper {
     // final String accessToken =
     //     await PreferenceManagerImpl().getString(PreferenceManager.keyToken);
     //      log(accessToken);
-    String accessToken = '14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw';
+    //String accessToken = '14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw';
+    final prefs = await SharedPreferences.getInstance();
+    final String accessToken = prefs.getString('accessToken') ??
+        '14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw';
+
     var customHeaders = {'content-type': 'application/json'};
+
     if (accessToken.trim().isNotEmpty) {
       customHeaders.addAll({
         'Authorization': "Bearer $accessToken",

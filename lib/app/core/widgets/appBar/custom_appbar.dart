@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double leadingWidth;
   final String title;
   final CustomAppbarItem? leading;
-  final List<CustomAppbarItem> actions;
+  final List<Widget> actions;
   final Color backgroundColor;
   final TextStyle titleStyle;
   @override

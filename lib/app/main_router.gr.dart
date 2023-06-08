@@ -74,7 +74,7 @@ class _$MainRouter extends RootStackRouter {
     ScanQRViewRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: ScanQRView(),
+        child: const ScanQRView(),
       );
     },
     WelcomeViewRoute.name: (routeData) {

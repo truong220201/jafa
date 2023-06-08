@@ -23,7 +23,9 @@ part 'main_router.gr.dart';
   MaterialRoute(page: TreeDetailView, path: Routes.treeDetail),
   MaterialRoute(page: TreeEditView, path: Routes.treeDetail),
   MaterialRoute(page: ScanQRView, path: Routes.scanQR),
-  MaterialRoute(page: WelcomeView),
+  MaterialRoute(
+    page: WelcomeView,
+  ),
 ])
 class MainRouter extends _$MainRouter {
   MainRouter({GlobalKey<NavigatorState>? navigatorKey}) : super(navigatorKey);

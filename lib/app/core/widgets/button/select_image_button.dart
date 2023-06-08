@@ -5,9 +5,16 @@ import 'package:flutter/material.dart';
 import '../../values/app_colors.dart';
 
 class SelectImageButton extends StatelessWidget {
-  const SelectImageButton({super.key, this.onTap, this.avatar});
+  const SelectImageButton(
+      {super.key,
+      this.onTap,
+      this.avatar,
+      this.backgroundColor = AppColors.colorFFEFF1F3,
+      this.iconColor = AppColors.colorFF606060});
   final void Function()? onTap;
   final String? avatar;
+  final Color backgroundColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +22,12 @@ class SelectImageButton extends StatelessWidget {
       onTap: onTap,
       child: (avatar == null || avatar!.isEmpty)
           ? Container(
-              decoration: const BoxDecoration(
-                  color: AppColors.colorFFEFF1F3, shape: BoxShape.circle),
+              decoration:
+                  BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
               height: 100,
-              child: const Icon(
+              child: Icon(
                 Icons.camera_alt,
-                color: AppColors.colorFF606060,
+                color: iconColor,
                 size: 32,
               ),
             )

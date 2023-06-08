@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../core/widgets/alert/network_alert_view.dart';
+import 'api_exception.dart';
 
 class NetworkAlertIgnore {
   final String path;
@@ -80,6 +81,25 @@ class ApiHelper {
       }
     }
     return '';
+  }
+
+  Future<Response> post({
+    required String path,
+    dynamic parameters,
+    String token = "",
+    Map<String, String>? headers,
+  }) async {
+    if (await isNotConnected()) {
+      handleNetworkIssue(path: path);
+      throw NetworkException();
+    }
+    final response = await _dio.post(rootPath + path,
+        data: parameters,
+        options: Options(headers: headers ?? _getHeaders(token)));
+    if (response.statusCode! < 200 || response.statusCode! >= 300) {
+      throw ApiException(response: response);
+    }
+    return response;
   }
 //  Future<dynamic> get({
 //     required String path,
@@ -197,21 +217,21 @@ class ApiHelper {
   }
 }
 
-class NetworkException {}
+// class NetworkException {}
 
-class ApiException {
-  ApiException({
-    required this.httpCode,
-    required this.status,
-    required this.message,
-  });
+// class ApiException {
+//   ApiException({
+//     required this.httpCode,
+//     required this.status,
+//     required this.message,
+//   });
 
-  final int httpCode;
-  final String status;
-  final String message;
+//   final int httpCode;
+//   final String status;
+//   final String message;
 
-  @override
-  String toString() {
-    return 'ApiException(httpCode: $httpCode, status: $status, message: $message)';
-  }
-}
+//   @override
+//   String toString() {
+//     return 'ApiException(httpCode: $httpCode, status: $status, message: $message)';
+//   }
+// }

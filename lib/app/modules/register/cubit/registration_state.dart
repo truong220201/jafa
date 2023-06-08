@@ -18,12 +18,15 @@ class RegistrationState with _$RegistrationState {
     @Default('') String name,
     @Default(Gender.woman)Gender gender,
     String? birthday,
+    @Default('')  String fUid,
     String? verificationId,
     UserCredential? userCredential,
+    @Default(true) bool checkOtp,
+    @Default(false) bool expireOtp,
+    @Default(false) bool hasUser,
     @Default(true) bool showHomePage,
-    // @Default(false) bool showImageLoading,
+    @Default(false) bool isLoading,
     UserModel? userModel,
-    // List<String>? imageList,
     Object? error,
   }) = _RegistrationState;
 

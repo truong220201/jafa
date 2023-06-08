@@ -13,7 +13,8 @@ class FloatingTextButton extends StatelessWidget {
       this.iconSize = 40,
       this.width = 160,
       this.height = 120,
-      required this.pass});
+      required this.pass,
+      this.loading});
   final void Function()? onPressed;
   final String? text;
   final TextStyle style;
@@ -22,6 +23,7 @@ class FloatingTextButton extends StatelessWidget {
   final double iconSize;
   final double width;
   final double height;
+  final Widget? loading;
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +52,11 @@ class FloatingTextButton extends StatelessWidget {
               foregroundColor:
                   (pass) ? AppColors.colorFFFFFFFF : AppColors.colorFFC2C2C2,
               mini: false,
-              child: Icon(
-                icon,
-                size: iconSize,
-              ),
+              child: loading ??
+                  Icon(
+                    icon,
+                    size: iconSize,
+                  ),
             ),
           ),
         ],
