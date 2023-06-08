@@ -1,21 +1,41 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../data/api/api_hepler.dart';
 import '../../../data/model/jafa_model.dart';
+import '../../../core/base/base_remote_source.dart';
+import '../../../data/model/base_response.dart';
+import '../../../data/model/jafa_model.dart';
+import '../../../flavors/build_config.dart';
+import '../../../flavors/env_config.dart';
 
-class HomeApi {
+class HomeApi extends BaseRemoteSource {
   final apiHelper = ApiHelper();
+  // Future<List<JafaModel>> getHomeDetail() async {
+  //   final responseData =
+  //       await apiHelper.get(path: '/api/genealogy/?per_page=23&page=1');
+
+  //   List<JafaModel> data = responseData.data['data']
+  //       .map<JafaModel>((n) => JafaModel.fromJson(n))
+  //       .toList();
+  //   debugPrint('-----------data' + data.toString());
+  //   return data;
+  // }
+
   Future<List<JafaModel>> getHomeDetail() async {
-    final responseData =
-        await apiHelper.get(path: '/api/genealogy/?per_page=23&page=1');
-
-    List<JafaModel> data = responseData.data['data']
-        .map<JafaModel>((n) => JafaModel.fromJson(n))
-        .toList();
-    debugPrint('-----------data' + data.toString());
-    return data;
+    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
+    final request = dioClient.get(
+      '$baseUrl/api/genealogy/?per_page=23&page=5',
+    );
+    try {
+      return callApiWithErrorParser(request).then((response) =>
+          (response.data['data'] as List)
+              .map<JafaModel>((value) => JafaModel.fromJson(value))
+              .toList());
+    } catch (e) {
+      rethrow;
+    }
   }
-
   // Future<List<EmailNotification>> getEmailNotifications() async {
   //   final data = await apiHelper.get(path: '/account/email-notification');
   //   return (data as List).map((e) => EmailNotification.fromJson(e)).toList();

@@ -15,17 +15,17 @@ Future<void> main() async {
   EnvConfig devConfig = EnvConfig(
     appName: "",
     appVersion: "0.1",
-    apiBaseUrl: "",
+    apiBaseUrl: "https://73f3-117-6-130-156.ngrok-free.app",
     webBaseUrl: "",
     shouldCollectCrashLog: true,
     iOSAppId: '',
     androidAppId: '',
   );
 
-  // BuildConfig.instantiate(
-  //   envType: Environment.DEVELOPMENT,
-  //   envConfig: devConfig,
-  // );
+  BuildConfig.instantiate(
+    envType: Environment.DEVELOPMENT,
+    envConfig: devConfig,
+  );
 
   WidgetsFlutterBinding.ensureInitialized();
 

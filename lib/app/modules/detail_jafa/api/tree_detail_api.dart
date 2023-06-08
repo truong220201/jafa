@@ -5,8 +5,10 @@ import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
 
 import '../../../data/api/api_hepler.dart';
 import '../../../data/model/jafa_model.dart';
+import '../../../flavors/build_config.dart';
+import '../../../core/base/base_remote_source.dart';
 
-class TreeDetailApi {
+class TreeDetailApi extends BaseRemoteSource {
   final apiHelper = ApiHelper();
   Future<TreeDetailModel> getTreeDetail(int idJafa) async {
     debugPrint(idJafa.toString());
@@ -29,6 +31,22 @@ class TreeDetailApi {
         path: '/api/genealogy/${idJafa.toString()}/leave');
     return responseData.toString();
   }
+
+  // Future<TreeDetailModel> getTreeDetail(int idJafa) async {
+  //   final baseUrl = BuildConfig.instance.config.apiBaseUrl;
+  //   final request = dioClient.get(
+  //     '$baseUrl/api/genealogy/?per_page=23&page=5',
+  //   );
+  //   try {
+  //     return callApiWithErrorParser(request)
+  //         .then((response) => TreeDetailModel.fromJson(response.data['data']));
+  //     // (response.data['data'] as List)
+  //     //     .map<JafaModel>((value) => JafaModel.fromJson(value))
+  //     //     .toList());
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
   // Future<List<EmailNotification>> getEmailNotifications() async {
   //   final data = await apiHelper.get(path: '/account/email-notification');
   //   return (data as List).map((e) => EmailNotification.fromJson(e)).toList();

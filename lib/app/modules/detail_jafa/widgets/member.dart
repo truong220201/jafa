@@ -20,7 +20,7 @@ class MemberWidget extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(StringConstants.member),
           BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
-              selector: (state) => state.treeDetail.totalMember,
+              selector: (state) => state.treeDetail.totalMember ?? 0,
               builder: (context, state) {
                 return CartWidget(
                     icon: SvgPicture.asset(
@@ -31,7 +31,7 @@ class MemberWidget extends StatelessWidget {
                     onTap: () => {});
               }),
           BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
-              selector: (state) => state.treeDetail.totalUser,
+              selector: (state) => state.treeDetail.totalUser ?? 0,
               builder: (context, state) {
                 return CartWidget(
                     icon: SvgPicture.asset(
