@@ -67,6 +67,15 @@ abstract class TextStyles {
     fontSize: 18,
     fontWeight: FontW.bold,
   );
+  static const boldBlackS16 = TextStyle(
+    color: AppColors.colorFF313131,
+    fontSize: 16,
+    fontWeight: FontW.bold,
+  );
+  static const greyS14 = TextStyle(
+    color: AppColors.colorFF636363,
+    fontSize: 14,
+  );
   static const boldRedS18 = TextStyle(
     color: AppColors.colorFFFF0000,
     fontSize: 18,

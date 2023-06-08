@@ -20,10 +20,22 @@ TreeDetailModel _$TreeDetailModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreeDetailModel {
-  JafaModel? get jafa => throw _privateConstructorUsedError;
-  String get familyInfo => throw _privateConstructorUsedError;
-  String get familyInfoContent => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'role_id')
+  int? get roleId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'relation_name')
+  String get relationName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image')
+  String? get imageJafa => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  @JsonKey(name: ' province_id')
+  int? get provinceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_member')
+  int? get totalMember => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_user')
+  int? get totalUser => throw _privateConstructorUsedError;
+  int? get level => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,12 +50,16 @@ abstract class $TreeDetailModelCopyWith<$Res> {
       _$TreeDetailModelCopyWithImpl<$Res, TreeDetailModel>;
   @useResult
   $Res call(
-      {JafaModel? jafa,
-      String familyInfo,
-      String familyInfoContent,
-      String imageUrl});
-
-  $JafaModelCopyWith<$Res>? get jafa;
+      {int? id,
+      String name,
+      @JsonKey(name: 'role_id') int? roleId,
+      @JsonKey(name: 'relation_name') String relationName,
+      @JsonKey(name: 'image') String? imageJafa,
+      String description,
+      @JsonKey(name: ' province_id') int? provinceId,
+      @JsonKey(name: 'total_member') int? totalMember,
+      @JsonKey(name: 'total_user') int? totalUser,
+      int? level});
 }
 
 /// @nodoc
@@ -59,41 +75,59 @@ class _$TreeDetailModelCopyWithImpl<$Res, $Val extends TreeDetailModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jafa = freezed,
-    Object? familyInfo = null,
-    Object? familyInfoContent = null,
-    Object? imageUrl = null,
+    Object? id = freezed,
+    Object? name = null,
+    Object? roleId = freezed,
+    Object? relationName = null,
+    Object? imageJafa = freezed,
+    Object? description = null,
+    Object? provinceId = freezed,
+    Object? totalMember = freezed,
+    Object? totalUser = freezed,
+    Object? level = freezed,
   }) {
     return _then(_value.copyWith(
-      jafa: freezed == jafa
-          ? _value.jafa
-          : jafa // ignore: cast_nullable_to_non_nullable
-              as JafaModel?,
-      familyInfo: null == familyInfo
-          ? _value.familyInfo
-          : familyInfo // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      familyInfoContent: null == familyInfoContent
-          ? _value.familyInfoContent
-          : familyInfoContent // ignore: cast_nullable_to_non_nullable
+      roleId: freezed == roleId
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      relationName: null == relationName
+          ? _value.relationName
+          : relationName // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      imageJafa: freezed == imageJafa
+          ? _value.imageJafa
+          : imageJafa // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
+      provinceId: freezed == provinceId
+          ? _value.provinceId
+          : provinceId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalMember: freezed == totalMember
+          ? _value.totalMember
+          : totalMember // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalUser: freezed == totalUser
+          ? _value.totalUser
+          : totalUser // ignore: cast_nullable_to_non_nullable
+              as int?,
+      level: freezed == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $JafaModelCopyWith<$Res>? get jafa {
-    if (_value.jafa == null) {
-      return null;
-    }
-
-    return $JafaModelCopyWith<$Res>(_value.jafa!, (value) {
-      return _then(_value.copyWith(jafa: value) as $Val);
-    });
   }
 }
 
@@ -106,13 +140,16 @@ abstract class _$$_TreeDetailModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {JafaModel? jafa,
-      String familyInfo,
-      String familyInfoContent,
-      String imageUrl});
-
-  @override
-  $JafaModelCopyWith<$Res>? get jafa;
+      {int? id,
+      String name,
+      @JsonKey(name: 'role_id') int? roleId,
+      @JsonKey(name: 'relation_name') String relationName,
+      @JsonKey(name: 'image') String? imageJafa,
+      String description,
+      @JsonKey(name: ' province_id') int? provinceId,
+      @JsonKey(name: 'total_member') int? totalMember,
+      @JsonKey(name: 'total_user') int? totalUser,
+      int? level});
 }
 
 /// @nodoc
@@ -126,28 +163,58 @@ class __$$_TreeDetailModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? jafa = freezed,
-    Object? familyInfo = null,
-    Object? familyInfoContent = null,
-    Object? imageUrl = null,
+    Object? id = freezed,
+    Object? name = null,
+    Object? roleId = freezed,
+    Object? relationName = null,
+    Object? imageJafa = freezed,
+    Object? description = null,
+    Object? provinceId = freezed,
+    Object? totalMember = freezed,
+    Object? totalUser = freezed,
+    Object? level = freezed,
   }) {
     return _then(_$_TreeDetailModel(
-      jafa: freezed == jafa
-          ? _value.jafa
-          : jafa // ignore: cast_nullable_to_non_nullable
-              as JafaModel?,
-      familyInfo: null == familyInfo
-          ? _value.familyInfo
-          : familyInfo // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      familyInfoContent: null == familyInfoContent
-          ? _value.familyInfoContent
-          : familyInfoContent // ignore: cast_nullable_to_non_nullable
+      roleId: freezed == roleId
+          ? _value.roleId
+          : roleId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      relationName: null == relationName
+          ? _value.relationName
+          : relationName // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: null == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      imageJafa: freezed == imageJafa
+          ? _value.imageJafa
+          : imageJafa // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
+      provinceId: freezed == provinceId
+          ? _value.provinceId
+          : provinceId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalMember: freezed == totalMember
+          ? _value.totalMember
+          : totalMember // ignore: cast_nullable_to_non_nullable
+              as int?,
+      totalUser: freezed == totalUser
+          ? _value.totalUser
+          : totalUser // ignore: cast_nullable_to_non_nullable
+              as int?,
+      level: freezed == level
+          ? _value.level
+          : level // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -156,30 +223,53 @@ class __$$_TreeDetailModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TreeDetailModel extends _TreeDetailModel {
   const _$_TreeDetailModel(
-      {this.jafa,
-      this.familyInfo = '',
-      this.familyInfoContent = '',
-      this.imageUrl = ''})
+      {this.id,
+      this.name = '',
+      @JsonKey(name: 'role_id') this.roleId,
+      @JsonKey(name: 'relation_name') this.relationName = '',
+      @JsonKey(name: 'image') this.imageJafa,
+      this.description = '',
+      @JsonKey(name: ' province_id') this.provinceId,
+      @JsonKey(name: 'total_member') this.totalMember,
+      @JsonKey(name: 'total_user') this.totalUser,
+      this.level})
       : super._();
 
   factory _$_TreeDetailModel.fromJson(Map<String, dynamic> json) =>
       _$$_TreeDetailModelFromJson(json);
 
   @override
-  final JafaModel? jafa;
+  final int? id;
   @override
   @JsonKey()
-  final String familyInfo;
+  final String name;
+  @override
+  @JsonKey(name: 'role_id')
+  final int? roleId;
+  @override
+  @JsonKey(name: 'relation_name')
+  final String relationName;
+  @override
+  @JsonKey(name: 'image')
+  final String? imageJafa;
   @override
   @JsonKey()
-  final String familyInfoContent;
+  final String description;
   @override
-  @JsonKey()
-  final String imageUrl;
+  @JsonKey(name: ' province_id')
+  final int? provinceId;
+  @override
+  @JsonKey(name: 'total_member')
+  final int? totalMember;
+  @override
+  @JsonKey(name: 'total_user')
+  final int? totalUser;
+  @override
+  final int? level;
 
   @override
   String toString() {
-    return 'TreeDetailModel(jafa: $jafa, familyInfo: $familyInfo, familyInfoContent: $familyInfoContent, imageUrl: $imageUrl)';
+    return 'TreeDetailModel(id: $id, name: $name, roleId: $roleId, relationName: $relationName, imageJafa: $imageJafa, description: $description, provinceId: $provinceId, totalMember: $totalMember, totalUser: $totalUser, level: $level)';
   }
 
   @override
@@ -187,19 +277,28 @@ class _$_TreeDetailModel extends _TreeDetailModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TreeDetailModel &&
-            (identical(other.jafa, jafa) || other.jafa == jafa) &&
-            (identical(other.familyInfo, familyInfo) ||
-                other.familyInfo == familyInfo) &&
-            (identical(other.familyInfoContent, familyInfoContent) ||
-                other.familyInfoContent == familyInfoContent) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.roleId, roleId) || other.roleId == roleId) &&
+            (identical(other.relationName, relationName) ||
+                other.relationName == relationName) &&
+            (identical(other.imageJafa, imageJafa) ||
+                other.imageJafa == imageJafa) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.provinceId, provinceId) ||
+                other.provinceId == provinceId) &&
+            (identical(other.totalMember, totalMember) ||
+                other.totalMember == totalMember) &&
+            (identical(other.totalUser, totalUser) ||
+                other.totalUser == totalUser) &&
+            (identical(other.level, level) || other.level == level));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, jafa, familyInfo, familyInfoContent, imageUrl);
+  int get hashCode => Object.hash(runtimeType, id, name, roleId, relationName,
+      imageJafa, description, provinceId, totalMember, totalUser, level);
 
   @JsonKey(ignore: true)
   @override
@@ -217,23 +316,47 @@ class _$_TreeDetailModel extends _TreeDetailModel {
 
 abstract class _TreeDetailModel extends TreeDetailModel {
   const factory _TreeDetailModel(
-      {final JafaModel? jafa,
-      final String familyInfo,
-      final String familyInfoContent,
-      final String imageUrl}) = _$_TreeDetailModel;
+      {final int? id,
+      final String name,
+      @JsonKey(name: 'role_id') final int? roleId,
+      @JsonKey(name: 'relation_name') final String relationName,
+      @JsonKey(name: 'image') final String? imageJafa,
+      final String description,
+      @JsonKey(name: ' province_id') final int? provinceId,
+      @JsonKey(name: 'total_member') final int? totalMember,
+      @JsonKey(name: 'total_user') final int? totalUser,
+      final int? level}) = _$_TreeDetailModel;
   const _TreeDetailModel._() : super._();
 
   factory _TreeDetailModel.fromJson(Map<String, dynamic> json) =
       _$_TreeDetailModel.fromJson;
 
   @override
-  JafaModel? get jafa;
+  int? get id;
   @override
-  String get familyInfo;
+  String get name;
   @override
-  String get familyInfoContent;
+  @JsonKey(name: 'role_id')
+  int? get roleId;
   @override
-  String get imageUrl;
+  @JsonKey(name: 'relation_name')
+  String get relationName;
+  @override
+  @JsonKey(name: 'image')
+  String? get imageJafa;
+  @override
+  String get description;
+  @override
+  @JsonKey(name: ' province_id')
+  int? get provinceId;
+  @override
+  @JsonKey(name: 'total_member')
+  int? get totalMember;
+  @override
+  @JsonKey(name: 'total_user')
+  int? get totalUser;
+  @override
+  int? get level;
   @override
   @JsonKey(ignore: true)
   _$$_TreeDetailModelCopyWith<_$_TreeDetailModel> get copyWith =>

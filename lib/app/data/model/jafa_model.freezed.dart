@@ -24,8 +24,10 @@ mixin _$JafaModel {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'role_id')
   int? get roleId => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
-  String get imageJafa => throw _privateConstructorUsedError;
+  @JsonKey(name: 'relation_name')
+  String get relationName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image')
+  String? get imageJafa => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +44,8 @@ abstract class $JafaModelCopyWith<$Res> {
       {int? id,
       String name,
       @JsonKey(name: 'role_id') int? roleId,
-      String content,
-      String imageJafa});
+      @JsonKey(name: 'relation_name') String relationName,
+      @JsonKey(name: 'image') String? imageJafa});
 }
 
 /// @nodoc
@@ -62,8 +64,8 @@ class _$JafaModelCopyWithImpl<$Res, $Val extends JafaModel>
     Object? id = freezed,
     Object? name = null,
     Object? roleId = freezed,
-    Object? content = null,
-    Object? imageJafa = null,
+    Object? relationName = null,
+    Object? imageJafa = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -78,14 +80,14 @@ class _$JafaModelCopyWithImpl<$Res, $Val extends JafaModel>
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
               as int?,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      relationName: null == relationName
+          ? _value.relationName
+          : relationName // ignore: cast_nullable_to_non_nullable
               as String,
-      imageJafa: null == imageJafa
+      imageJafa: freezed == imageJafa
           ? _value.imageJafa
           : imageJafa // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -101,8 +103,8 @@ abstract class _$$_JafaModelCopyWith<$Res> implements $JafaModelCopyWith<$Res> {
       {int? id,
       String name,
       @JsonKey(name: 'role_id') int? roleId,
-      String content,
-      String imageJafa});
+      @JsonKey(name: 'relation_name') String relationName,
+      @JsonKey(name: 'image') String? imageJafa});
 }
 
 /// @nodoc
@@ -119,8 +121,8 @@ class __$$_JafaModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? roleId = freezed,
-    Object? content = null,
-    Object? imageJafa = null,
+    Object? relationName = null,
+    Object? imageJafa = freezed,
   }) {
     return _then(_$_JafaModel(
       id: freezed == id
@@ -135,14 +137,14 @@ class __$$_JafaModelCopyWithImpl<$Res>
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
               as int?,
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      relationName: null == relationName
+          ? _value.relationName
+          : relationName // ignore: cast_nullable_to_non_nullable
               as String,
-      imageJafa: null == imageJafa
+      imageJafa: freezed == imageJafa
           ? _value.imageJafa
           : imageJafa // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -154,8 +156,8 @@ class _$_JafaModel extends _JafaModel {
       {this.id,
       this.name = '',
       @JsonKey(name: 'role_id') this.roleId,
-      this.content = '',
-      this.imageJafa = ''})
+      @JsonKey(name: 'relation_name') this.relationName = '',
+      @JsonKey(name: 'image') this.imageJafa})
       : super._();
 
   factory _$_JafaModel.fromJson(Map<String, dynamic> json) =>
@@ -170,15 +172,15 @@ class _$_JafaModel extends _JafaModel {
   @JsonKey(name: 'role_id')
   final int? roleId;
   @override
-  @JsonKey()
-  final String content;
+  @JsonKey(name: 'relation_name')
+  final String relationName;
   @override
-  @JsonKey()
-  final String imageJafa;
+  @JsonKey(name: 'image')
+  final String? imageJafa;
 
   @override
   String toString() {
-    return 'JafaModel(id: $id, name: $name, roleId: $roleId, content: $content, imageJafa: $imageJafa)';
+    return 'JafaModel(id: $id, name: $name, roleId: $roleId, relationName: $relationName, imageJafa: $imageJafa)';
   }
 
   @override
@@ -189,7 +191,8 @@ class _$_JafaModel extends _JafaModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.content, content) || other.content == content) &&
+            (identical(other.relationName, relationName) ||
+                other.relationName == relationName) &&
             (identical(other.imageJafa, imageJafa) ||
                 other.imageJafa == imageJafa));
   }
@@ -197,7 +200,7 @@ class _$_JafaModel extends _JafaModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, roleId, content, imageJafa);
+      Object.hash(runtimeType, id, name, roleId, relationName, imageJafa);
 
   @JsonKey(ignore: true)
   @override
@@ -218,8 +221,8 @@ abstract class _JafaModel extends JafaModel {
       {final int? id,
       final String name,
       @JsonKey(name: 'role_id') final int? roleId,
-      final String content,
-      final String imageJafa}) = _$_JafaModel;
+      @JsonKey(name: 'relation_name') final String relationName,
+      @JsonKey(name: 'image') final String? imageJafa}) = _$_JafaModel;
   const _JafaModel._() : super._();
 
   factory _JafaModel.fromJson(Map<String, dynamic> json) =
@@ -233,9 +236,11 @@ abstract class _JafaModel extends JafaModel {
   @JsonKey(name: 'role_id')
   int? get roleId;
   @override
-  String get content;
+  @JsonKey(name: 'relation_name')
+  String get relationName;
   @override
-  String get imageJafa;
+  @JsonKey(name: 'image')
+  String? get imageJafa;
   @override
   @JsonKey(ignore: true)
   _$$_JafaModelCopyWith<_$_JafaModel> get copyWith =>

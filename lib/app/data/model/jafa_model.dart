@@ -10,8 +10,8 @@ class JafaModel with _$JafaModel {
     int? id,
     @Default('') String name,
     @JsonKey(name: 'role_id') int? roleId,
-    @Default('') String content,
-    @Default('') String imageJafa,
+    @JsonKey(name: 'relation_name') @Default('') String relationName,
+    @JsonKey(name: 'image') String? imageJafa,
   }) = _JafaModel;
 
   factory JafaModel.fromJson(Map<String, Object?> json) =>

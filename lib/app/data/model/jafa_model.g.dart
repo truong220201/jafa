@@ -10,8 +10,8 @@ _$_JafaModel _$$_JafaModelFromJson(Map<String, dynamic> json) => _$_JafaModel(
       id: json['id'] as int?,
       name: json['name'] as String? ?? '',
       roleId: json['role_id'] as int?,
-      content: json['content'] as String? ?? '',
-      imageJafa: json['imageJafa'] as String? ?? '',
+      relationName: json['relation_name'] as String? ?? '',
+      imageJafa: json['image'] as String?,
     );
 
 Map<String, dynamic> _$$_JafaModelToJson(_$_JafaModel instance) =>
@@ -19,6 +19,6 @@ Map<String, dynamic> _$$_JafaModelToJson(_$_JafaModel instance) =>
       'id': instance.id,
       'name': instance.name,
       'role_id': instance.roleId,
-      'content': instance.content,
-      'imageJafa': instance.imageJafa,
+      'relation_name': instance.relationName,
+      'image': instance.imageJafa,
     };

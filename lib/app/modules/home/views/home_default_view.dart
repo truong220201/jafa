@@ -40,8 +40,8 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       appBar: AppBar(
         leading: SizedBox(
-          width: 16.25,
-          height: 21.57,
+          width: 16,
+          height: 21,
           child: SvgPicture.asset(
             "assets/images/tree.svg",
           ),
@@ -164,11 +164,11 @@ class _HomeViewState extends State<HomeView> {
                 onTap: () async {
                   //context.read<HomeCubit>().getConservations();
                   await context.router
-                      .push(TreeDetailViewRoute(idTree: i.id ?? 0));
+                      .push(TreeDetailViewRoute(idJafa: i.id ?? 0));
                 },
                 child: CustomCard(
                   name: i.name,
-                  content: i.content,
+                  content: i.relationName,
                   image: i.imageJafa,
                 )))
             .toList());

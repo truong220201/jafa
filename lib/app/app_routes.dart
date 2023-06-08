@@ -1,4 +1,3 @@
-
 abstract class Routes {
   const Routes._();
 
@@ -10,6 +9,7 @@ abstract class Routes {
   static const createTree = _Paths.createTree;
   static const editBranch = _Paths.editBranch;
   static const treeDetail = _Paths.treeDetail;
+  static const treeEdit = _Paths.treeDetail;
   static const scanQR = _Paths.scanQR;
 }
 
@@ -22,5 +22,6 @@ abstract class _Paths {
   static const createTree = 'create_tree';
   static const editBranch = 'edit_branch';
   static const treeDetail = 'tree_detail';
+  static const treeEdit = 'tree_edit';
   static const scanQR = 'scan_qr';
 }

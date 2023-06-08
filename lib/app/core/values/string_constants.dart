@@ -56,6 +56,8 @@ class StringConstants {
   static String detailJafa = "Chi Tiết Gia Tộc";
   static String domicile = "Nguyên quán";
   static String seeListJafa = "Xem gia phả dạng danh sách";
+  static String seeMemberHasJoin = "Xem thành viên đã tham gia";
+
   static String jafaInHere = "Các gia tộc của bạn sẽ xuất hiện ở đây";
   static String youCanMemorize =
       "Bạn có thể thêm cây gia phả cho gia tộc,\nghi nhớ ngày giỗ, ngày họp mặt\nvà nhiều hơn thế nữa.";
@@ -84,7 +86,10 @@ class StringConstants {
   static String downLoad = "Tải xuống";
   static String reset = "Làm mới";
   static String jafaList = "Danh sách gia tộc";
+  static String levelLowcase = 'đời';
   //ScanQR
   static String scanYourQrCode = "$scanQrCode của gia phả \nbạn muốn tham gia ";
   static String scanQrCode = "Quét mã QR";
+  //Edit jafa
+  static String editJafa = "Chỉnh sửa gia tộc";
 }

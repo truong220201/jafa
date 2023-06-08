@@ -8,10 +8,16 @@ part 'tree_detail_model.g.dart';
 class TreeDetailModel with _$TreeDetailModel {
   const TreeDetailModel._();
   const factory TreeDetailModel({
-    JafaModel? jafa,
-    @Default('') String familyInfo,
-    @Default('') String familyInfoContent,
-    @Default('') String imageUrl,
+    int? id,
+    @Default('') String name,
+    @JsonKey(name: 'role_id') int? roleId,
+    @JsonKey(name: 'relation_name') @Default('') String relationName,
+    @JsonKey(name: 'image') String? imageJafa,
+    @Default('') String description,
+    @JsonKey(name: ' province_id') int? provinceId,
+    @JsonKey(name: 'total_member') int? totalMember,
+     @JsonKey(name: 'total_user') int? totalUser,
+    int? level,
   }) = _TreeDetailModel;
 
   factory TreeDetailModel.fromJson(Map<String, Object?> json) =>

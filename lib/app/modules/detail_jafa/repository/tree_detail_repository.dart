@@ -1,13 +1,14 @@
 import 'package:genealogy_management/app/data/model/jafa_model.dart';
+import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
 
-// import '../api/home_api.dart';
+import '../api/tree_detail_api.dart';
 
-class Repository {
-  // final HomeApi _api;
-  // HomeRepository(this._api);
-  // Future<List<JafaModel>> getHomeDetail() {
-  //   return _api.getHomeDetail();
-  // }
+class TreeDetailRepository {
+  final TreeDetailApi _api;
+  TreeDetailRepository(this._api);
+  Future<TreeDetailModel> getTreeDetail(int idJafa) async {
+    return await _api.getTreeDetail(idJafa);
+  }
 
   // Future<List<Conservation>> getConservations({
   //   required ConservationKindId conservationKindId,

@@ -61,8 +61,14 @@ class _$MainRouter extends RootStackRouter {
         routeData: routeData,
         child: TreeDetailView(
           key: args.key,
-          idTree: args.idTree,
+          idJafa: args.idJafa,
         ),
+      );
+    },
+    TreeEditViewRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const TreeEditView(),
       );
     },
     ScanQRViewRoute.name: (routeData) {
@@ -109,6 +115,10 @@ class _$MainRouter extends RootStackRouter {
         ),
         RouteConfig(
           TreeDetailViewRoute.name,
+          path: 'tree_detail',
+        ),
+        RouteConfig(
+          TreeEditViewRoute.name,
           path: 'tree_detail',
         ),
         RouteConfig(
@@ -231,13 +241,13 @@ class TreeCreateViewRoute extends PageRouteInfo<void> {
 class TreeDetailViewRoute extends PageRouteInfo<TreeDetailViewRouteArgs> {
   TreeDetailViewRoute({
     Key? key,
-    required int idTree,
+    required int idJafa,
   }) : super(
           TreeDetailViewRoute.name,
           path: 'tree_detail',
           args: TreeDetailViewRouteArgs(
             key: key,
-            idTree: idTree,
+            idJafa: idJafa,
           ),
         );
 
@@ -247,17 +257,29 @@ class TreeDetailViewRoute extends PageRouteInfo<TreeDetailViewRouteArgs> {
 class TreeDetailViewRouteArgs {
   const TreeDetailViewRouteArgs({
     this.key,
-    required this.idTree,
+    required this.idJafa,
   });
 
   final Key? key;
 
-  final int idTree;
+  final int idJafa;
 
   @override
   String toString() {
-    return 'TreeDetailViewRouteArgs{key: $key, idTree: $idTree}';
+    return 'TreeDetailViewRouteArgs{key: $key, idJafa: $idJafa}';
   }
+}
+
+/// generated route for
+/// [TreeEditView]
+class TreeEditViewRoute extends PageRouteInfo<void> {
+  const TreeEditViewRoute()
+      : super(
+          TreeEditViewRoute.name,
+          path: 'tree_detail',
+        );
+
+  static const String name = 'TreeEditViewRoute';
 }
 
 /// generated route for

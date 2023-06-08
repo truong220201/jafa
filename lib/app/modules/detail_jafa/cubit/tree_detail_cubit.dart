@@ -1,19 +1,32 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:genealogy_management/app/data/model/jafa_model.dart';
 import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
-
-import '../repository/mock_tree_detail_repository.dart';
+import 'package:genealogy_management/app/data/model/jafa_model.dart';
+import 'package:genealogy_management/app/modules/detail_jafa/api/tree_detail_api.dart';
+import '../../../core/widgets/dialog/custom_dialog.dart';
+import '../../../main_router.dart';
+import '../repository/tree_detail_repository.dart';
 import 'tree_detail_state.dart';
 
 class TreeDetailCubit extends Cubit<TreeDetailState> {
-  TreeDetailCubit(this._mockTreeDetailRepository, this.idTreeDetail)
-      : super(TreeDetailState());
+  TreeDetailCubit(
+    this._treeDetailRepository,
+    this.idJafa,
+  ) : super(const TreeDetailState());
 
-  //final TreeDetailRepository _TreeDetailRepository;
-  final MockTreeDetailRepository _mockTreeDetailRepository;
-  final int idTreeDetail;
+  final TreeDetailRepository _treeDetailRepository;
+//final MockTreeDetailRepository _mockTreeDetailRepository;
+  final int idJafa;
   bool _isLoading = false;
+
+  void initData() {
+    debugPrint('init$state');
+    loadData(idJafa);
+    checkHasData();
+    debugPrint('state: $state');
+  }
+
   checkHasData() async {
     emit(state.copyWith(hasInfoJaFa: true));
   }
@@ -22,30 +35,51 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     if (state.showInviteFriends == true) {
       emit(state.copyWith(showInviteFriends: false));
     }
-    emit(state.copyWith(showModal: !state.showModal));
+    emit(state.copyWith(showModal: !state.showModal!));
   }
 
   void changeShowInviteFriends() {
     if (state.showModal == true) {
       emit(state.copyWith(showModal: false));
     }
-    emit(state.copyWith(showInviteFriends: !state.showInviteFriends));
+    emit(state.copyWith(showInviteFriends: !state.showInviteFriends!));
   }
 
-  void initData() {
-    loadData();
-    checkHasData();
-    debugPrint('state: ' + state.toString());
+  void toEditJafa(
+    BuildContext context,
+  ) {
+    context.router.push(const TreeEditViewRoute());
   }
 
-  Future<void> loadData() async {
+  Future<void> showdialog(BuildContext context, String title, String content,
+      String nameButtonSubmit) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomDialog(
+            content: content,
+            onTap: () {
+              deleteJafaFunc(10);
+              // ignore: use_build_context_synchronously
+              context.router.replaceAll([const HomeViewRoute()]);
+            },
+            title: title,
+            nameButtonSubmit: nameButtonSubmit,
+          );
+        });
+  }
+
+  Future<void> loadData(int idJafa) async {
+    emit(state.copyWith(showModal: false));
+    emit(state.copyWith(showInviteFriends: false));
     if (_isLoading) {
       return;
     }
     _isLoading = true;
     try {
+      debugPrint('loadata$state');
       await Future.wait<void>([
-        loadDataJaFaDetail(),
+        loadDataJaFa(idJafa),
       ]);
 
       _isLoading = false;
@@ -54,14 +88,39 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     }
   }
 
-  Future<void> loadDataJaFaDetail() async {
-    emit(state.copyWith(treeDetail: const TreeDetailModel(jafa: JafaModel())));
+  Future<String> deleteJafaResponse(int idJafa) async {
+    var api = await TreeDetailApi().deleteJafa(idJafa);
+    debugPrint(api.toString());
+    return api.toString();
+  }
+
+  Future<void> deleteJafaFunc(int idJafa) async {
+    String message = await deleteJafaResponse(idJafa);
+    debugPrint(message);
+    emit(state.copyWith(statusDeleteJafa: message));
+  }
+
+  Future<String> leaveJafaResponse(int idJafa) async {
+    var api = await TreeDetailApi().leavingJafa(idJafa);
+    debugPrint(api.toString());
+    return api.toString();
+  }
+
+  Future<void> leaveJafaFunc(int idJafa) async {
+    String message = await leaveJafaResponse(idJafa);
+    debugPrint(message);
+    emit(state.copyWith(statusDeleteJafa: message));
+  }
+
+  Future<void> loadDataJaFa(int idJafa) async {
+    emit(state.copyWith(treeDetail: const TreeDetailModel()));
+    debugPrint(' detail state:+++++++++++$state');
     try {
       final treeDetailReponse =
-          await _mockTreeDetailRepository.getTreeDetailModel();
-      debugPrint(treeDetailReponse.jafa!.name);
+          await _treeDetailRepository.getTreeDetail(idJafa);
       emit(state.copyWith(treeDetail: treeDetailReponse));
     } catch (e) {
+      debugPrint(e.toString());
       emit(state.copyWith(showUserListError: e));
     }
   }

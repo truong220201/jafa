@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:genealogy_management/app/core/values/text_styles.dart';
 import 'package:image_network/image_network.dart';
 
 class CustomCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(image);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 31, vertical: 10),
       child: Container(
@@ -38,8 +40,7 @@ class CustomCard extends StatelessWidget {
                     : CircleAvatar(
                         child: FadeInImage.assetNetwork(
                           placeholder: "assets/images/user.png",
-                          image:
-                              "https://www.dungplus.com/wp-content/uploads/2019/12/girl-xinh-600x600.jpg",
+                          image: image!,
                         ),
                       ),
               ),
@@ -50,7 +51,18 @@ class CustomCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [Text(name), Text(content)],
+                    children: [
+                      Text(
+                        name,
+                        style: TextStyles.boldBlackS16,
+                      ),
+                      RichText(
+                        overflow: TextOverflow.ellipsis,
+                        strutStyle: const StrutStyle(fontSize: 12.0),
+                        text:
+                            TextSpan(style: TextStyles.greyS14, text: content),
+                      ),
+                    ],
                   ),
                 ),
               ),

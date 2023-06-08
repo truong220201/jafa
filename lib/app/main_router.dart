@@ -11,6 +11,7 @@ import 'modules/register/views/login/registration_phone_view.dart';
 import 'modules/register/views/login/welcome_view.dart';
 import 'modules/scan_QR/scan_qr_view.dart';
 import 'modules/tree_create/view/tree_create_view.dart';
+import 'modules/tree_edit/view/tree_edit_view.dart';
 part 'main_router.gr.dart';
 
 @MaterialAutoRouter(routes: <AutoRoute>[
@@ -20,6 +21,7 @@ part 'main_router.gr.dart';
   MaterialRoute(page: HomeView, path: Routes.home, initial: true),
   MaterialRoute(page: TreeCreateView, path: Routes.createTree),
   MaterialRoute(page: TreeDetailView, path: Routes.treeDetail),
+  MaterialRoute(page: TreeEditView, path: Routes.treeDetail),
   MaterialRoute(page: ScanQRView, path: Routes.scanQR),
   MaterialRoute(page: WelcomeView),
 ])

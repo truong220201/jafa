@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../core/widgets/alert/network_alert_view.dart';
-import '../../flavors/build_config.dart';
 
 class NetworkAlertIgnore {
   final String path;
@@ -32,7 +28,7 @@ class ApiPath {
       ignorePaths.map((e) => e.toString()).toList();
 }
 
-const String rootPath = 'https://f5fc-117-6-130-156.ngrok-free.app';
+const String rootPath = 'https://73f3-117-6-130-156.ngrok-free.app';
 
 class ApiHelper {
   //final roothPath = BuildConfig.instance.config.logger;
@@ -53,6 +49,7 @@ class ApiHelper {
     try {
       var response =
           await _dio.get(rootPath + path, options: Options(headers: headers));
+      debugPrint(response.toString());
       return response;
     } catch (e) {
       throw Exception('exception in GET HTTP request. $e');
@@ -69,7 +66,6 @@ class ApiHelper {
             "Authorization":
                 "Bearer 14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw",
           }));
-      debugPrint('a--------------' + response.toString());
       if (response.statusCode == 400) {
         var jsonResponse = response.data['message'];
         debugPrint(jsonResponse.toString());
