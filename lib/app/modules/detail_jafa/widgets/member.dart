@@ -30,6 +30,7 @@ class MemberWidget extends StatelessWidget {
                     title: StringConstants.seeListJafa,
                     content: '${state.toString()} thành viên',
                     onTap: () => {
+                          debugPrint('hello'),
                           Navigator.push(
                               context,
                               MaterialPageRoute(
