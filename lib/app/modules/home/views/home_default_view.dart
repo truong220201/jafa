@@ -158,19 +158,27 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _listCard(BuildContext context, List<JafaModel> listUser) {
     List<JafaModel> listCardSelect = listUser;
-    return Column(
-        children: listCardSelect
-            .map((i) => GestureDetector(
-                onTap: () async {
-                  //context.read<HomeCubit>().getConservations();
-                  await context.router
-                      .push(TreeDetailViewRoute(idJafa: i.id ?? 0));
-                },
-                child: CustomCard(
-                  name: i.name,
-                  content: i.relationName,
-                  image: i.imageJafa,
-                )))
-            .toList());
+    return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+      return GestureDetector(
+        onVerticalDragEnd: (details) {
+          debugPrint('reset');
+          context.read<HomeCubit>().loadDataJaFa();
+        },
+        child: Column(
+            children: listCardSelect
+                .map((i) => GestureDetector(
+                    onTap: () async {
+                      //context.read<HomeCubit>().getConservations();
+                      await context.router
+                          .push(TreeDetailViewRoute(idJafa: i.id ?? 0));
+                    },
+                    child: CustomCard(
+                      name: i.name,
+                      content: i.relationName,
+                      image: i.imageJafa,
+                    )))
+                .toList()),
+      );
+    });
   }
 }

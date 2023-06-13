@@ -82,7 +82,7 @@ class TreeView extends StatelessWidget {
             ),
             MaterialButton(
               onPressed: () {
-                var graph = new Graph();
+                var graph = Graph();
 
                 Node node1 = Node.Id('One');
                 Node node2 = Node.Id('Two');
@@ -121,7 +121,7 @@ class TreeView extends StatelessWidget {
             ),
             MaterialButton(
               onPressed: () {
-                var graph = new Graph();
+                var graph = Graph();
 
                 Node node1 = Node.Id('One');
                 Node node2 = Node.Id('Two');
