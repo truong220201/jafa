@@ -1,35 +1,42 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
 
-import '../../../data/api/api_hepler.dart';
-import '../../../data/model/jafa_model.dart';
 import '../../../flavors/build_config.dart';
 import '../../../core/base/base_remote_source.dart';
 
 class TreeDetailApi extends BaseRemoteSource {
-  final apiHelper = ApiHelper();
   Future<TreeDetailModel> getTreeDetail(int idJafa) async {
-    debugPrint(idJafa.toString());
-    final responseData =
-        await apiHelper.get(path: '/api/genealogy/$idJafa/detail');
-    debugPrint('-----------responseData' + responseData.toString());
-    TreeDetailModel data = TreeDetailModel.fromJson(responseData.data['data']);
-    debugPrint('-----------data' + data.toString());
-    return data;
+    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
+    final request = dioClient.get(
+      '$baseUrl/api/genealogy/$idJafa/detail',
+      
+    );
+    try {
+      return callApiWithErrorParser(request)
+          .then((response) => TreeDetailModel.fromJson(response.data['data']));
+    } catch (e) {
+      rethrow;
+    }
   }
 
-  Future<String> deleteJafa(int idJafa) async {
-    final String responseData =
-        await apiHelper.delete(path: '/api/genealogy/${idJafa.toString()}');
-    return responseData.toString();
+  Future<Response> deleteJafa(int idJafa) async {
+    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
+    final request = dioClient.delete(
+      '$baseUrl/api/genealogy/$idJafa/detail',
+    );
+    final Response responseData = await callApiWithErrorParser(request)
+        .then((response) => response.data['data']);
+    return responseData;
   }
 
-  Future<String> leavingJafa(int idJafa) async {
-    final String responseData = await apiHelper.delete(
-        path: '/api/genealogy/${idJafa.toString()}/leave');
-    return responseData.toString();
+  Future<Response> leavingJafa(int idJafa) async {
+    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
+    final request = dioClient.delete(
+      '$baseUrl/api/genealogy/${idJafa.toString()}/leave',
+    );
+    final Response responseData = await callApiWithErrorParser(request)
+        .then((response) => response.data['data']);
+    return responseData;
   }
 
   // Future<TreeDetailModel> getTreeDetail(int idJafa) async {

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:genealogy_management/app/core/values/string_constants.dart';
 import 'package:genealogy_management/app/modules/detail_jafa/widgets/cart.dart';
 
+import '../../tree_view/tree_view.dart';
 import '../cubit/tree_detail_cubit.dart';
 import '../cubit/tree_detail_state.dart';
 
@@ -28,7 +29,12 @@ class MemberWidget extends StatelessWidget {
                     ),
                     title: StringConstants.seeListJafa,
                     content: '${state.toString()} thành viên',
-                    onTap: () => {});
+                    onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const TreeView()))
+                        });
               }),
           BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
               selector: (state) => state.treeDetail.totalUser ?? 0,
