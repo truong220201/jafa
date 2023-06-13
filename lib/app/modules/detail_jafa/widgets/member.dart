@@ -13,37 +13,45 @@ class MemberWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(20.0),
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.all(Radius.circular(8))),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(StringConstants.member),
-          BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
-              selector: (state) => state.treeDetail.totalMember ?? 0,
-              builder: (context, state) {
-                return CartWidget(
-                    icon: SvgPicture.asset(
-                      "assets/images/nguoi_dung_lk.svg",
-                    ),
-                    title: StringConstants.seeListJafa,
-                    content: '${state.toString()} thành viên',
-                    onTap: () {
-                      debugPrint('hello');
-                    });
-              }),
-          BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
-              selector: (state) => state.treeDetail.totalUser ?? 0,
-              builder: (context, state) {
-                return CartWidget(
-                    icon: SvgPicture.asset(
-                      "assets/images/nguoi_dung_lk.svg",
-                    ),
-                    title: StringConstants.seeMemberHasJoin,
-                    content: '${state.toString()} thành viên',
-                    onTap: () => {});
-              })
-        ]));
+    return GestureDetector(
+      onTap: () => {
+        debugPrint('hello'),
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const TreeView()))
+      },
+      child: Container(
+          padding: const EdgeInsets.all(20.0),
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(StringConstants.member),
+            BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
+                selector: (state) => state.treeDetail.totalMember ?? 0,
+                builder: (context, state) {
+                  return CartWidget(
+                      icon: SvgPicture.asset(
+                        "assets/images/nguoi_dung_lk.svg",
+                      ),
+                      title: StringConstants.seeListJafa,
+                      content: '${state.toString()} thành viên',
+                      onTap: () {
+                        debugPrint('hello');
+                      });
+                }),
+            BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
+                selector: (state) => state.treeDetail.totalUser ?? 0,
+                builder: (context, state) {
+                  return CartWidget(
+                      icon: SvgPicture.asset(
+                        "assets/images/nguoi_dung_lk.svg",
+                      ),
+                      title: StringConstants.seeMemberHasJoin,
+                      content: '${state.toString()} thành viên',
+                      onTap: () => {});
+                })
+          ])),
+    );
   }
 }
