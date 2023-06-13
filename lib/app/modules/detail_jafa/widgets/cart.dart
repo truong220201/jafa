@@ -13,7 +13,7 @@ class CartWidget extends StatelessWidget {
   SvgPicture? icon;
   String? title;
   String? content;
-  Function? onTap;
+  Function onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

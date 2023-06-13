@@ -29,7 +29,7 @@ class RelationshipWidget extends StatelessWidget {
                         "assets/images/path.svg",
                       ),
                       title: state,
-                      onTap: () => {}),
+                      onTap: () {}),
                 ],
               ));
         });
