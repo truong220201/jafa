@@ -15,7 +15,7 @@ Future<void> main() async {
   EnvConfig devConfig = EnvConfig(
     appName: "",
     appVersion: "0.1",
-    apiBaseUrl: "https://dcd2-117-6-130-156.ngrok-free.app",
+    apiBaseUrl: "https://7958-117-6-130-156.ngrok-free.app",
     webBaseUrl: "",
     shouldCollectCrashLog: true,
     iOSAppId: '',

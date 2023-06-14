@@ -11,6 +11,7 @@ import '../../../core/widgets/card/custom_card.dart';
 import '../../../core/widgets/search/custom_search.dart';
 import '../../../data/model/jafa_model.dart';
 import '../../scan_QR/scan_qr_view.dart';
+import '../../tree_view/tree_view.dart';
 import '../api/home_api.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
@@ -89,7 +90,9 @@ class _HomeViewState extends State<HomeView> {
         height: 68,
         child: FloatingActionButton(
           onPressed: () async {
-            await context.router.push(const TreeCreateViewRoute());
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const TreeView()));
+            //await context.router.push(const TreeCreateViewRoute());
           },
           backgroundColor: AppColors.colorFFB20000,
           foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
@@ -176,6 +179,7 @@ class _HomeViewState extends State<HomeView> {
                       name: i.name,
                       content: i.relationName,
                       image: i.imageJafa,
+                      //image: null,
                     )))
                 .toList()),
       );
