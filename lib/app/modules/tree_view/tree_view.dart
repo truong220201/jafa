@@ -5,6 +5,67 @@ import 'package:genealogy_management/app/core/values/app_colors.dart';
 import 'package:graphview/GraphView.dart';
 
 import '../../core/widgets/asset_image/asset_image_view.dart';
+import '../../data/model/tree_view_model.dart';
+import 'create_branch_view.dart';
+
+class MockTreeDetailRepository {
+  List<TreeViewModel> _treeDetail = [];
+  List<TreeViewModel> getTreeViewModel() {
+    _treeDetail = [
+      const TreeViewModel(
+        id: 128,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [
+          Parrent(id: 99, relationType: 'dad'),
+          Parrent(id: 129, relationType: 'dad')
+        ],
+      ),
+      const TreeViewModel(
+        id: 99,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [
+          Parrent(id: 127, relationType: 'dad'),
+          Parrent(id: 130, relationType: 'couple'),
+          Parrent(id: 131, relationType: 'couple'),
+          Parrent(id: 132, relationType: 'dad')
+        ],
+      ),
+      const TreeViewModel(
+        id: 127,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [],
+      ),
+      const TreeViewModel(
+        id: 129,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [],
+      ),
+      const TreeViewModel(
+        id: 130,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [],
+      ),
+      const TreeViewModel(
+        id: 131,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [],
+      ),
+      const TreeViewModel(
+        id: 132,
+        name: 'a',
+        avatar: '',
+        childrenParrent: [],
+      ),
+    ];
+    return _treeDetail;
+  }
+}
 
 class TreeView extends StatefulWidget {
   const TreeView({
@@ -16,32 +77,47 @@ class TreeView extends StatefulWidget {
 }
 
 class _TreeViewState extends State<TreeView> {
+  List arr = [];
+  List<Couple> arrCouple = [];
+  void initArray(int lengthArray) {
+    final List<TreeViewModel> listTreeView =
+        MockTreeDetailRepository().getTreeViewModel();
+
+    for (int i = 0; i < listTreeView.length; i++) {
+      arr.add(Node.Id(listTreeView[i].id));
+    }
+    for (int i = 0; i < listTreeView.length; i++) {
+      if (listTreeView[i].childrenParrent!.isNotEmpty) {
+        for (int j = 0; j < listTreeView[i].childrenParrent!.length; j++) {
+          if (listTreeView[i].childrenParrent![j].relationType == 'dad') {
+            //debugPrint(listTreeView[i].childrenParrent![j].id.toString());
+            graph.addEdge(Node.Id(listTreeView[i].id),
+                Node.Id(listTreeView[i].childrenParrent![j].id));
+          } else if (listTreeView[i].childrenParrent![j].relationType ==
+              'couple') {
+            for (int q = 0; q < arrCouple.length; q++) {
+              if (arrCouple[q].idaPerson == listTreeView[i].id) {
+                // arrCouple[q]
+                //     .listIdvk!
+                //     .add(listTreeView[i].childrenParrent![j].id!);
+                continue;
+              }
+            }
+            arrCouple.add(Couple(idaPerson: listTreeView[i].id, listIdvk: [
+              listTreeView[i].id!,
+              listTreeView[i].childrenParrent![j].id!
+            ]));
+          }
+        }
+      }
+    }
+  }
+
   @override
   void initState() {
-    final node1 = Node.Id(1);
-    final node2 = Node.Id(2);
-    final node3 = Node.Id(3);
-    final node4 = Node.Id(4);
-    final node5 = Node.Id(5);
-    final node6 = Node.Id(6);
-    final node8 = Node.Id(7);
-    final node7 = Node.Id(8);
-    final node9 = Node.Id(9);
-    final node10 = Node.Id(10);
-    final node11 = Node.Id(11);
-    final node12 = Node.Id(12);
+    super.initState();
 
-    graph.addEdge(node1, node2);
-    graph.addEdge(node1, node3, paint: Paint()..color = Colors.red);
-    graph.addEdge(node1, node4, paint: Paint()..color = Colors.blue);
-    graph.addEdge(node2, node5);
-    graph.addEdge(node2, node6);
-    graph.addEdge(node6, node7, paint: Paint()..color = Colors.red);
-    graph.addEdge(node6, node8, paint: Paint()..color = Colors.red);
-    graph.addEdge(node4, node9);
-    graph.addEdge(node4, node10, paint: Paint()..color = Colors.black);
-    graph.addEdge(node4, node11, paint: Paint()..color = Colors.red);
-    graph.addEdge(node11, node12);
+    initArray(13);
 
     builder
       ..siblingSeparation = (100)
@@ -54,44 +130,53 @@ class _TreeViewState extends State<TreeView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          child: InteractiveViewer(
-              constrained: false,
-              boundaryMargin: const EdgeInsets.all(100),
-              minScale: 0.001,
-              maxScale: 2.5,
-              child: GraphView(
-                graph: graph,
-                algorithm:
-                    BuchheimWalkerAlgorithm(builder, TreeEdgeRenderer(builder)),
-                paint: Paint()
-                  ..color = Colors.green
-                  ..strokeWidth = 1
-                  ..style = PaintingStyle.stroke,
-                builder: (Node node) {
-                  // I can decide what widget should be shown here based on the id
-                  var a = node.key!.value as int;
-                  return rectangleWidget(a);
-                },
-              )),
-        ),
+        body: InteractiveViewer(
+            constrained: false,
+            boundaryMargin: const EdgeInsets.all(10000),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            minScale: 0.05,
+            maxScale: 50,
+            child: GraphView(
+              graph: graph,
+              algorithm:
+                  BuchheimWalkerAlgorithm(builder, TreeEdgeRenderer(builder)),
+              paint: Paint()
+                ..color = const Color.fromARGB(255, 33, 33, 33)
+                ..strokeWidth = 2
+                ..style = PaintingStyle.stroke,
+              builder: (Node node) {
+                // I can decide what widget should be shown here based on the id
+                var a = node.key!.value as int;
+
+                return rectangleWidget(a);
+              },
+            )),
       ),
     );
   }
 
-  Random r = Random();
-
   Widget rectangleWidget(int a) {
+    debugPrint('int a = ' + a.toString());
+    for (int i = 0; i < arrCouple.length; i++) {
+      if (a == arrCouple[i].idaPerson) {
+        debugPrint(arrCouple[i].listIdvk.toString());
+        return InkWell(
+          onTap: () {
+            print('clicked');
+          },
+          child: ListSubUser(
+            userInfo: arrCouple[i].listIdvk!,
+          ),
+        );
+      }
+    }
     return InkWell(
-      onTap: () {
-        print('clicked');
-      },
-      child: a % 2 != 0
-          ? SingleUser()
-          : ListSubUser(
-              userInfo: ['a', 'b', 'c'],
-            ),
-    );
+        onTap: () {
+          print('clicked');
+        },
+        child: SingleUser(
+          name: a.toString(),
+        ));
   }
 
   final Graph graph = Graph()..isTree = true;
@@ -117,6 +202,10 @@ class _TreeViewState extends State<TreeView> {
 }
 
 class SingleUser extends StatelessWidget {
+  const SingleUser({super.key, required this.name});
+  final String name;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.all(16),
@@ -164,14 +253,14 @@ class SingleUser extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text('Node name')
+          Text('Node $name')
         ]));
   }
 }
 
 class ListSubUser extends StatelessWidget {
   const ListSubUser({super.key, required this.userInfo});
-  final List<String> userInfo;
+  final List<int> userInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +297,7 @@ class ListSubUser extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text('Node $i')
+                          Text('Node ${userInfo[i]}')
                         ]),
                   ),
               ]),

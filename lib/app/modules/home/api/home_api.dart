@@ -25,7 +25,7 @@ class HomeApi extends BaseRemoteSource {
   Future<List<JafaModel>> getHomeDetail() async {
     final baseUrl = BuildConfig.instance.config.apiBaseUrl;
     final request = dioClient.get(
-      '$baseUrl/api/genealogy/?per_page=23&page=5',
+      '$baseUrl/api/genealogy/',
     );
     try {
       return callApiWithErrorParser(request).then((response) =>

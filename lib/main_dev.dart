@@ -15,7 +15,7 @@ Future<void> main() async {
   EnvConfig devConfig = EnvConfig(
     appName: "",
     appVersion: "0.1",
-    apiBaseUrl: "https://7958-117-6-130-156.ngrok-free.app",
+    apiBaseUrl: "http://jafa.mumesoft.com",
     webBaseUrl: "",
     shouldCollectCrashLog: true,
     iOSAppId: '',

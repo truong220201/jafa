@@ -17,7 +17,7 @@ class RequestHeaderInterceptor extends InterceptorsWrapper {
     //String accessToken = '14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw';
     final prefs = await SharedPreferences.getInstance();
     final String accessToken = prefs.getString('accessToken') ??
-        '6|aTe3bUGmZClN6ySAaxrM6KOUCWdtqcYVv3Q5rRRd';
+        '1|5PzQItkO2Qcwkfn8JrIqpgUMPDbBKg8q7BDpJrtx';
 
     var customHeaders = {'content-type': 'application/json'};
 

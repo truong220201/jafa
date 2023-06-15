@@ -90,9 +90,9 @@ class _HomeViewState extends State<HomeView> {
         height: 68,
         child: FloatingActionButton(
           onPressed: () async {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const TreeView()));
-            //await context.router.push(const TreeCreateViewRoute());
+            // Navigator.push(context,
+            //     MaterialPageRoute(builder: (context) => const TreeView()));
+            await context.router.push(const TreeCreateViewRoute());
           },
           backgroundColor: AppColors.colorFFB20000,
           foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
