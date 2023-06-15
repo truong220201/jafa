@@ -27,8 +27,12 @@ class TreeEditCubit extends Cubit<TreeEditState> {
     emit(state.copyWith(avatar: avatar));
   }
 
-  void setAddress(String address) {
-    emit(state.copyWith(address: address));
+  void setDistrict(int district) {
+    emit(state.copyWith(district: district));
+  }
+
+  void setProvince(int province) {
+    emit(state.copyWith(province: province));
   }
 
   void setRelationship(String relationship) {

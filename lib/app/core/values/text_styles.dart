@@ -58,8 +58,14 @@ abstract class TextStyles {
   static const small12LineHeight18BlackSur = _small12LineHeight18;
 
   static const regularWhiteS20 = TextStyle(
-    fontSize: 20,
+    fontSize: 12,
     color: AppColors.colorFFFFFFFF,
+  );
+  static const small12LineHeight18RedSur = TextStyle(
+    fontWeight: FontW.bold,
+    fontSize: 12,
+    letterSpacing: 0.7,
+    color: AppColors.colorFF940000,
   );
 
   static const boldBlackS18 = TextStyle(

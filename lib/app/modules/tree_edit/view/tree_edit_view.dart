@@ -9,6 +9,7 @@ import '../../../core/values/string_constants.dart';
 import '../../../core/values/text_styles.dart';
 import '../../../core/widgets/button/custom_buttom.dart';
 import '../../../core/widgets/popup/popup_select_image.dart';
+import '../../../data/model/province.dart';
 import '../cubit/tree_edit_cubit.dart';
 import '../cubit/tree_edit_state.dart';
 import '../repository/tree_edit_repository.dart';
@@ -330,19 +331,90 @@ class _TreeEditViewState extends State<TreeEditView> {
     );
   }
 
-  Future<void> selectImage(BuildContext context, TreeEditCubit cubit) async {
-    await showModalBottomSheet(
-      backgroundColor: Colors.transparent,
+  void _showProvinceDialog(BuildContext context, TreeEditCubit cubit,TreeEditState state) {
+    showDialog(
       context: context,
       builder: (BuildContext context) {
-        return PopupSelectImage(onTap1: () {
-          cubit.chooseImageFromGallery();
-          Navigator.pop(context);
-        }, onTap2: () {
-          cubit.takeImageFromCamera();
-          Navigator.pop(context);
-        });
+        return AlertDialog(
+          title: Text(StringConstants.selectProvince),
+          content: SizedBox(
+              width: 200,
+              height: 300,
+              child: (state.provinces != null)
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.provinces!.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final Province province = state.provinces![index];
+                        return ListTile(
+                          title: Text(province.name!),
+                          onTap: () {
+                            cubit.setProvince(province.id!);
+                            setState(() {
+                              _provinceController.text = province.name!;
+                              districtList = province.districts!;
+                              //Province.address[province]!;
+                            });
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
+                    )
+                  : const SizedBox(),
+            )
+          ,
+        );
+      },
+    );
+  }
+
+  void _showDistrictDialog(BuildContext context, TreeEditCubit cubit) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(StringConstants.selectDistrict),
+          content: SizedBox(
+                  width: 200,
+                  height: 300,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: districtList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final district = districtList[index];
+                      return ListTile(
+                        title: Text(district.name!),
+                        onTap: () {
+                          cubit.setDistrict(district.id!);
+                          setState(() {
+                            _districtController.text = district.name!;
+                          });
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  ),
+                )
+              ,
+        );
       },
     );
   }
 }
+
+Future<void> selectImage(BuildContext context, TreeEditCubit cubit) async {
+  await showModalBottomSheet(
+    backgroundColor: Colors.transparent,
+    context: context,
+    builder: (BuildContext context) {
+      return PopupSelectImage(onTap1: () {
+        cubit.chooseImageFromGallery();
+        Navigator.pop(context);
+      }, onTap2: () {
+        cubit.takeImageFromCamera();
+        Navigator.pop(context);
+      });
+    },
+  );
+}
+

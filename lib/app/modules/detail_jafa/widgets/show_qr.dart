@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:genealogy_management/app/core/values/string_constants.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../core/values/text_styles.dart';
+import '../../../core/widgets/asset_image/asset_image_view.dart';
 import '../../../core/widgets/button/custom_close_button.dart';
 import '../../../core/widgets/button/custom_icon_button.dart';
 import '../cubit/tree_detail_cubit.dart';
@@ -43,9 +45,17 @@ class ModalInviteFriends extends StatelessWidget {
                           const SizedBox(
                             height: 4,
                           ),
-                          Text(
-                            '${StringConstants.showOrSendQrCode} Trần Viết Gia',
-                            style: TextStyles.small12LineHeight18BlackSur,
+                          RichText(
+                            text: TextSpan(
+                              text: '${StringConstants.showOrSendQrCode} ',
+                              style: TextStyles.small12LineHeight18BlackSur,
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: '${state.treeDetail.name}',
+                                    style:
+                                        TextStyles.small12LineHeight18RedSur),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 20,
@@ -55,38 +65,50 @@ class ModalInviteFriends extends StatelessWidget {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(16),
                             decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 209, 209, 209),
+                                color: Color.fromARGB(255, 237, 237, 237),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
                             child: QrImageView(
-                                data: '1234567890',
+                                data: state.treeDetail.id.toString(),
                                 version: QrVersions.auto,
-                                size: 100,
+                                size: 190,
                                 backgroundColor:
                                     const Color.fromARGB(255, 255, 255, 255)),
                           ),
                           const SizedBox(
-                            height: 2,
+                            height: 10,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomIconButton(
-                                  icon: const Icon(Icons.abc,
-                                      color: Colors.redAccent),
-                                  name: StringConstants.copyLink),
+                                icon: const AssetImageView(
+                                  fileName: 'ic_copy_link.svg',
+                                ),
+                                name: StringConstants.copyLink,
+                                onTap: () {},
+                              ),
                               CustomIconButton(
-                                  icon: const Icon(Icons.abc,
-                                      color: Colors.redAccent),
-                                  name: StringConstants.share),
+                                icon: const AssetImageView(
+                                  fileName: 'ic_share.svg',
+                                ),
+                                name: StringConstants.share,
+                                onTap: () {},
+                              ),
                               CustomIconButton(
-                                  icon: const Icon(Icons.abc,
-                                      color: Colors.redAccent),
-                                  name: StringConstants.downLoad),
+                                icon: const AssetImageView(
+                                  fileName: 'ic_download.svg',
+                                ),
+                                name: StringConstants.downLoad,
+                                onTap: () {},
+                              ),
                               CustomIconButton(
-                                  icon: const Icon(Icons.abc,
-                                      color: Colors.redAccent),
-                                  name: StringConstants.reset),
+                                icon: const AssetImageView(
+                                  fileName: 'ic_refresh.svg',
+                                ),
+                                name: StringConstants.reset,
+                                onTap: () {},
+                              ),
                             ],
                           ),
                           const SizedBox(
