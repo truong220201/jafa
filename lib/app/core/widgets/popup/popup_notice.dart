@@ -8,13 +8,16 @@ class PopupNotice extends StatelessWidget {
     super.key,
     required this.title,
     required this.textButton,
+    this.content,
   });
   final String title;
   final String textButton;
+  final String? content;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      content: Text(content ?? ''),
       title: Text(
         title,
         textAlign: TextAlign.center,
@@ -30,7 +33,10 @@ class PopupNotice extends StatelessWidget {
                   const BorderSide(color: AppColors.color4B000000, width: 2.0),
             ),
             primary: AppColors.colorFFFFFFFF,
-            padding: const EdgeInsets.symmetric(horizontal: 120,vertical: 10,),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 120,
+              vertical: 10,
+            ),
           ),
           child: Text(
             textButton,

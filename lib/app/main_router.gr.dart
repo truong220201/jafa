@@ -77,6 +77,16 @@ class _$MainRouter extends RootStackRouter {
         child: const ScanQRView(),
       );
     },
+    TreeViewRoute.name: (routeData) {
+      final args = routeData.argsAs<TreeViewRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: TreeView(
+          key: args.key,
+          idTree: args.idTree,
+        ),
+      );
+    },
     WelcomeViewRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -124,6 +134,10 @@ class _$MainRouter extends RootStackRouter {
         RouteConfig(
           ScanQRViewRoute.name,
           path: 'scan_qr',
+        ),
+        RouteConfig(
+          TreeViewRoute.name,
+          path: 'treeView',
         ),
         RouteConfig(
           WelcomeViewRoute.name,
@@ -292,6 +306,40 @@ class ScanQRViewRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ScanQRViewRoute';
+}
+
+/// generated route for
+/// [TreeView]
+class TreeViewRoute extends PageRouteInfo<TreeViewRouteArgs> {
+  TreeViewRoute({
+    Key? key,
+    required int idTree,
+  }) : super(
+          TreeViewRoute.name,
+          path: 'treeView',
+          args: TreeViewRouteArgs(
+            key: key,
+            idTree: idTree,
+          ),
+        );
+
+  static const String name = 'TreeViewRoute';
+}
+
+class TreeViewRouteArgs {
+  const TreeViewRouteArgs({
+    this.key,
+    required this.idTree,
+  });
+
+  final Key? key;
+
+  final int idTree;
+
+  @override
+  String toString() {
+    return 'TreeViewRouteArgs{key: $key, idTree: $idTree}';
+  }
 }
 
 /// generated route for

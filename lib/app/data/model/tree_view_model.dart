@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tree_view_model.freezed.dart';
@@ -7,10 +10,10 @@ part 'tree_view_model.g.dart';
 class TreeViewModel with _$TreeViewModel {
   const TreeViewModel._();
   const factory TreeViewModel({
-    int? id,
+    @JsonKey(name: 'user_genealogy_id') int? id,
     String? name,
     String? avatar,
-    List<Parrent>? childrenParrent,
+    @JsonKey(name: 'children') @Default([]) List<Parrent> childrenParrent,
   }) = _TreeViewModel;
 
   factory TreeViewModel.fromJson(Map<String, Object?> json) =>
@@ -21,21 +24,50 @@ class TreeViewModel with _$TreeViewModel {
 class Parrent with _$Parrent {
   const Parrent._();
   const factory Parrent({
-    int? id,
-    String? relationType,
+    @JsonKey(name: 'user_genealogy_id') int? id,
+    @JsonKey(name: 'relation_type') String? relationType,
   }) = _Parrent;
 
   factory Parrent.fromJson(Map<String, Object?> json) =>
       _$ParrentFromJson(json);
 }
 
-@freezed
-class Couple with _$Couple {
-  const Couple._();
-  const factory Couple({
+class Couple {
+  int? idaPerson;
+  List<int>? listIdvk;
+
+  Couple({
+    this.idaPerson,
+    this.listIdvk,
+  });
+  Couple copyWith({
     int? idaPerson,
     List<int>? listIdvk,
-  }) = _Couple;
+  }) {
+    return Couple(
+      idaPerson: idaPerson ?? this.idaPerson,
+      listIdvk: listIdvk ?? this.listIdvk,
+    );
+  }
 
-  factory Couple.fromJson(Map<String, Object?> json) => _$CoupleFromJson(json);
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'idaPerson': idaPerson,
+      'listIdvk': listIdvk,
+    };
+  }
+
+  factory Couple.fromMap(Map<String, dynamic> map) {
+    return Couple(
+      idaPerson: map['idaPerson'] != null ? map['idaPerson'] as int : null,
+      listIdvk: map['listIdvk'] != null
+          ? List<int>.from((map['listIdvk'] as List<int>))
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Couple.fromJson(String source) =>
+      Couple.fromMap(json.decode(source) as Map<String, dynamic>);
 }

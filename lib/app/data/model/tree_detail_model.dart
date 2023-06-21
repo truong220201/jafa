@@ -1,25 +1,70 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:genealogy_management/app/data/model/jafa_model.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 
-part 'tree_detail_model.freezed.dart';
-part 'tree_detail_model.g.dart';
+class TreeDetailModel {
+  int? id;
+  String? name;
 
-@freezed
-class TreeDetailModel with _$TreeDetailModel {
-  const TreeDetailModel._();
-  const factory TreeDetailModel({
-    int? id,
-    @Default('') String name,
-    @JsonKey(name: 'role_id') int? roleId,
-    @JsonKey(name: 'relation_name') @Default('') String relationName,
-    @JsonKey(name: 'image') String? imageJafa,
-    @Default('') String description,
-    @JsonKey(name: ' province_id') int? provinceId,
-    @JsonKey(name: 'total_member') int? totalMember,
-     @JsonKey(name: 'total_user') int? totalUser,
-    int? level,
-  }) = _TreeDetailModel;
+  String? image;
+  String? description;
+  String? provinceId;
+  String? district;
+  String? relationName;
+  int? level;
+  int? totalMember;
+  int? totalUser;
 
-  factory TreeDetailModel.fromJson(Map<String, Object?> json) =>
-      _$TreeDetailModelFromJson(json);
+  TreeDetailModel({
+    this.id,
+    this.name,
+    this.image,
+    this.description,
+    this.provinceId,
+    this.district,
+    this.relationName,
+    this.level,
+    this.totalMember,
+    this.totalUser,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      // 'roleId': roleId,
+
+      'image': image,
+      'description': description,
+      'province': provinceId,
+      'district': district,
+      'relation_name': relationName,
+      'level': level,
+      'total_member': totalMember,
+      'total_user': totalUser,
+    };
+  }
+
+  factory TreeDetailModel.fromMap(Map<String, dynamic> map) {
+    return TreeDetailModel(
+      id: map['id'] != null ? map['id'] as int : null,
+      name: map['name'] != null ? map['name'] as String : null,
+      // roleId: map['roleId'] != null ? map['roleId'] as int : null,
+      image: map['image'] != null ? map['image'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      provinceId: map['province'] != null ? map['province'] as String : null,
+      district: map['district'] != null ? map['district'] as String : null,
+      relationName:
+          map['relation_name'] != null ? map['relation_name'] as String : null,
+      level: map['level'] != null ? map['level'] as int : null,
+      totalMember:
+          map['total_member'] != null ? map['total_member'] as int : null,
+      totalUser: map['total_user'] != null ? map['total_user'] as int : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TreeDetailModel.fromJson(String source) =>
+      TreeDetailModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

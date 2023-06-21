@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:genealogy_management/app/modules/tree_view/view/tree_view.dart';
 import 'app_routes.dart';
 import 'modules/detail_jafa/views/tree_detail_view.dart';
 import 'modules/home/views/home_default_view.dart';
@@ -23,6 +24,7 @@ part 'main_router.gr.dart';
   MaterialRoute(page: TreeDetailView, path: Routes.treeDetail),
   MaterialRoute(page: TreeEditView, path: Routes.treeDetail),
   MaterialRoute(page: ScanQRView, path: Routes.scanQR),
+   MaterialRoute(page: TreeView, path: Routes.treeView),
   MaterialRoute(
     page: WelcomeView,
   ),

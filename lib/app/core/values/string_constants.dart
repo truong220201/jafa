@@ -62,6 +62,7 @@ class StringConstants {
   static String youCanMemorize =
       "Bạn có thể thêm cây gia phả cho gia tộc,\nghi nhớ ngày giỗ, ngày họp mặt\nvà nhiều hơn thế nữa.";
   //Detail
+  static String seeTreeView = "Xem Cây";
   static String createNow = "Tạo ngay";
   static String lowKeyOr = "hoặc";
   static String joinJafa = "Tham gia vào gia phả";
@@ -87,9 +88,39 @@ class StringConstants {
   static String reset = "Làm mới";
   static String jafaList = "Danh sách gia tộc";
   static String levelLowcase = 'đời';
+
   //ScanQR
   static String scanYourQrCode = "$scanQrCode của gia phả \nbạn muốn tham gia ";
   static String scanQrCode = "Quét mã QR";
   //Edit jafa
   static String editJafa = "Chỉnh sửa gia tộc";
+  //Phoenix
+  static String phoenix = 'Phoenix';
+  //modal tree view request
+  static String doSomething = 'Bạn muốn làm gì?';
+  static String requestAdmin = 'Yêu cầu quản trị cho bạn vào nhánh này';
+  static String requestAdmin2 = "Yêu cầu vào nhánh cây";
+  static String acceptAdmin =
+      "Yêu cầu của bạn đã được gửi cho quản trị viên. Hãy chờ đợi và liên lạc tới quản trị viên nếu cần.";
+  static String close = "Đóng";
+  static String editBranch = "Chỉnh sửa nhánh này";
+  static String addMember = "Thêm thành viên vào nhánh này";
+  static String addBranch = "Thêm nhánh liên quan";
+  static String deleteBranch = "Xoá nhánh này";
+  //viewer internal and exxternal
+  static String watch = "Xem";
+  static String editRole = "Chỉnh sửa quyền";
+  static String editBranchGr = "Chỉnh sửa nhánh gia phả";
+  static String deleteMember = "Xoá thành viên này";
+  //create branch view
+  static String dad = "Cha";
+  static String dadE = "dad";
+  static String mom = 'Mẹ';
+  static String momE = 'mom';
+  static String addMomRole = 'Trước tiên bạn phải có bố';
+  static String couple = 'Vợ/Chồng';
+  static String coupleE = 'couple';
+  static String child = "Con Cái";
+  static String childE = "child";
+  //Phoenix
 }

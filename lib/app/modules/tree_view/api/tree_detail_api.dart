@@ -1,61 +1,34 @@
-import 'package:dio/dio.dart';
-import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
+import 'package:genealogy_management/app/data/model/tree_view_model.dart';
 
-import '../../../flavors/build_config.dart';
 import '../../../core/base/base_remote_source.dart';
+import '../../../core/values/api_url_constant.dart';
 
-class TreeDetailApi extends BaseRemoteSource {
-  Future<TreeDetailModel> getTreeDetail(int idJafa) async {
-    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
-    final request = dioClient.get(
-      '$baseUrl/api/genealogy/$idJafa',
-    );
+class TreeViewApi extends BaseRemoteSource {
+  // Future<List<JafaModel>> getTreeViewDetail() async {
+  //   final responseData =
+  //       await apiHelper.get(path: '/api/genealogy/?per_page=23&page=1');
+
+  //   List<JafaModel> data = responseData.data['data']
+  //       .map<JafaModel>((n) => JafaModel.fromJson(n))
+  //       .toList();
+  //   debugPrint('-----------data' + data.toString());
+  //   return data;
+  // }
+
+  Future<List<TreeViewModel>> getTreeViewDetail(int id) async {
+    final request = dioClient.get(ApiUrlConstants.getTreeView(id));
     try {
-      return callApiWithErrorParser(request)
-          .then((response) => TreeDetailModel.fromMap(response.data['data']));
+      // return callApiWithErrorParser(request)
+      //     .then((response) => List<TreeViewModel>.fromJson(response.data['data']));
+      return callApiWithErrorParser(request).then((response) =>
+          (response.data['data'] as List)
+              .map<TreeViewModel>((value) => TreeViewModel.fromJson(value))
+              .toList());
+      //return MockTreeDetailRepository().getTreeViewModel();
     } catch (e) {
       rethrow;
     }
   }
-
-  Future<Response> deleteJafa(int idJafa, bool isDestroy) async {
-    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
-
-    final request = dioClient.delete(
-      isDestroy
-          ? '$baseUrl/api/genealogy/$idJafa?destroy=true'
-          : '$baseUrl/api/genealogy/$idJafa',
-    );
-    final Response responseData = await callApiWithErrorParser(request)
-        .then((response) => response.data['data']);
-    return responseData;
-  }
-
-  Future<Response> leavingJafa(int idJafa) async {
-    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
-    final request = dioClient.delete(
-      '$baseUrl/api/genealogy/${idJafa.toString()}/leave',
-    );
-    final Response responseData = await callApiWithErrorParser(request)
-        .then((response) => response.data['data']);
-    return responseData;
-  }
-
-  // Future<TreeDetailModel> getTreeDetail(int idJafa) async {
-  //   final baseUrl = BuildConfig.instance.config.apiBaseUrl;
-  //   final request = dioClient.get(
-  //     '$baseUrl/api/genealogy/?per_page=23&page=5',
-  //   );
-  //   try {
-  //     return callApiWithErrorParser(request)
-  //         .then((response) => TreeDetailModel.fromJson(response.data['data']));
-  //     // (response.data['data'] as List)
-  //     //     .map<JafaModel>((value) => JafaModel.fromJson(value))
-  //     //     .toList());
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
   // Future<List<EmailNotification>> getEmailNotifications() async {
   //   final data = await apiHelper.get(path: '/account/email-notification');
   //   return (data as List).map((e) => EmailNotification.fromJson(e)).toList();
@@ -65,6 +38,7 @@ class TreeDetailApi extends BaseRemoteSource {
   //   required ConservationFilter? filter,
   //   required String query,
   // }) async {
+  //
   //   final Map<String, String> params = {};
   //   if (query.trim().isNotEmpty) {
   //     params['search'] = query.trim();
@@ -104,4 +78,20 @@ class TreeDetailApi extends BaseRemoteSource {
   //     },
   //   );
   // }
+  Future<String?> treeRequest({
+    required int userGenealogyId,
+    required int genealogyId,
+  }) {
+    final data = {
+      "user_genealogy_id": userGenealogyId,
+      "genealogy_id": genealogyId
+    };
+    final request = dioClient.post(ApiUrlConstants.treeRequest, data: data);
+    try {
+      return callApiWithErrorParser(request)
+          .then((value) => value.data["message"]);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -28,11 +28,11 @@ class FamilyWidget extends StatelessWidget {
               topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
           child: InkWell(
             onTap: () {
-              openImg(state.treeDetail.imageJafa ??
+              openImg(state.treeDetail!.image ??
                   'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg');
             },
             child: Image.network(
-              state.treeDetail.imageJafa ??
+              state.treeDetail!.image ??
                   'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
             ),
           ),
@@ -53,11 +53,11 @@ class FamilyWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.treeDetail.name,
+                          state.treeDetail!.name ?? '',
                           style: TextStyles.medium16LineHeight24Sur,
                         ),
                         Text(
-                          '${state.treeDetail.level} ${StringConstants.levelLowcase} ${state.treeDetail.relationName}',
+                          '${state.treeDetail!.level} ${StringConstants.levelLowcase} ${state.treeDetail!.relationName}',
                           style: TextStyles.medium14LineHeight21Sur,
                         )
                       ]),
@@ -67,7 +67,7 @@ class FamilyWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  state.treeDetail.description,
+                  state.treeDetail!.description ?? '',
                   style: TextStyles.small12LineHeight18Sur,
                 ),
               )
@@ -83,15 +83,15 @@ class CustomButtonDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {},
+      onTap: () => {context.read<TreeDetailCubit>().toTreeView(context)},
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           decoration: const BoxDecoration(
               color: Color.fromARGB(255, 178, 0, 0),
               borderRadius: BorderRadius.all(Radius.circular(33.5))),
-          child: const Text(
-            'Xem Cây',
-            style: TextStyle(
+          child: Text(
+            StringConstants.seeTreeView,
+            style: const TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 14,
                 fontWeight: FontWeight.w500),

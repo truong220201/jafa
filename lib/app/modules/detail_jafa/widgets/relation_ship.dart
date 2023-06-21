@@ -13,7 +13,7 @@ class RelationshipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<TreeDetailCubit, TreeDetailState, String?>(
-        selector: (state) => state.treeDetail.relationName,
+        selector: (state) => state.treeDetail!.relationName,
         builder: (context, state) {
           return Container(
               padding: const EdgeInsets.all(20.0),

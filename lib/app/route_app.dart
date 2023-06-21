@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/modules/detail_jafa/api/tree_detail_api.dart';
 import 'package:genealogy_management/app/modules/home/repository/home_repository.dart';
 import 'package:genealogy_management/app/modules/register/repository/registration_repository.dart';
+import 'package:genealogy_management/app/modules/tree_edit/api/tree_edit_api.dart';
+import 'package:genealogy_management/app/modules/tree_view/api/tree_detail_api.dart';
+import 'package:genealogy_management/app/modules/tree_view/repository/tree_view_repository.dart';
 import 'core/values/app_theme.dart';
 import 'main_router.dart';
 import 'modules/detail_jafa/repository/tree_detail_repository.dart';
@@ -43,6 +46,9 @@ class _RouteAppState extends State<RouteApp> {
         RepositoryProvider<TreeDetailRepository>(
           create: (context) => TreeDetailRepository(TreeDetailApi()),
         ),
+        RepositoryProvider<TreeViewRepository>(
+          create: (context) => TreeViewRepository(TreeViewApi()),
+        ),
         RepositoryProvider(
           create: (context) =>
               RegistrationRepository(LoginApi(), RegisterApi()),
@@ -51,7 +57,7 @@ class _RouteAppState extends State<RouteApp> {
           create: (context) => TreeCreateRepository(TreeCreateApi()),
         ),
         RepositoryProvider(
-          create: (context) => TreeEditRepository(),
+          create: (context) => TreeEditRepository(TreeEditApi()),
         ),
       ],
       child: MaterialApp.router(

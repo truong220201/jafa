@@ -20,7 +20,7 @@ mixin _$TreeDetailState {
   bool? get hasInfoJaFa => throw _privateConstructorUsedError;
   bool? get showModal => throw _privateConstructorUsedError;
   bool? get showInviteFriends => throw _privateConstructorUsedError;
-  TreeDetailModel get treeDetail => throw _privateConstructorUsedError;
+  TreeDetailModel? get treeDetail => throw _privateConstructorUsedError;
   int? get countDown => throw _privateConstructorUsedError;
   bool? get startCountDownLeftJafa => throw _privateConstructorUsedError;
   bool? get startCountDownDeleteJafa => throw _privateConstructorUsedError;
@@ -43,14 +43,12 @@ abstract class $TreeDetailStateCopyWith<$Res> {
       bool? hasInfoJaFa,
       bool? showModal,
       bool? showInviteFriends,
-      TreeDetailModel treeDetail,
+      TreeDetailModel? treeDetail,
       int? countDown,
       bool? startCountDownLeftJafa,
       bool? startCountDownDeleteJafa,
       String statusLeftJafa,
       String statusDeleteJafa});
-
-  $TreeDetailModelCopyWith<$Res> get treeDetail;
 }
 
 /// @nodoc
@@ -70,7 +68,7 @@ class _$TreeDetailStateCopyWithImpl<$Res, $Val extends TreeDetailState>
     Object? hasInfoJaFa = freezed,
     Object? showModal = freezed,
     Object? showInviteFriends = freezed,
-    Object? treeDetail = null,
+    Object? treeDetail = freezed,
     Object? countDown = freezed,
     Object? startCountDownLeftJafa = freezed,
     Object? startCountDownDeleteJafa = freezed,
@@ -93,10 +91,10 @@ class _$TreeDetailStateCopyWithImpl<$Res, $Val extends TreeDetailState>
           ? _value.showInviteFriends
           : showInviteFriends // ignore: cast_nullable_to_non_nullable
               as bool?,
-      treeDetail: null == treeDetail
+      treeDetail: freezed == treeDetail
           ? _value.treeDetail
           : treeDetail // ignore: cast_nullable_to_non_nullable
-              as TreeDetailModel,
+              as TreeDetailModel?,
       countDown: freezed == countDown
           ? _value.countDown
           : countDown // ignore: cast_nullable_to_non_nullable
@@ -119,14 +117,6 @@ class _$TreeDetailStateCopyWithImpl<$Res, $Val extends TreeDetailState>
               as String,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TreeDetailModelCopyWith<$Res> get treeDetail {
-    return $TreeDetailModelCopyWith<$Res>(_value.treeDetail, (value) {
-      return _then(_value.copyWith(treeDetail: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -142,15 +132,12 @@ abstract class _$$_TreeDetailStateCopyWith<$Res>
       bool? hasInfoJaFa,
       bool? showModal,
       bool? showInviteFriends,
-      TreeDetailModel treeDetail,
+      TreeDetailModel? treeDetail,
       int? countDown,
       bool? startCountDownLeftJafa,
       bool? startCountDownDeleteJafa,
       String statusLeftJafa,
       String statusDeleteJafa});
-
-  @override
-  $TreeDetailModelCopyWith<$Res> get treeDetail;
 }
 
 /// @nodoc
@@ -168,7 +155,7 @@ class __$$_TreeDetailStateCopyWithImpl<$Res>
     Object? hasInfoJaFa = freezed,
     Object? showModal = freezed,
     Object? showInviteFriends = freezed,
-    Object? treeDetail = null,
+    Object? treeDetail = freezed,
     Object? countDown = freezed,
     Object? startCountDownLeftJafa = freezed,
     Object? startCountDownDeleteJafa = freezed,
@@ -191,10 +178,10 @@ class __$$_TreeDetailStateCopyWithImpl<$Res>
           ? _value.showInviteFriends
           : showInviteFriends // ignore: cast_nullable_to_non_nullable
               as bool?,
-      treeDetail: null == treeDetail
+      treeDetail: freezed == treeDetail
           ? _value.treeDetail
           : treeDetail // ignore: cast_nullable_to_non_nullable
-              as TreeDetailModel,
+              as TreeDetailModel?,
       countDown: freezed == countDown
           ? _value.countDown
           : countDown // ignore: cast_nullable_to_non_nullable
@@ -227,7 +214,7 @@ class _$_TreeDetailState extends _TreeDetailState {
       this.hasInfoJaFa,
       this.showModal,
       this.showInviteFriends,
-      this.treeDetail = const TreeDetailModel(),
+      this.treeDetail,
       this.countDown,
       this.startCountDownLeftJafa,
       this.startCountDownDeleteJafa,
@@ -244,8 +231,7 @@ class _$_TreeDetailState extends _TreeDetailState {
   @override
   final bool? showInviteFriends;
   @override
-  @JsonKey()
-  final TreeDetailModel treeDetail;
+  final TreeDetailModel? treeDetail;
   @override
   final int? countDown;
   @override
@@ -319,7 +305,7 @@ abstract class _TreeDetailState extends TreeDetailState {
       final bool? hasInfoJaFa,
       final bool? showModal,
       final bool? showInviteFriends,
-      final TreeDetailModel treeDetail,
+      final TreeDetailModel? treeDetail,
       final int? countDown,
       final bool? startCountDownLeftJafa,
       final bool? startCountDownDeleteJafa,
@@ -336,7 +322,7 @@ abstract class _TreeDetailState extends TreeDetailState {
   @override
   bool? get showInviteFriends;
   @override
-  TreeDetailModel get treeDetail;
+  TreeDetailModel? get treeDetail;
   @override
   int? get countDown;
   @override

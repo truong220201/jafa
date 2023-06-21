@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/values/province_info.dart';
+import '../../../data/model/province.dart';
 
 part 'tree_edit_state.freezed.dart';
 
@@ -8,14 +8,17 @@ part 'tree_edit_state.freezed.dart';
 class TreeEditState with _$TreeEditState {
   const TreeEditState._();
   const factory TreeEditState({
+    @Default(0) int id,
     @Default('') String avatar,
     @Default('') String name,
     @Default('') String history,
-    int? province,
-    int? district,
+    String? province,
+    String? district,
+    String? address,
     @Default('') String relationship,
     @Default(false) bool pass,
     List<Province>? provinces,
     Object? error,
+    @Default(false) bool update,
   }) = _TreeEditState;
 }

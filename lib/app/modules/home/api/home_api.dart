@@ -10,7 +10,7 @@ import '../../../flavors/build_config.dart';
 import '../../../flavors/env_config.dart';
 
 class HomeApi extends BaseRemoteSource {
-  final apiHelper = ApiHelper();
+  
   // Future<List<JafaModel>> getHomeDetail() async {
   //   final responseData =
   //       await apiHelper.get(path: '/api/genealogy/?per_page=23&page=1');

@@ -11,7 +11,7 @@ import '../../../core/widgets/card/custom_card.dart';
 import '../../../core/widgets/search/custom_search.dart';
 import '../../../data/model/jafa_model.dart';
 import '../../scan_QR/scan_qr_view.dart';
-import '../../tree_view/tree_view.dart';
+import '../../tree_view/view/tree_view.dart';
 import '../api/home_api.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';

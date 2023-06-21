@@ -11,6 +11,7 @@ abstract class Routes {
   static const treeDetail = _Paths.treeDetail;
   static const treeEdit = _Paths.treeDetail;
   static const scanQR = _Paths.scanQR;
+  static const treeView = _Paths.treeView;
 }
 
 abstract class _Paths {
@@ -24,4 +25,5 @@ abstract class _Paths {
   static const treeDetail = 'tree_detail';
   static const treeEdit = 'tree_edit';
   static const scanQR = 'scan_qr';
+  static const treeView = 'treeView';
 }

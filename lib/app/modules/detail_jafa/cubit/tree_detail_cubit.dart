@@ -6,6 +6,7 @@ import 'package:genealogy_management/app/data/model/jafa_model.dart';
 import 'package:genealogy_management/app/modules/detail_jafa/api/tree_detail_api.dart';
 import '../../../core/widgets/dialog/custom_dialog.dart';
 import '../../../main_router.dart';
+import '../../tree_view/view/tree_view.dart';
 import '../repository/tree_detail_repository.dart';
 import 'tree_detail_state.dart';
 
@@ -13,7 +14,8 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
   TreeDetailCubit(
     this._treeDetailRepository,
     this.idJafa,
-  ) : super(const TreeDetailState());
+    // ignore: prefer_const_constructors
+  ) : super(TreeDetailState());
 
   final TreeDetailRepository _treeDetailRepository;
 //final MockTreeDetailRepository _mockTreeDetailRepository;
@@ -88,8 +90,21 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     }
   }
 
+  void toTreeView(BuildContext context) async {
+    await context.router.push(TreeViewRoute(idTree: state.treeDetail!.id!));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) => TreeView(idTree: state.treeDetail!.id!)));
+  }
+
   Future<String> deleteJafaResponse(int idJafa) async {
-    var api = await TreeDetailApi().deleteJafa(idJafa);
+    if (state.treeDetail!.totalMember! >= 1) {
+      var api = await TreeDetailApi().deleteJafa(idJafa, true);
+      debugPrint(api.toString());
+      return api.toString();
+    }
+    var api = await TreeDetailApi().deleteJafa(idJafa, false);
     debugPrint(api.toString());
     return api.toString();
   }
@@ -113,14 +128,13 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
   }
 
   Future<void> loadDataJaFa(int idJafa) async {
-    emit(state.copyWith(treeDetail: const TreeDetailModel()));
-    debugPrint(' detail state:+++++++++++$state');
+    emit(state.copyWith(treeDetail: TreeDetailModel()));
     try {
       final treeDetailReponse =
           await _treeDetailRepository.getTreeDetail(idJafa);
       emit(state.copyWith(treeDetail: treeDetailReponse));
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('error--------------' + e.toString());
       emit(state.copyWith(showUserListError: e));
     }
   }

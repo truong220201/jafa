@@ -16,15 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TreeEditState {
+  int get id => throw _privateConstructorUsedError;
   String get avatar => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get history => throw _privateConstructorUsedError;
-  int? get province => throw _privateConstructorUsedError;
-  int? get district => throw _privateConstructorUsedError;
+  String? get province => throw _privateConstructorUsedError;
+  String? get district => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
   String get relationship => throw _privateConstructorUsedError;
   bool get pass => throw _privateConstructorUsedError;
   List<Province>? get provinces => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
+  bool get update => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TreeEditStateCopyWith<TreeEditState> get copyWith =>
@@ -38,15 +41,18 @@ abstract class $TreeEditStateCopyWith<$Res> {
       _$TreeEditStateCopyWithImpl<$Res, TreeEditState>;
   @useResult
   $Res call(
-      {String avatar,
+      {int id,
+      String avatar,
       String name,
       String history,
-      int? province,
-      int? district,
+      String? province,
+      String? district,
+      String? address,
       String relationship,
       bool pass,
       List<Province>? provinces,
-      Object? error});
+      Object? error,
+      bool update});
 }
 
 /// @nodoc
@@ -62,17 +68,24 @@ class _$TreeEditStateCopyWithImpl<$Res, $Val extends TreeEditState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? avatar = null,
     Object? name = null,
     Object? history = null,
     Object? province = freezed,
     Object? district = freezed,
+    Object? address = freezed,
     Object? relationship = null,
     Object? pass = null,
     Object? provinces = freezed,
     Object? error = freezed,
+    Object? update = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -88,11 +101,15 @@ class _$TreeEditStateCopyWithImpl<$Res, $Val extends TreeEditState>
       province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       district: freezed == district
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
       relationship: null == relationship
           ? _value.relationship
           : relationship // ignore: cast_nullable_to_non_nullable
@@ -106,6 +123,10 @@ class _$TreeEditStateCopyWithImpl<$Res, $Val extends TreeEditState>
           : provinces // ignore: cast_nullable_to_non_nullable
               as List<Province>?,
       error: freezed == error ? _value.error : error,
+      update: null == update
+          ? _value.update
+          : update // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -119,15 +140,18 @@ abstract class _$$_TreeEditStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String avatar,
+      {int id,
+      String avatar,
       String name,
       String history,
-      int? province,
-      int? district,
+      String? province,
+      String? district,
+      String? address,
       String relationship,
       bool pass,
       List<Province>? provinces,
-      Object? error});
+      Object? error,
+      bool update});
 }
 
 /// @nodoc
@@ -141,17 +165,24 @@ class __$$_TreeEditStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? avatar = null,
     Object? name = null,
     Object? history = null,
     Object? province = freezed,
     Object? district = freezed,
+    Object? address = freezed,
     Object? relationship = null,
     Object? pass = null,
     Object? provinces = freezed,
     Object? error = freezed,
+    Object? update = null,
   }) {
     return _then(_$_TreeEditState(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
@@ -167,11 +198,15 @@ class __$$_TreeEditStateCopyWithImpl<$Res>
       province: freezed == province
           ? _value.province
           : province // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       district: freezed == district
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
       relationship: null == relationship
           ? _value.relationship
           : relationship // ignore: cast_nullable_to_non_nullable
@@ -185,6 +220,10 @@ class __$$_TreeEditStateCopyWithImpl<$Res>
           : provinces // ignore: cast_nullable_to_non_nullable
               as List<Province>?,
       error: freezed == error ? _value.error : error,
+      update: null == update
+          ? _value.update
+          : update // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -193,18 +232,24 @@ class __$$_TreeEditStateCopyWithImpl<$Res>
 
 class _$_TreeEditState extends _TreeEditState {
   const _$_TreeEditState(
-      {this.avatar = '',
+      {this.id = 0,
+      this.avatar = '',
       this.name = '',
       this.history = '',
       this.province,
       this.district,
+      this.address,
       this.relationship = '',
       this.pass = false,
       final List<Province>? provinces,
-      this.error})
+      this.error,
+      this.update = false})
       : _provinces = provinces,
         super._();
 
+  @override
+  @JsonKey()
+  final int id;
   @override
   @JsonKey()
   final String avatar;
@@ -215,9 +260,11 @@ class _$_TreeEditState extends _TreeEditState {
   @JsonKey()
   final String history;
   @override
-  final int? province;
+  final String? province;
   @override
-  final int? district;
+  final String? district;
+  @override
+  final String? address;
   @override
   @JsonKey()
   final String relationship;
@@ -236,10 +283,13 @@ class _$_TreeEditState extends _TreeEditState {
 
   @override
   final Object? error;
+  @override
+  @JsonKey()
+  final bool update;
 
   @override
   String toString() {
-    return 'TreeEditState(avatar: $avatar, name: $name, history: $history, province: $province, district: $district, relationship: $relationship, pass: $pass, provinces: $provinces, error: $error)';
+    return 'TreeEditState(id: $id, avatar: $avatar, name: $name, history: $history, province: $province, district: $district, address: $address, relationship: $relationship, pass: $pass, provinces: $provinces, error: $error, update: $update)';
   }
 
   @override
@@ -247,6 +297,7 @@ class _$_TreeEditState extends _TreeEditState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TreeEditState &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.history, history) || other.history == history) &&
@@ -254,26 +305,31 @@ class _$_TreeEditState extends _TreeEditState {
                 other.province == province) &&
             (identical(other.district, district) ||
                 other.district == district) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.relationship, relationship) ||
                 other.relationship == relationship) &&
             (identical(other.pass, pass) || other.pass == pass) &&
             const DeepCollectionEquality()
                 .equals(other._provinces, _provinces) &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            (identical(other.update, update) || other.update == update));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       avatar,
       name,
       history,
       province,
       district,
+      address,
       relationship,
       pass,
       const DeepCollectionEquality().hash(_provinces),
-      const DeepCollectionEquality().hash(error));
+      const DeepCollectionEquality().hash(error),
+      update);
 
   @JsonKey(ignore: true)
   @override
@@ -284,17 +340,22 @@ class _$_TreeEditState extends _TreeEditState {
 
 abstract class _TreeEditState extends TreeEditState {
   const factory _TreeEditState(
-      {final String avatar,
+      {final int id,
+      final String avatar,
       final String name,
       final String history,
-      final int? province,
-      final int? district,
+      final String? province,
+      final String? district,
+      final String? address,
       final String relationship,
       final bool pass,
       final List<Province>? provinces,
-      final Object? error}) = _$_TreeEditState;
+      final Object? error,
+      final bool update}) = _$_TreeEditState;
   const _TreeEditState._() : super._();
 
+  @override
+  int get id;
   @override
   String get avatar;
   @override
@@ -302,9 +363,11 @@ abstract class _TreeEditState extends TreeEditState {
   @override
   String get history;
   @override
-  int? get province;
+  String? get province;
   @override
-  int? get district;
+  String? get district;
+  @override
+  String? get address;
   @override
   String get relationship;
   @override
@@ -313,6 +376,8 @@ abstract class _TreeEditState extends TreeEditState {
   List<Province>? get provinces;
   @override
   Object? get error;
+  @override
+  bool get update;
   @override
   @JsonKey(ignore: true)
   _$$_TreeEditStateCopyWith<_$_TreeEditState> get copyWith =>

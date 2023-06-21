@@ -13,7 +13,7 @@ class TreeDetailState with _$TreeDetailState {
     bool? hasInfoJaFa,
     bool? showModal,
     bool? showInviteFriends,
-    @Default(TreeDetailModel()) TreeDetailModel treeDetail,
+    TreeDetailModel? treeDetail,
     int? countDown,
     bool? startCountDownLeftJafa,
     bool? startCountDownDeleteJafa,

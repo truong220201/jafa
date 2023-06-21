@@ -51,7 +51,7 @@ class ModalInviteFriends extends StatelessWidget {
                               style: TextStyles.small12LineHeight18BlackSur,
                               children: <TextSpan>[
                                 TextSpan(
-                                    text: '${state.treeDetail.name}',
+                                    text: '${state.treeDetail!.name}',
                                     style:
                                         TextStyles.small12LineHeight18RedSur),
                               ],
@@ -69,7 +69,7 @@ class ModalInviteFriends extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10))),
                             child: QrImageView(
-                                data: state.treeDetail.id.toString(),
+                                data: state.treeDetail!.id.toString(),
                                 version: QrVersions.auto,
                                 size: 190,
                                 backgroundColor:

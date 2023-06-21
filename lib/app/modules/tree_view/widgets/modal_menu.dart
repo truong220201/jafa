@@ -8,18 +8,17 @@ import 'package:genealogy_management/app/core/values/string_constants.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../core/values/text_styles.dart';
 import '../../../core/widgets/button/primary_button.dart';
-import '../cubit/tree_detail_cubit.dart';
-import '../cubit/tree_detail_state.dart';
+import '../cubit/tree_view_cubit.dart';
+import '../cubit/tree_view_state.dart';
 
 class ModalMenu extends StatelessWidget {
   const ModalMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TreeDetailCubit, TreeDetailState>(
-        builder: (context, state) {
+    return BlocBuilder<TreeViewCubit, TreeViewState>(builder: (context, state) {
       return GestureDetector(
-        onTap: () => context.read<TreeDetailCubit>().changeModal(),
+        onTap: () => context.read<TreeViewCubit>().changeModal(),
         child: Container(
           alignment: Alignment.topRight,
           decoration:
@@ -41,18 +40,11 @@ class ModalMenu extends StatelessWidget {
                           "assets/images/edit_icon.svg",
                         ),
                         StringConstants.editInfo,
-                        () => {
-                              context
-                                  .read<TreeDetailCubit>()
-                                  .toEditJafa(context)
-                            }),
+                        () => {}),
                     _cardMiniExit(context, StringConstants.leavejafa, () {
                       _showdialogWithCountDown(
                           context,
-                          () => {
-                                context.read<TreeDetailCubit>().leaveJafaFunc(
-                                    context.read<TreeDetailCubit>().idJafa)
-                              },
+                          () => {},
                           StringConstants.sureLeaveJafa,
                           StringConstants.alertContentLeveJafa,
                           StringConstants.agree);
@@ -66,10 +58,7 @@ class ModalMenu extends StatelessWidget {
                       () {
                         _showdialogWithCountDown(
                             context,
-                            () => {
-                                  context.read<TreeDetailCubit>().leaveJafaFunc(
-                                      context.read<TreeDetailCubit>().idJafa)
-                                },
+                            () => {},
                             StringConstants.sureDeleteJafa,
                             StringConstants.alertContentDeleteJafa,
                             StringConstants.agree);
@@ -256,54 +245,5 @@ class ModalMenu extends StatelessWidget {
         ]),
       ),
     );
-  }
-}
-
-class ShowDialogCD extends StatelessWidget {
-  const ShowDialogCD({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TreeDetailCubit, TreeDetailState>(
-        builder: (context, state) {
-      return state.showModal!
-          ? const Positioned(
-              child: Align(alignment: Alignment.topRight, child: ModalMenu()),
-            )
-          : Container();
-    });
-  }
-}
-
-class CountDown extends StatelessWidget {
-  CountDown({super.key});
-
-  void changeCD() {
-    const oneDecimal = Duration(milliseconds: 1000);
-    // Future.delayed(const Duration(seconds: 1), () {
-    //   emit(state.copyWith(countDown: (state.countDown! - 100)));
-    //   debugPrint('ok countDown');
-    // });
-    // Timer.periodic(oneDecimal, (Timer timer) {
-    //   if (countDown == 0) {
-    //     debugPrint(widget.string.toString());
-    //     widget.functions;
-    //     timer.cancel();
-    //   } else {
-    //     setState(() {
-    //       countDown = countDown - 1;
-    //     });
-    //   }
-    // });
-  }
-
-  int countDown = 5;
-  @override
-  Widget build(BuildContext context) {
-    return BlocSelector<TreeDetailCubit, TreeDetailState, int?>(
-        selector: (state) => state.countDown,
-        builder: (context, state) {
-          return Text(state.toString());
-        });
   }
 }

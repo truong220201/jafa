@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/modules/detail_jafa/cubit/tree_detail_state.dart';
 import '../../../core/values/app_colors.dart';
-import '../../../core/values/province_info.dart';
+// import '../../../core/values/province_info.dart';
 import '../../../core/values/string_constants.dart';
 import '../../../core/values/text_styles.dart';
 import '../../../core/widgets/button/custom_buttom.dart';
@@ -22,8 +22,8 @@ class TreeEditView extends StatefulWidget {
 }
 
 class _TreeEditViewState extends State<TreeEditView> {
-  List<String> provinceList = Province.address.keys.toList();
-  List<String> districtList = [];
+  List<String> provinceList = [];
+  List<District> districtList = [];
   DateTime? selectedDate;
   final TextEditingController _provinceController = TextEditingController();
   final TextEditingController _districtController = TextEditingController();
@@ -81,7 +81,9 @@ class _TreeEditViewState extends State<TreeEditView> {
                     color: (pass)
                         ? AppColors.colorFFB20000
                         : AppColors.colorFFC2C2C2,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<TreeEditCubit>().treeEdit();
+                    },
                     icon: Icon(
                         (pass) ? Icons.done : Icons.arrow_forward_outlined),
                   ));
@@ -331,38 +333,38 @@ class _TreeEditViewState extends State<TreeEditView> {
     );
   }
 
-  void _showProvinceDialog(BuildContext context, TreeEditCubit cubit,TreeEditState state) {
+  void _showProvinceDialog(
+      BuildContext context, TreeEditCubit cubit, TreeEditState state) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(StringConstants.selectProvince),
           content: SizedBox(
-              width: 200,
-              height: 300,
-              child: (state.provinces != null)
-                  ? ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.provinces!.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final Province province = state.provinces![index];
-                        return ListTile(
-                          title: Text(province.name!),
-                          onTap: () {
-                            cubit.setProvince(province.id!);
-                            setState(() {
-                              _provinceController.text = province.name!;
-                              districtList = province.districts!;
-                              //Province.address[province]!;
-                            });
-                            Navigator.pop(context);
-                          },
-                        );
-                      },
-                    )
-                  : const SizedBox(),
-            )
-          ,
+            width: 200,
+            height: 300,
+            child: (state.provinces != null)
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.provinces!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Province province = state.provinces![index];
+                      return ListTile(
+                        title: Text(province.name!),
+                        onTap: () {
+                          cubit.setProvince(province.name!);
+                          setState(() {
+                            _provinceController.text = province.name!;
+                            districtList = province.districts!;
+                            //Province.address[province]!;
+                          });
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  )
+                : const SizedBox(),
+          ),
         );
       },
     );
@@ -375,27 +377,26 @@ class _TreeEditViewState extends State<TreeEditView> {
         return AlertDialog(
           title: Text(StringConstants.selectDistrict),
           content: SizedBox(
-                  width: 200,
-                  height: 300,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: districtList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final district = districtList[index];
-                      return ListTile(
-                        title: Text(district.name!),
-                        onTap: () {
-                          cubit.setDistrict(district.id!);
-                          setState(() {
-                            _districtController.text = district.name!;
-                          });
-                          Navigator.pop(context);
-                        },
-                      );
-                    },
-                  ),
-                )
-              ,
+            width: 200,
+            height: 300,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: districtList.length,
+              itemBuilder: (BuildContext context, int index) {
+                final district = districtList[index];
+                return ListTile(
+                  title: Text(district.name!),
+                  onTap: () {
+                    cubit.setDistrict(district.name!);
+                    setState(() {
+                      _districtController.text = district.name!;
+                    });
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            ),
+          ),
         );
       },
     );
@@ -417,4 +418,3 @@ Future<void> selectImage(BuildContext context, TreeEditCubit cubit) async {
     },
   );
 }
-

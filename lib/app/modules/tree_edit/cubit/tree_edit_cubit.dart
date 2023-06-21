@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/modules/tree_create/cubit/tree_create_state.dart';
 import 'package:genealogy_management/app/modules/tree_edit/cubit/tree_edit_state.dart';
@@ -6,9 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import '../repository/tree_edit_repository.dart';
 
 class TreeEditCubit extends Cubit<TreeEditState> {
-  TreeEditCubit(this._TreeEditRepository) : super(const TreeEditState());
+  TreeEditCubit(this._treeEditRepository) : super(const TreeEditState());
 
-  final TreeEditRepository _TreeEditRepository;
+  final TreeEditRepository _treeEditRepository;
 
   void setName(String name) {
     emit(state.copyWith(name: name));
@@ -27,11 +28,11 @@ class TreeEditCubit extends Cubit<TreeEditState> {
     emit(state.copyWith(avatar: avatar));
   }
 
-  void setDistrict(int district) {
+  void setDistrict(String district) {
     emit(state.copyWith(district: district));
   }
 
-  void setProvince(int province) {
+  void setProvince(String province) {
     emit(state.copyWith(province: province));
   }
 
@@ -52,6 +53,29 @@ class TreeEditCubit extends Cubit<TreeEditState> {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
     if (pickedFile != null) {
       emit(state.copyWith(avatar: pickedFile.path));
+    }
+  }
+
+  Future<void> treeEdit() async {
+    try {
+      var tree;
+      await _treeEditRepository
+              .treeEdit(
+                  id: state.id,
+                  name: state.name,
+                  description: state.history,
+                  image: state.avatar,
+                  province: state.province,
+                  district: state.district,
+                  address: state.address,
+                  relationship: state.relationship)
+              .then((value) => tree = value) ??
+          '';
+      // final message = await tree;
+      // if()
+      debugPrint('baab---$tree');
+    } catch (e) {
+      rethrow;
     }
   }
 }

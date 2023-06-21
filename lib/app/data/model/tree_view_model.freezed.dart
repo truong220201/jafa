@@ -20,10 +20,12 @@ TreeViewModel _$TreeViewModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreeViewModel {
+  @JsonKey(name: 'user_genealogy_id')
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
-  List<Parrent>? get childrenParrent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'children')
+  List<Parrent> get childrenParrent => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +40,10 @@ abstract class $TreeViewModelCopyWith<$Res> {
       _$TreeViewModelCopyWithImpl<$Res, TreeViewModel>;
   @useResult
   $Res call(
-      {int? id, String? name, String? avatar, List<Parrent>? childrenParrent});
+      {@JsonKey(name: 'user_genealogy_id') int? id,
+      String? name,
+      String? avatar,
+      @JsonKey(name: 'children') List<Parrent> childrenParrent});
 }
 
 /// @nodoc
@@ -57,7 +62,7 @@ class _$TreeViewModelCopyWithImpl<$Res, $Val extends TreeViewModel>
     Object? id = freezed,
     Object? name = freezed,
     Object? avatar = freezed,
-    Object? childrenParrent = freezed,
+    Object? childrenParrent = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -72,10 +77,10 @@ class _$TreeViewModelCopyWithImpl<$Res, $Val extends TreeViewModel>
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-      childrenParrent: freezed == childrenParrent
+      childrenParrent: null == childrenParrent
           ? _value.childrenParrent
           : childrenParrent // ignore: cast_nullable_to_non_nullable
-              as List<Parrent>?,
+              as List<Parrent>,
     ) as $Val);
   }
 }
@@ -89,7 +94,10 @@ abstract class _$$_TreeViewModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id, String? name, String? avatar, List<Parrent>? childrenParrent});
+      {@JsonKey(name: 'user_genealogy_id') int? id,
+      String? name,
+      String? avatar,
+      @JsonKey(name: 'children') List<Parrent> childrenParrent});
 }
 
 /// @nodoc
@@ -106,7 +114,7 @@ class __$$_TreeViewModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? avatar = freezed,
-    Object? childrenParrent = freezed,
+    Object? childrenParrent = null,
   }) {
     return _then(_$_TreeViewModel(
       id: freezed == id
@@ -121,10 +129,10 @@ class __$$_TreeViewModelCopyWithImpl<$Res>
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String?,
-      childrenParrent: freezed == childrenParrent
+      childrenParrent: null == childrenParrent
           ? _value._childrenParrent
           : childrenParrent // ignore: cast_nullable_to_non_nullable
-              as List<Parrent>?,
+              as List<Parrent>,
     ));
   }
 }
@@ -133,7 +141,12 @@ class __$$_TreeViewModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_TreeViewModel extends _TreeViewModel {
   const _$_TreeViewModel(
-      {this.id, this.name, this.avatar, final List<Parrent>? childrenParrent})
+      {@JsonKey(name: 'user_genealogy_id')
+          this.id,
+      this.name,
+      this.avatar,
+      @JsonKey(name: 'children')
+          final List<Parrent> childrenParrent = const []})
       : _childrenParrent = childrenParrent,
         super._();
 
@@ -141,19 +154,19 @@ class _$_TreeViewModel extends _TreeViewModel {
       _$$_TreeViewModelFromJson(json);
 
   @override
+  @JsonKey(name: 'user_genealogy_id')
   final int? id;
   @override
   final String? name;
   @override
   final String? avatar;
-  final List<Parrent>? _childrenParrent;
+  final List<Parrent> _childrenParrent;
   @override
-  List<Parrent>? get childrenParrent {
-    final value = _childrenParrent;
-    if (value == null) return null;
+  @JsonKey(name: 'children')
+  List<Parrent> get childrenParrent {
     if (_childrenParrent is EqualUnmodifiableListView) return _childrenParrent;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_childrenParrent);
   }
 
   @override
@@ -194,23 +207,26 @@ class _$_TreeViewModel extends _TreeViewModel {
 
 abstract class _TreeViewModel extends TreeViewModel {
   const factory _TreeViewModel(
-      {final int? id,
-      final String? name,
-      final String? avatar,
-      final List<Parrent>? childrenParrent}) = _$_TreeViewModel;
+          {@JsonKey(name: 'user_genealogy_id') final int? id,
+          final String? name,
+          final String? avatar,
+          @JsonKey(name: 'children') final List<Parrent> childrenParrent}) =
+      _$_TreeViewModel;
   const _TreeViewModel._() : super._();
 
   factory _TreeViewModel.fromJson(Map<String, dynamic> json) =
       _$_TreeViewModel.fromJson;
 
   @override
+  @JsonKey(name: 'user_genealogy_id')
   int? get id;
   @override
   String? get name;
   @override
   String? get avatar;
   @override
-  List<Parrent>? get childrenParrent;
+  @JsonKey(name: 'children')
+  List<Parrent> get childrenParrent;
   @override
   @JsonKey(ignore: true)
   _$$_TreeViewModelCopyWith<_$_TreeViewModel> get copyWith =>
@@ -223,7 +239,9 @@ Parrent _$ParrentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Parrent {
+  @JsonKey(name: 'user_genealogy_id')
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'relation_type')
   String? get relationType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -236,7 +254,9 @@ abstract class $ParrentCopyWith<$Res> {
   factory $ParrentCopyWith(Parrent value, $Res Function(Parrent) then) =
       _$ParrentCopyWithImpl<$Res, Parrent>;
   @useResult
-  $Res call({int? id, String? relationType});
+  $Res call(
+      {@JsonKey(name: 'user_genealogy_id') int? id,
+      @JsonKey(name: 'relation_type') String? relationType});
 }
 
 /// @nodoc
@@ -275,7 +295,9 @@ abstract class _$$_ParrentCopyWith<$Res> implements $ParrentCopyWith<$Res> {
       __$$_ParrentCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? relationType});
+  $Res call(
+      {@JsonKey(name: 'user_genealogy_id') int? id,
+      @JsonKey(name: 'relation_type') String? relationType});
 }
 
 /// @nodoc
@@ -307,14 +329,19 @@ class __$$_ParrentCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Parrent extends _Parrent {
-  const _$_Parrent({this.id, this.relationType}) : super._();
+  const _$_Parrent(
+      {@JsonKey(name: 'user_genealogy_id') this.id,
+      @JsonKey(name: 'relation_type') this.relationType})
+      : super._();
 
   factory _$_Parrent.fromJson(Map<String, dynamic> json) =>
       _$$_ParrentFromJson(json);
 
   @override
+  @JsonKey(name: 'user_genealogy_id')
   final int? id;
   @override
+  @JsonKey(name: 'relation_type')
   final String? relationType;
 
   @override
@@ -351,177 +378,21 @@ class _$_Parrent extends _Parrent {
 }
 
 abstract class _Parrent extends Parrent {
-  const factory _Parrent({final int? id, final String? relationType}) =
-      _$_Parrent;
+  const factory _Parrent(
+      {@JsonKey(name: 'user_genealogy_id') final int? id,
+      @JsonKey(name: 'relation_type') final String? relationType}) = _$_Parrent;
   const _Parrent._() : super._();
 
   factory _Parrent.fromJson(Map<String, dynamic> json) = _$_Parrent.fromJson;
 
   @override
+  @JsonKey(name: 'user_genealogy_id')
   int? get id;
   @override
+  @JsonKey(name: 'relation_type')
   String? get relationType;
   @override
   @JsonKey(ignore: true)
   _$$_ParrentCopyWith<_$_Parrent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Couple _$CoupleFromJson(Map<String, dynamic> json) {
-  return _Couple.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Couple {
-  int? get idaPerson => throw _privateConstructorUsedError;
-  List<int>? get listIdvk => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CoupleCopyWith<Couple> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CoupleCopyWith<$Res> {
-  factory $CoupleCopyWith(Couple value, $Res Function(Couple) then) =
-      _$CoupleCopyWithImpl<$Res, Couple>;
-  @useResult
-  $Res call({int? idaPerson, List<int>? listIdvk});
-}
-
-/// @nodoc
-class _$CoupleCopyWithImpl<$Res, $Val extends Couple>
-    implements $CoupleCopyWith<$Res> {
-  _$CoupleCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? idaPerson = freezed,
-    Object? listIdvk = freezed,
-  }) {
-    return _then(_value.copyWith(
-      idaPerson: freezed == idaPerson
-          ? _value.idaPerson
-          : idaPerson // ignore: cast_nullable_to_non_nullable
-              as int?,
-      listIdvk: freezed == listIdvk
-          ? _value.listIdvk
-          : listIdvk // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_CoupleCopyWith<$Res> implements $CoupleCopyWith<$Res> {
-  factory _$$_CoupleCopyWith(_$_Couple value, $Res Function(_$_Couple) then) =
-      __$$_CoupleCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int? idaPerson, List<int>? listIdvk});
-}
-
-/// @nodoc
-class __$$_CoupleCopyWithImpl<$Res>
-    extends _$CoupleCopyWithImpl<$Res, _$_Couple>
-    implements _$$_CoupleCopyWith<$Res> {
-  __$$_CoupleCopyWithImpl(_$_Couple _value, $Res Function(_$_Couple) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? idaPerson = freezed,
-    Object? listIdvk = freezed,
-  }) {
-    return _then(_$_Couple(
-      idaPerson: freezed == idaPerson
-          ? _value.idaPerson
-          : idaPerson // ignore: cast_nullable_to_non_nullable
-              as int?,
-      listIdvk: freezed == listIdvk
-          ? _value._listIdvk
-          : listIdvk // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Couple extends _Couple {
-  const _$_Couple({this.idaPerson, final List<int>? listIdvk})
-      : _listIdvk = listIdvk,
-        super._();
-
-  factory _$_Couple.fromJson(Map<String, dynamic> json) =>
-      _$$_CoupleFromJson(json);
-
-  @override
-  final int? idaPerson;
-  final List<int>? _listIdvk;
-  @override
-  List<int>? get listIdvk {
-    final value = _listIdvk;
-    if (value == null) return null;
-    if (_listIdvk is EqualUnmodifiableListView) return _listIdvk;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'Couple(idaPerson: $idaPerson, listIdvk: $listIdvk)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Couple &&
-            (identical(other.idaPerson, idaPerson) ||
-                other.idaPerson == idaPerson) &&
-            const DeepCollectionEquality().equals(other._listIdvk, _listIdvk));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, idaPerson, const DeepCollectionEquality().hash(_listIdvk));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_CoupleCopyWith<_$_Couple> get copyWith =>
-      __$$_CoupleCopyWithImpl<_$_Couple>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_CoupleToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Couple extends Couple {
-  const factory _Couple({final int? idaPerson, final List<int>? listIdvk}) =
-      _$_Couple;
-  const _Couple._() : super._();
-
-  factory _Couple.fromJson(Map<String, dynamic> json) = _$_Couple.fromJson;
-
-  @override
-  int? get idaPerson;
-  @override
-  List<int>? get listIdvk;
-  @override
-  @JsonKey(ignore: true)
-  _$$_CoupleCopyWith<_$_Couple> get copyWith =>
       throw _privateConstructorUsedError;
 }
