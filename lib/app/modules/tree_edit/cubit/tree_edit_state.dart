@@ -20,5 +20,6 @@ class TreeEditState with _$TreeEditState {
     List<Province>? provinces,
     Object? error,
     @Default(false) bool update,
+    String? message,
   }) = _TreeEditState;
 }

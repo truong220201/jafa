@@ -84,6 +84,8 @@ class _$MainRouter extends RootStackRouter {
         child: TreeView(
           key: args.key,
           idTree: args.idTree,
+          roleId: args.roleId,
+          nameJafa: args.nameJafa,
         ),
       );
     },
@@ -314,12 +316,16 @@ class TreeViewRoute extends PageRouteInfo<TreeViewRouteArgs> {
   TreeViewRoute({
     Key? key,
     required int idTree,
+    required int roleId,
+    required String nameJafa,
   }) : super(
           TreeViewRoute.name,
           path: 'treeView',
           args: TreeViewRouteArgs(
             key: key,
             idTree: idTree,
+            roleId: roleId,
+            nameJafa: nameJafa,
           ),
         );
 
@@ -330,15 +336,21 @@ class TreeViewRouteArgs {
   const TreeViewRouteArgs({
     this.key,
     required this.idTree,
+    required this.roleId,
+    required this.nameJafa,
   });
 
   final Key? key;
 
   final int idTree;
 
+  final int roleId;
+
+  final String nameJafa;
+
   @override
   String toString() {
-    return 'TreeViewRouteArgs{key: $key, idTree: $idTree}';
+    return 'TreeViewRouteArgs{key: $key, idTree: $idTree, roleId: $roleId, nameJafa: $nameJafa}';
   }
 }
 

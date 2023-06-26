@@ -78,8 +78,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     !state.isLoading
                         ? Expanded(
-                            child: SingleChildScrollView(
-                                child: _listCard(context, state.userList)),
+                            child: _listCard(context, state.userList),
                           )
                         : const Center(child: CircularProgressIndicator())
                   ])
@@ -162,26 +161,35 @@ class _HomeViewState extends State<HomeView> {
   Widget _listCard(BuildContext context, List<JafaModel> listUser) {
     List<JafaModel> listCardSelect = listUser;
     return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
-      return GestureDetector(
-        onVerticalDragEnd: (details) {
+      return RefreshIndicator(
+        onRefresh: () async {
           debugPrint('reset');
           context.read<HomeCubit>().loadDataJaFa();
+          return Future<void>.delayed(const Duration(seconds: 3));
         },
-        child: Column(
-            children: listCardSelect
-                .map((i) => GestureDetector(
-                    onTap: () async {
-                      //context.read<HomeCubit>().getConservations();
-                      await context.router
-                          .push(TreeDetailViewRoute(idJafa: i.id ?? 0));
-                    },
-                    child: CustomCard(
-                      name: i.name,
-                      content: i.relationName,
-                      image: i.imageJafa,
-                      //image: null,
-                    )))
-                .toList()),
+        child: SizedBox(
+          height: 700,
+          child: ListView.builder(
+            itemCount: listCardSelect.length,
+            itemBuilder: (BuildContext context, int index) {
+              final JafaModel i = listCardSelect[index];
+              return ListTile(
+                  title: GestureDetector(
+                onTap: () async {
+                  //context.read<HomeCubit>().getConservations();
+                  await context.router
+                      .push(TreeDetailViewRoute(idJafa: i.id ?? 0));
+                },
+                child: CustomCard(
+                  name: i.name,
+                  content: i.relationName,
+                  image: i.imageJafa,
+                  //image: null,
+                ),
+              ));
+            },
+          ),
+        ),
       );
     });
   }

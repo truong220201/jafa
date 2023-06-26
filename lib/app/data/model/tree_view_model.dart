@@ -13,6 +13,7 @@ class TreeViewModel with _$TreeViewModel {
     @JsonKey(name: 'user_genealogy_id') int? id,
     String? name,
     String? avatar,
+    String? birthday,
     @JsonKey(name: 'children') @Default([]) List<Parrent> childrenParrent,
   }) = _TreeViewModel;
 

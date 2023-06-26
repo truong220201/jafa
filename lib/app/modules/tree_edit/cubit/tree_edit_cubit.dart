@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:genealogy_management/app/modules/detail_jafa/api/tree_detail_api.dart';
+import 'package:genealogy_management/app/modules/detail_jafa/views/tree_detail_view.dart';
 import 'package:genealogy_management/app/modules/tree_create/cubit/tree_create_state.dart';
 import 'package:genealogy_management/app/modules/tree_edit/cubit/tree_edit_state.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +20,15 @@ class TreeEditCubit extends Cubit<TreeEditState> {
       emit(state.copyWith(pass: true));
     } else {
       emit(state.copyWith(pass: false));
+    }
+  }
+
+  void getProvinces() async {
+    try {
+      final provinces = await _treeEditRepository.getProvinces();
+      emit(state.copyWith(provinces: provinces));
+    } catch (e) {
+      rethrow;
     }
   }
 
@@ -40,6 +52,12 @@ class TreeEditCubit extends Cubit<TreeEditState> {
     emit(state.copyWith(relationship: relationship));
   }
 
+  void toDetailJafa(
+    BuildContext context,
+  ) {
+    context.router.pop();
+  }
+
   Future<void> chooseImageFromGallery() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
@@ -56,9 +74,9 @@ class TreeEditCubit extends Cubit<TreeEditState> {
     }
   }
 
-  Future<void> treeEdit() async {
+  Future<void> treeEdit(BuildContext context) async {
     try {
-      var tree;
+      String? tree;
       await _treeEditRepository
               .treeEdit(
                   id: state.id,
@@ -73,6 +91,10 @@ class TreeEditCubit extends Cubit<TreeEditState> {
           '';
       // final message = await tree;
       // if()
+      emit(state.copyWith(
+          message: tree ?? 'Bạn Không có quyền chỉnh sửa gia tộc này'));
+      // ignore: use_build_context_synchronously
+      toDetailJafa(context);
       debugPrint('baab---$tree');
     } catch (e) {
       rethrow;

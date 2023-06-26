@@ -27,6 +27,7 @@ mixin _$TreeViewState {
   List<Couple>? get arrCouple => throw _privateConstructorUsedError;
   String? get messageTreeRequest => throw _privateConstructorUsedError;
   bool get requestDone => throw _privateConstructorUsedError;
+  List<TreeViewModel>? get listName => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -52,6 +53,7 @@ abstract class $TreeViewStateCopyWith<$Res> {
       List<Couple>? arrCouple,
       String? messageTreeRequest,
       bool requestDone,
+      List<TreeViewModel>? listName,
       Object? error});
 }
 
@@ -79,6 +81,7 @@ class _$TreeViewStateCopyWithImpl<$Res, $Val extends TreeViewState>
     Object? arrCouple = freezed,
     Object? messageTreeRequest = freezed,
     Object? requestDone = null,
+    Object? listName = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -125,6 +128,10 @@ class _$TreeViewStateCopyWithImpl<$Res, $Val extends TreeViewState>
           ? _value.requestDone
           : requestDone // ignore: cast_nullable_to_non_nullable
               as bool,
+      listName: freezed == listName
+          ? _value.listName
+          : listName // ignore: cast_nullable_to_non_nullable
+              as List<TreeViewModel>?,
       error: freezed == error ? _value.error : error,
     ) as $Val);
   }
@@ -150,6 +157,7 @@ abstract class _$$_TreeViewStateCopyWith<$Res>
       List<Couple>? arrCouple,
       String? messageTreeRequest,
       bool requestDone,
+      List<TreeViewModel>? listName,
       Object? error});
 }
 
@@ -175,6 +183,7 @@ class __$$_TreeViewStateCopyWithImpl<$Res>
     Object? arrCouple = freezed,
     Object? messageTreeRequest = freezed,
     Object? requestDone = null,
+    Object? listName = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_TreeViewState(
@@ -221,6 +230,10 @@ class __$$_TreeViewStateCopyWithImpl<$Res>
           ? _value.requestDone
           : requestDone // ignore: cast_nullable_to_non_nullable
               as bool,
+      listName: freezed == listName
+          ? _value._listName
+          : listName // ignore: cast_nullable_to_non_nullable
+              as List<TreeViewModel>?,
       error: freezed == error ? _value.error : error,
     ));
   }
@@ -241,10 +254,12 @@ class _$_TreeViewState extends _TreeViewState {
       final List<Couple>? arrCouple,
       this.messageTreeRequest,
       this.requestDone = false,
+      final List<TreeViewModel>? listName,
       this.error})
       : _treeViewModel = treeViewModel,
         _arrTree = arrTree,
         _arrCouple = arrCouple,
+        _listName = listName,
         super._();
 
   @override
@@ -299,12 +314,22 @@ class _$_TreeViewState extends _TreeViewState {
   @override
   @JsonKey()
   final bool requestDone;
+  final List<TreeViewModel>? _listName;
+  @override
+  List<TreeViewModel>? get listName {
+    final value = _listName;
+    if (value == null) return null;
+    if (_listName is EqualUnmodifiableListView) return _listName;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final Object? error;
 
   @override
   String toString() {
-    return 'TreeViewState(showUserListError: $showUserListError, treeViewModel: $treeViewModel, isLoading: $isLoading, hasData: $hasData, showModal: $showModal, showSearch: $showSearch, aloneUser: $aloneUser, arrTree: $arrTree, arrCouple: $arrCouple, messageTreeRequest: $messageTreeRequest, requestDone: $requestDone, error: $error)';
+    return 'TreeViewState(showUserListError: $showUserListError, treeViewModel: $treeViewModel, isLoading: $isLoading, hasData: $hasData, showModal: $showModal, showSearch: $showSearch, aloneUser: $aloneUser, arrTree: $arrTree, arrCouple: $arrCouple, messageTreeRequest: $messageTreeRequest, requestDone: $requestDone, listName: $listName, error: $error)';
   }
 
   @override
@@ -332,6 +357,7 @@ class _$_TreeViewState extends _TreeViewState {
                 other.messageTreeRequest == messageTreeRequest) &&
             (identical(other.requestDone, requestDone) ||
                 other.requestDone == requestDone) &&
+            const DeepCollectionEquality().equals(other._listName, _listName) &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -349,6 +375,7 @@ class _$_TreeViewState extends _TreeViewState {
       const DeepCollectionEquality().hash(_arrCouple),
       messageTreeRequest,
       requestDone,
+      const DeepCollectionEquality().hash(_listName),
       const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
@@ -371,6 +398,7 @@ abstract class _TreeViewState extends TreeViewState {
       final List<Couple>? arrCouple,
       final String? messageTreeRequest,
       final bool requestDone,
+      final List<TreeViewModel>? listName,
       final Object? error}) = _$_TreeViewState;
   const _TreeViewState._() : super._();
 
@@ -396,6 +424,8 @@ abstract class _TreeViewState extends TreeViewState {
   String? get messageTreeRequest;
   @override
   bool get requestDone;
+  @override
+  List<TreeViewModel>? get listName;
   @override
   Object? get error;
   @override

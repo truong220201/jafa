@@ -18,7 +18,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint(image);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 31, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Container(
           alignment: Alignment.centerLeft,
           width: double.infinity,

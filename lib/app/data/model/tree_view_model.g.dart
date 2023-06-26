@@ -11,6 +11,7 @@ _$_TreeViewModel _$$_TreeViewModelFromJson(Map<String, dynamic> json) =>
       id: json['user_genealogy_id'] as int?,
       name: json['name'] as String?,
       avatar: json['avatar'] as String?,
+      birthday: json['birthday'] as String?,
       childrenParrent: (json['children'] as List<dynamic>?)
               ?.map((e) => Parrent.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$_TreeViewModelToJson(_$_TreeViewModel instance) =>
       'user_genealogy_id': instance.id,
       'name': instance.name,
       'avatar': instance.avatar,
+      'birthday': instance.birthday,
       'children': instance.childrenParrent,
     };
 

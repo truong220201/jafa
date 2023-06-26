@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 
+import '../flavors/build_config.dart';
 import '/app/network/pretty_dio_logger.dart';
 import '/app/network/request_headers.dart';
 
 class DioProvider {
-  static final String baseUrl = "";
+  static final String baseUrl = BuildConfig.instance.config.apiBaseUrl;
 
   static Dio? _instance;
 

@@ -11,237 +11,116 @@ import '../../../core/widgets/button/primary_button.dart';
 import '../cubit/tree_view_cubit.dart';
 import '../cubit/tree_view_state.dart';
 
-class ModalMenu extends StatelessWidget {
-  const ModalMenu({super.key});
+class ModalMenu extends StatefulWidget {
+  ModalMenu({super.key});
+
+  @override
+  State<ModalMenu> createState() => _ModalMenuState();
+}
+
+class _ModalMenuState extends State<ModalMenu> {
+  List<bool> checkList = [true, true, true, true, true];
+  void checkBox(int index) {
+    setState(() {
+      checkList[index] = !checkList[index];
+    });
+    for (int i = 1; i < checkList.length; i++) {
+      bool sameCheck = false;
+      if (checkList[i] == true) {
+        sameCheck = true;
+      } else {
+        sameCheck = false;
+        setState(() {
+          checkList[0] = false;
+        });
+        break;
+      }
+      if (sameCheck == true) {
+        setState(() {
+          checkList[0] = true;
+        });
+      }
+    }
+  }
+
+  void checkAll() {
+    setState(() {
+      checkList[0] = !checkList[0];
+    });
+    debugPrint(checkList[0].toString());
+    if (checkList[0] == false) {
+      setState(() {
+        for (int i = 1; i < checkList.length; i++) {
+          checkList[i] = false;
+        }
+      });
+    } else {
+      setState(() {
+        for (int i = 1; i < checkList.length; i++) {
+          checkList[i] = true;
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TreeViewCubit, TreeViewState>(builder: (context, state) {
-      return GestureDetector(
-        onTap: () => context.read<TreeViewCubit>().changeModal(),
-        child: Container(
-          alignment: Alignment.topRight,
-          decoration:
-              const BoxDecoration(color: Color.fromARGB(141, 133, 133, 133)),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-                width: 210,
-                height: 127,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _cardMini(
-                        context,
-                        SvgPicture.asset(
-                          "assets/images/edit_icon.svg",
-                        ),
-                        StringConstants.editInfo,
-                        () => {}),
-                    _cardMiniExit(context, StringConstants.leavejafa, () {
-                      _showdialogWithCountDown(
-                          context,
-                          () => {},
-                          StringConstants.sureLeaveJafa,
-                          StringConstants.alertContentLeveJafa,
-                          StringConstants.agree);
-                    }),
-                    _cardMini(
-                      context,
-                      SvgPicture.asset(
-                        "assets/images/ic_trash.svg",
-                      ),
-                      StringConstants.deleteJafa,
-                      () {
-                        _showdialogWithCountDown(
-                            context,
-                            () => {},
-                            StringConstants.sureDeleteJafa,
-                            StringConstants.alertContentDeleteJafa,
-                            StringConstants.agree);
-                      },
-                    ),
-                  ],
-                )),
-          ),
-        ),
-      );
-    });
-  }
-
-  Future<void> _showdialogWithCountDown(
-    BuildContext context,
-    Function onTap,
-    String title,
-    String content,
-    String nameButtonSubmit,
-  ) async {
-    await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child: Scaffold(
-              backgroundColor: const Color.fromARGB(37, 0, 0, 0),
-              body: Column(children: [
-                Expanded(
-                  child: Container(),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      color: Color.fromARGB(255, 255, 255, 255)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 20, bottom: 16, left: 16, right: 16),
-                    child: Column(
-                      children: [
-                        Text(
-                          title,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 18),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          content,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        Column(
-                          children: [
-                            PrimaryButton(
-                              onTap: () async {
-                                onTap();
-                                // await FirebaseAuth.instance.verifyPhoneNumber(
-                                //   phoneNumber: "+84${_phoneController.text.substring(1)}",
-                                //   verificationCompleted:
-                                //       (PhoneAuthCredential credential) {},
-                                //   verificationFailed: (FirebaseAuthException e) {},
-                                //   codeSent: (verificationId, forceResendingToken) async {
-                                //     RegisterPhoneView.verify = verificationId;
-                                //     Navigator.of(context).pop();
-
-                                // await context.router.push(
-                                //     ConfirmViewRoute(registrationState: registrationState));
-
-                                //   },
-                                //   codeAutoRetrievalTimeout: (verificationId) {},
-                                // );
-                              },
-                              title: StringConstants.agree,
-                              backgroundColor: AppColors.colorFFB20000,
-                              textColor: AppColors.colorFFFFFFFF,
-                              textSize: 16,
-                              borderColor: AppColors.colorFFB20000,
-                              textWeight: FontWeight.w600,
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            PrimaryButton(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              title: StringConstants.back,
-                              borderColor: AppColors.color4B000000,
-                              backgroundColor: AppColors.colorFFFFFFFF,
-                              textColor: AppColors.color4B000000,
-                              textSize: 16,
-                              textWeight: FontWeight.w600,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _cardMini(
-      BuildContext context, SvgPicture icon, String content, Function onTapp) {
     return GestureDetector(
-      onTap: () => onTapp(),
+      onTap: () => context.read<TreeViewCubit>().changeModal(),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        alignment: Alignment.topRight,
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(141, 133, 133, 133)),
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 2),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: icon,
-            ),
-            Expanded(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+              width: 190,
+              height: 310,
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    content,
-                    style: TextStyles.medium14LineHeight21Sur,
-                  )
+                  Container(
+                    height: 50,
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 15),
+                    child: Text(
+                      'Bộ lọc thành viên',
+                      style: TextStyles.bold14TitleBold,
+                    ),
+                  ),
+                  _cardMini(context, 0, 'Tất cả', () => checkAll()),
+                  _cardMini(context, 1, 'Con trai', () => checkBox(1)),
+                  _cardMini(context, 2, 'Con gái', () => checkBox(2)),
+                  _cardMini(context, 3, 'Con rể', () => checkBox(3)),
+                  _cardMini(context, 4, 'Con dâu', () => checkBox(4)),
                 ],
-              ),
-            ),
-          ]),
+              )),
         ),
       ),
     );
   }
 
-  Widget _cardMiniExit(BuildContext context, String content, Function onTap) {
+  Widget _cardMini(
+      BuildContext context, int index, String content, Function onTapp) {
     return GestureDetector(
-      onTap: () => onTap(),
+      onTap: () => onTapp(),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 229, 170, 170),
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: SvgPicture.asset(
-              "assets/images/ic_log_out.svg",
-            ),
+        width: double.infinity,
+        //padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        decoration: BoxDecoration(border: Border.all(color: Colors.white)),
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Checkbox(
+            checkColor: Colors.greenAccent,
+            activeColor: const Color.fromARGB(255, 255, 17, 0),
+            value: checkList[index],
+            onChanged: (bool? value) {
+              //onTapp();
+            },
           ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  content,
-                  style: TextStyles.medium14LineHeight21Sur
-                      .copyWith(color: const Color.fromARGB(255, 148, 0, 0)),
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: SvgPicture.asset(
-              "assets/images/caret.svg",
-            ),
-          ),
+          Text(content)
         ]),
       ),
     );

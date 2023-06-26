@@ -91,7 +91,10 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
   }
 
   void toTreeView(BuildContext context) async {
-    await context.router.push(TreeViewRoute(idTree: state.treeDetail!.id!));
+    await context.router.push(TreeViewRoute(
+        idTree: state.treeDetail!.id!,
+        roleId: 1,
+        nameJafa: state.treeDetail!.name ?? ''));
     // Navigator.push(
     //     context,
     //     MaterialPageRoute(

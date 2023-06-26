@@ -123,4 +123,5 @@ class StringConstants {
   static String child = "Con Cái";
   static String childE = "child";
   //Phoenix
+  static String nullName = "Chưa điền quan hệ";
 }

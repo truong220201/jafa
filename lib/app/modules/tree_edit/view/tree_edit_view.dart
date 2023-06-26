@@ -37,7 +37,9 @@ class _TreeEditViewState extends State<TreeEditView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return TreeEditCubit(context.read<TreeEditRepository>());
+        return TreeEditCubit(context.read<TreeEditRepository>())
+          ..getProvinces();
+
         // ..initData(widget.registrationState);
       },
       child: _buildPage(context),
@@ -82,7 +84,7 @@ class _TreeEditViewState extends State<TreeEditView> {
                         ? AppColors.colorFFB20000
                         : AppColors.colorFFC2C2C2,
                     onPressed: () {
-                      context.read<TreeEditCubit>().treeEdit();
+                      context.read<TreeEditCubit>().treeEdit(context);
                     },
                     icon: Icon(
                         (pass) ? Icons.done : Icons.arrow_forward_outlined),
@@ -249,7 +251,10 @@ class _TreeEditViewState extends State<TreeEditView> {
                                       ),
                                       suffixIcon: IconButton(
                                         icon: const Icon(Icons.arrow_drop_down),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          _showProvinceDialog(
+                                              context, cubit, state);
+                                        },
                                       )),
                                   cursorColor: AppColors.colorFF000000,
                                 ),

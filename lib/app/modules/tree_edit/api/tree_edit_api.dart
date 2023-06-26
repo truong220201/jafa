@@ -80,19 +80,24 @@ class TreeEditApi extends BaseRemoteSource {
           .then((response) => response.data['message']);
       //return MockTreeDetailRepository().getTreeViewModel();
     } catch (e) {
-      rethrow;
+      // if (e.response!.statusCode == 400) {
+      //   debugPrint(e.response!.data['message'].toString());
+      //   return e.response!.data['message'].toString();
+      //   //debugPrint(e.response!.data['message'].toString());
+      // }
+      return e.toString();
+      //return e.response!.data['message'].toString();
     }
   }
 
   Future<List<Province>> getProvinces() async {
+    final baseUrl = BuildConfig.instance.config.apiBaseUrl;
     try {
-      final response = await apiHelper.get(path: '/api/cities');
-
-      List<Province> data = response.data['data']
-          .map<Province>((n) => Province.fromJson(n))
-          .toList();
-      print(data);
-      return data;
+      final response = dioClient.get('$baseUrl/api/cities');
+      return await callApiWithErrorParser(response).then((response) =>
+          (response.data['data'] as List)
+              .map<Province>((value) => Province.fromJson(value))
+              .toList());
     } catch (e) {
       rethrow;
     }

@@ -28,6 +28,7 @@ mixin _$TreeEditState {
   List<Province>? get provinces => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
   bool get update => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TreeEditStateCopyWith<TreeEditState> get copyWith =>
@@ -52,7 +53,8 @@ abstract class $TreeEditStateCopyWith<$Res> {
       bool pass,
       List<Province>? provinces,
       Object? error,
-      bool update});
+      bool update,
+      String? message});
 }
 
 /// @nodoc
@@ -80,6 +82,7 @@ class _$TreeEditStateCopyWithImpl<$Res, $Val extends TreeEditState>
     Object? provinces = freezed,
     Object? error = freezed,
     Object? update = null,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -127,6 +130,10 @@ class _$TreeEditStateCopyWithImpl<$Res, $Val extends TreeEditState>
           ? _value.update
           : update // ignore: cast_nullable_to_non_nullable
               as bool,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -151,7 +158,8 @@ abstract class _$$_TreeEditStateCopyWith<$Res>
       bool pass,
       List<Province>? provinces,
       Object? error,
-      bool update});
+      bool update,
+      String? message});
 }
 
 /// @nodoc
@@ -177,6 +185,7 @@ class __$$_TreeEditStateCopyWithImpl<$Res>
     Object? provinces = freezed,
     Object? error = freezed,
     Object? update = null,
+    Object? message = freezed,
   }) {
     return _then(_$_TreeEditState(
       id: null == id
@@ -224,6 +233,10 @@ class __$$_TreeEditStateCopyWithImpl<$Res>
           ? _value.update
           : update // ignore: cast_nullable_to_non_nullable
               as bool,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -243,7 +256,8 @@ class _$_TreeEditState extends _TreeEditState {
       this.pass = false,
       final List<Province>? provinces,
       this.error,
-      this.update = false})
+      this.update = false,
+      this.message})
       : _provinces = provinces,
         super._();
 
@@ -286,10 +300,12 @@ class _$_TreeEditState extends _TreeEditState {
   @override
   @JsonKey()
   final bool update;
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'TreeEditState(id: $id, avatar: $avatar, name: $name, history: $history, province: $province, district: $district, address: $address, relationship: $relationship, pass: $pass, provinces: $provinces, error: $error, update: $update)';
+    return 'TreeEditState(id: $id, avatar: $avatar, name: $name, history: $history, province: $province, district: $district, address: $address, relationship: $relationship, pass: $pass, provinces: $provinces, error: $error, update: $update, message: $message)';
   }
 
   @override
@@ -312,7 +328,8 @@ class _$_TreeEditState extends _TreeEditState {
             const DeepCollectionEquality()
                 .equals(other._provinces, _provinces) &&
             const DeepCollectionEquality().equals(other.error, error) &&
-            (identical(other.update, update) || other.update == update));
+            (identical(other.update, update) || other.update == update) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
@@ -329,7 +346,8 @@ class _$_TreeEditState extends _TreeEditState {
       pass,
       const DeepCollectionEquality().hash(_provinces),
       const DeepCollectionEquality().hash(error),
-      update);
+      update,
+      message);
 
   @JsonKey(ignore: true)
   @override
@@ -351,7 +369,8 @@ abstract class _TreeEditState extends TreeEditState {
       final bool pass,
       final List<Province>? provinces,
       final Object? error,
-      final bool update}) = _$_TreeEditState;
+      final bool update,
+      final String? message}) = _$_TreeEditState;
   const _TreeEditState._() : super._();
 
   @override
@@ -378,6 +397,8 @@ abstract class _TreeEditState extends TreeEditState {
   Object? get error;
   @override
   bool get update;
+  @override
+  String? get message;
   @override
   @JsonKey(ignore: true)
   _$$_TreeEditStateCopyWith<_$_TreeEditState> get copyWith =>

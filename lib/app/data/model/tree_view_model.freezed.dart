@@ -24,6 +24,7 @@ mixin _$TreeViewModel {
   int? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
+  String? get birthday => throw _privateConstructorUsedError;
   @JsonKey(name: 'children')
   List<Parrent> get childrenParrent => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $TreeViewModelCopyWith<$Res> {
       {@JsonKey(name: 'user_genealogy_id') int? id,
       String? name,
       String? avatar,
+      String? birthday,
       @JsonKey(name: 'children') List<Parrent> childrenParrent});
 }
 
@@ -62,6 +64,7 @@ class _$TreeViewModelCopyWithImpl<$Res, $Val extends TreeViewModel>
     Object? id = freezed,
     Object? name = freezed,
     Object? avatar = freezed,
+    Object? birthday = freezed,
     Object? childrenParrent = null,
   }) {
     return _then(_value.copyWith(
@@ -76,6 +79,10 @@ class _$TreeViewModelCopyWithImpl<$Res, $Val extends TreeViewModel>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
               as String?,
       childrenParrent: null == childrenParrent
           ? _value.childrenParrent
@@ -97,6 +104,7 @@ abstract class _$$_TreeViewModelCopyWith<$Res>
       {@JsonKey(name: 'user_genealogy_id') int? id,
       String? name,
       String? avatar,
+      String? birthday,
       @JsonKey(name: 'children') List<Parrent> childrenParrent});
 }
 
@@ -114,6 +122,7 @@ class __$$_TreeViewModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? avatar = freezed,
+    Object? birthday = freezed,
     Object? childrenParrent = null,
   }) {
     return _then(_$_TreeViewModel(
@@ -128,6 +137,10 @@ class __$$_TreeViewModelCopyWithImpl<$Res>
       avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthday: freezed == birthday
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
               as String?,
       childrenParrent: null == childrenParrent
           ? _value._childrenParrent
@@ -145,6 +158,7 @@ class _$_TreeViewModel extends _TreeViewModel {
           this.id,
       this.name,
       this.avatar,
+      this.birthday,
       @JsonKey(name: 'children')
           final List<Parrent> childrenParrent = const []})
       : _childrenParrent = childrenParrent,
@@ -160,6 +174,8 @@ class _$_TreeViewModel extends _TreeViewModel {
   final String? name;
   @override
   final String? avatar;
+  @override
+  final String? birthday;
   final List<Parrent> _childrenParrent;
   @override
   @JsonKey(name: 'children')
@@ -171,7 +187,7 @@ class _$_TreeViewModel extends _TreeViewModel {
 
   @override
   String toString() {
-    return 'TreeViewModel(id: $id, name: $name, avatar: $avatar, childrenParrent: $childrenParrent)';
+    return 'TreeViewModel(id: $id, name: $name, avatar: $avatar, birthday: $birthday, childrenParrent: $childrenParrent)';
   }
 
   @override
@@ -182,13 +198,15 @@ class _$_TreeViewModel extends _TreeViewModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
             const DeepCollectionEquality()
                 .equals(other._childrenParrent, _childrenParrent));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, avatar,
+  int get hashCode => Object.hash(runtimeType, id, name, avatar, birthday,
       const DeepCollectionEquality().hash(_childrenParrent));
 
   @JsonKey(ignore: true)
@@ -210,6 +228,7 @@ abstract class _TreeViewModel extends TreeViewModel {
           {@JsonKey(name: 'user_genealogy_id') final int? id,
           final String? name,
           final String? avatar,
+          final String? birthday,
           @JsonKey(name: 'children') final List<Parrent> childrenParrent}) =
       _$_TreeViewModel;
   const _TreeViewModel._() : super._();
@@ -224,6 +243,8 @@ abstract class _TreeViewModel extends TreeViewModel {
   String? get name;
   @override
   String? get avatar;
+  @override
+  String? get birthday;
   @override
   @JsonKey(name: 'children')
   List<Parrent> get childrenParrent;

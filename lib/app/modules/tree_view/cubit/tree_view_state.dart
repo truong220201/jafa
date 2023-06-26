@@ -20,6 +20,7 @@ class TreeViewState with _$TreeViewState {
     List<Couple>? arrCouple,
     String? messageTreeRequest,
     @Default(false) bool requestDone,
+    List<TreeViewModel>? listName,
     Object? error,
   }) = _TreeViewState;
 }

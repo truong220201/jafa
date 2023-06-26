@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/data/model/tree_view_model.dart';
 import '../../../network/exceptions/bad_request_exception.dart';
@@ -55,6 +56,17 @@ class TreeViewCubit extends Cubit<TreeViewState> {
     emit(state.copyWith(arrCouple: arrCouple));
   }
 
+  Future<void> addName() async {
+    List<TreeViewModel> arrNameUser = [];
+    for (int i = 0; i < state.treeViewModel!.length; i++) {
+      debugPrint('i' + state.treeViewModel![i].name.toString() ?? 'null');
+      if (state.treeViewModel![i].name != null) {
+        arrNameUser.add(state.treeViewModel![i]);
+      }
+    }
+    emit(state.copyWith(listName: arrNameUser));
+  }
+
   Future<void> loadData() async {
     if (_isLoading) {
       return;
@@ -95,40 +107,37 @@ class TreeViewCubit extends Cubit<TreeViewState> {
 
       // debugPrint(arrCouple[0].listIdvk.toString());
       // debugPrint(arrCouple[1].listIdvk.toString());
-      // debugPrint('arrCouple length :----------' + arrCouple.length.toString());
+      // debugPrint('arrCouple length :----------${arrCouple.length}');
       for (int i = 0; i < arrCouple.length; i++) {
-        // debugPrint('i:---' + i.toString());
+        debugPrint('i:---$i');
         if (i >= 1) {
           // debugPrint(arrCouple[i].idaPerson.toString());
           // debugPrint(arrCouple[i - 1].idaPerson.toString());
           if (arrCouple[i].idaPerson == arrCouple[i - 1].idaPerson) {
             //logic o cho nay. van chua add vao arrCoupleAdd
             List<int> listvk = [];
-            // debugPrint(
-            //     'listvk khoi tao: ' + arrCouple[i - 1].listIdvk!.toString());
+            //debugPrint('listvk khoi tao: ${arrCouple[i - 1].listIdvk!}');
             listvk = [...arrCouple[i - 1].listIdvk!];
-            // debugPrint('listvk:----------' + listvk.toString());
-            // debugPrint('arrCouple[$i].listIdvk![0]:----------' +
-            //     arrCouple[i].listIdvk![0].toString());
+            // debugPrint('listvk:----------$listvk');
+            // debugPrint(
+            //     'arrCouple[$i].listIdvk![0]:----------${arrCouple[i].listIdvk![0]}');
             listvk.add(arrCouple[i].listIdvk![0]);
-            // debugPrint('listvk:----------' + listvk.toString());
-            //
+            // debugPrint('listvk:----------$listvk');
+
             if (listvk.length <= 2) {
               arrCoupleAdd.add(Couple(
                   idaPerson: arrCouple[i].idaPerson,
                   listIdvk: arrCouple[i].listIdvk));
-              // debugPrint('arrCoupleAdd 2 phan tu:----------' +
-              //     arrCoupleAdd.length.toString());
               // debugPrint(
-              //     'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------' +
-              //         listvk.toString());
+              //     'arrCoupleAdd 2 phan tu:----------${arrCoupleAdd.length}');
+              // debugPrint(
+              //     'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------$listvk');
             } else {
-              // arrCoupleAdd[arrCoupleAdd.length - 1] =
+              arrCoupleAdd[arrCoupleAdd.length - 1] =
                   arrCoupleAdd[arrCoupleAdd.length - 1]
                       .copyWith(listIdvk: listvk);
               // debugPrint(
-              //     'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------' +
-              //         listvk.toString());
+              //     'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------$listvk');
             }
             //
             arrCouple[i] = arrCouple[i].copyWith(listIdvk: listvk);
@@ -138,12 +147,17 @@ class TreeViewCubit extends Cubit<TreeViewState> {
             //     listIdvk: arrCouple[i].listIdvk));
             // debugPrint('arrCoupleAdd-----' + arrCoupleAdd.toString());
           }
-        } else {
-          // arrCoupleAdd.add(Couple(
-          //     idaPerson: arrCouple[i].idaPerson,
-          //     listIdvk: arrCouple[i].listIdvk));
+        } else if (i == 0) {
+          //
+          arrCoupleAdd.add(Couple(
+              idaPerson: arrCouple[i].idaPerson,
+              listIdvk: arrCouple[i].listIdvk));
           // debugPrint('arrCoupleAdd-----' + arrCoupleAdd.toString());
         }
+        // arrCoupleAdd.add(Couple(
+        //     idaPerson: arrCouple[i].idaPerson,
+        //     listIdvk: arrCouple[i].listIdvk));
+        // debugPrint('arrCoupleAdd-----' + arrCoupleAdd.toString());
       }
 
       // debugPrint(
@@ -168,13 +182,13 @@ class TreeViewCubit extends Cubit<TreeViewState> {
       //     'arrCoupleAdd length :----------' + arrCouple.length.toString());
       // for (int q = 0; q < arrCoupleAdd.length; q++) {
       //   // if (arrCouple[q].idaPerson == state.treeViewModel![i].id) {
-        // debugPrint(' arrCouple[$q]:' + arrCouple[q].listIdvk.toString());
-        // debugPrint(' state.treeViewModel![$i]:' +
+      // debugPrint(' arrCouple[$q]:' + arrCouple[q].listIdvk.toString());
+      // debugPrint(' state.treeViewModel![$i]:' +
       //   //     state.treeViewModel![i].toString());
       //   // if (q + 1 >= arrCouple.length) {
       //   if (q >= 1) {
       //     if (arrCouple[q].idaPerson == arrCouple[q - 1].idaPerson) {
-            // debugPrint(' state.treeViewModel![$i]:' +
+      // debugPrint(' state.treeViewModel![$i]:' +
       //       //     arrCouple[q].listIdvk!.toString());
       //       List<int> listvk = [];
       //       if (q >= 1) {
@@ -184,14 +198,14 @@ class TreeViewCubit extends Cubit<TreeViewState> {
       //         continue;
       //       }
 
-            // debugPrint(' arrCouple[q].listIdvk: add' + listvk.toString());
+      // debugPrint(' arrCouple[q].listIdvk: add' + listvk.toString());
       //       // if (q == arrCouple.length) {
       //       //   break;
       //       // } else {
       //       listvk.add(arrCouple[q].listIdvk![0]);
-            // debugPrint('listvk' + listvk.toString());
+      // debugPrint('listvk' + listvk.toString());
       //       arrCouple[q] = arrCouple[q].copyWith(listIdvk: listvk);
-            // debugPrint(' arrCouple[$q].listIdvk: last' +
+      // debugPrint(' arrCouple[$q].listIdvk: last' +
       //           arrCouple[q].listIdvk.toString());
       //       // if (arrCoupleAdd.length > 1) {
       //       //   for (int i = 0; i < arrCoupleAdd.length; i++) {
@@ -257,6 +271,8 @@ class TreeViewCubit extends Cubit<TreeViewState> {
       treeViewModel: listModel,
     ));
     await checkUser();
+    await addName();
+    debugPrint('-------------------==============' + state.listName.toString());
     emit(state.copyWith(isLoading: false));
   }
 
