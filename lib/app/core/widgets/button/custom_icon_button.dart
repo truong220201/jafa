@@ -16,7 +16,7 @@ class CustomIconButton extends StatelessWidget {
           onTap: () => onTap,
           child: Column(children: [
             icon,
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(

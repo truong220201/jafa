@@ -14,7 +14,10 @@ class TreeViewModel with _$TreeViewModel {
     String? name,
     String? avatar,
     String? birthday,
+    String? gender,
     @JsonKey(name: 'children') @Default([]) List<Parrent> childrenParrent,
+    @JsonKey(name: 'is_root') @Default(false) bool isRoot,
+    bool? self,
   }) = _TreeViewModel;
 
   factory TreeViewModel.fromJson(Map<String, Object?> json) =>

@@ -26,4 +26,18 @@ class ApiUrlConstants {
   }
 
   static String getTreeView(int id) => '$baseUrl/api/tree/$id';
+
+
+  static String logout = '$baseUrl/api/logout';
+
+  static String getInfo = '$baseUrl/api/me';
+
+  static String editInfo = '$baseUrl/api/me';
+
+
+  static String changeMom(int genealogyId) => '$baseUrl/api/genealogy/$genealogyId/members/change-mom';
+
+  static String changeCouple(int genealogyId) => '$baseUrl/api/genealogy/$genealogyId/members/change-couple';
+
+  static String changeRole(int genealogyId, int userGenealogyId) => '$baseUrl/api/genealogy/$genealogyId/members/$userGenealogyId/role';
 }

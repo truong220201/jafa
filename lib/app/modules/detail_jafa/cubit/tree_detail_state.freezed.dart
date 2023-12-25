@@ -24,8 +24,8 @@ mixin _$TreeDetailState {
   int? get countDown => throw _privateConstructorUsedError;
   bool? get startCountDownLeftJafa => throw _privateConstructorUsedError;
   bool? get startCountDownDeleteJafa => throw _privateConstructorUsedError;
-  String get statusLeftJafa => throw _privateConstructorUsedError;
-  String get statusDeleteJafa => throw _privateConstructorUsedError;
+  String? get statusLeftJafa => throw _privateConstructorUsedError;
+  String? get statusDeleteJafa => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TreeDetailStateCopyWith<TreeDetailState> get copyWith =>
@@ -47,8 +47,8 @@ abstract class $TreeDetailStateCopyWith<$Res> {
       int? countDown,
       bool? startCountDownLeftJafa,
       bool? startCountDownDeleteJafa,
-      String statusLeftJafa,
-      String statusDeleteJafa});
+      String? statusLeftJafa,
+      String? statusDeleteJafa});
 }
 
 /// @nodoc
@@ -72,8 +72,8 @@ class _$TreeDetailStateCopyWithImpl<$Res, $Val extends TreeDetailState>
     Object? countDown = freezed,
     Object? startCountDownLeftJafa = freezed,
     Object? startCountDownDeleteJafa = freezed,
-    Object? statusLeftJafa = null,
-    Object? statusDeleteJafa = null,
+    Object? statusLeftJafa = freezed,
+    Object? statusDeleteJafa = freezed,
   }) {
     return _then(_value.copyWith(
       showUserListError: freezed == showUserListError
@@ -107,14 +107,14 @@ class _$TreeDetailStateCopyWithImpl<$Res, $Val extends TreeDetailState>
           ? _value.startCountDownDeleteJafa
           : startCountDownDeleteJafa // ignore: cast_nullable_to_non_nullable
               as bool?,
-      statusLeftJafa: null == statusLeftJafa
+      statusLeftJafa: freezed == statusLeftJafa
           ? _value.statusLeftJafa
           : statusLeftJafa // ignore: cast_nullable_to_non_nullable
-              as String,
-      statusDeleteJafa: null == statusDeleteJafa
+              as String?,
+      statusDeleteJafa: freezed == statusDeleteJafa
           ? _value.statusDeleteJafa
           : statusDeleteJafa // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -136,8 +136,8 @@ abstract class _$$_TreeDetailStateCopyWith<$Res>
       int? countDown,
       bool? startCountDownLeftJafa,
       bool? startCountDownDeleteJafa,
-      String statusLeftJafa,
-      String statusDeleteJafa});
+      String? statusLeftJafa,
+      String? statusDeleteJafa});
 }
 
 /// @nodoc
@@ -159,8 +159,8 @@ class __$$_TreeDetailStateCopyWithImpl<$Res>
     Object? countDown = freezed,
     Object? startCountDownLeftJafa = freezed,
     Object? startCountDownDeleteJafa = freezed,
-    Object? statusLeftJafa = null,
-    Object? statusDeleteJafa = null,
+    Object? statusLeftJafa = freezed,
+    Object? statusDeleteJafa = freezed,
   }) {
     return _then(_$_TreeDetailState(
       showUserListError: freezed == showUserListError
@@ -194,14 +194,14 @@ class __$$_TreeDetailStateCopyWithImpl<$Res>
           ? _value.startCountDownDeleteJafa
           : startCountDownDeleteJafa // ignore: cast_nullable_to_non_nullable
               as bool?,
-      statusLeftJafa: null == statusLeftJafa
+      statusLeftJafa: freezed == statusLeftJafa
           ? _value.statusLeftJafa
           : statusLeftJafa // ignore: cast_nullable_to_non_nullable
-              as String,
-      statusDeleteJafa: null == statusDeleteJafa
+              as String?,
+      statusDeleteJafa: freezed == statusDeleteJafa
           ? _value.statusDeleteJafa
           : statusDeleteJafa // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -218,8 +218,8 @@ class _$_TreeDetailState extends _TreeDetailState {
       this.countDown,
       this.startCountDownLeftJafa,
       this.startCountDownDeleteJafa,
-      this.statusLeftJafa = '',
-      this.statusDeleteJafa = ''})
+      this.statusLeftJafa,
+      this.statusDeleteJafa})
       : super._();
 
   @override
@@ -239,11 +239,9 @@ class _$_TreeDetailState extends _TreeDetailState {
   @override
   final bool? startCountDownDeleteJafa;
   @override
-  @JsonKey()
-  final String statusLeftJafa;
+  final String? statusLeftJafa;
   @override
-  @JsonKey()
-  final String statusDeleteJafa;
+  final String? statusDeleteJafa;
 
   @override
   String toString() {
@@ -309,8 +307,8 @@ abstract class _TreeDetailState extends TreeDetailState {
       final int? countDown,
       final bool? startCountDownLeftJafa,
       final bool? startCountDownDeleteJafa,
-      final String statusLeftJafa,
-      final String statusDeleteJafa}) = _$_TreeDetailState;
+      final String? statusLeftJafa,
+      final String? statusDeleteJafa}) = _$_TreeDetailState;
   const _TreeDetailState._() : super._();
 
   @override
@@ -330,9 +328,9 @@ abstract class _TreeDetailState extends TreeDetailState {
   @override
   bool? get startCountDownDeleteJafa;
   @override
-  String get statusLeftJafa;
+  String? get statusLeftJafa;
   @override
-  String get statusDeleteJafa;
+  String? get statusDeleteJafa;
   @override
   @JsonKey(ignore: true)
   _$$_TreeDetailStateCopyWith<_$_TreeDetailState> get copyWith =>

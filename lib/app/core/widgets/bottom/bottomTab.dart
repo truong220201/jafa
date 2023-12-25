@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:genealogy_management/app/main_router.dart';
 
+import '../../../app_routes.dart';
 import '../../values/app_colors.dart';
 
 class BottomTab extends StatefulWidget {
@@ -42,12 +45,14 @@ class _BottomTabState extends State<BottomTab> {
       onTap: (int index) async {
         switch (index) {
           case 0:
+            context.router.replace(const HomeViewRoute());
             break;
           case 1:
             break;
           case 2:
             break;
           case 3:
+            context.router.replace(const UserInfoViewRoute());
             break;
         }
       },

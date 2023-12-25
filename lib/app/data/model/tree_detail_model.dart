@@ -4,7 +4,6 @@ import 'dart:convert';
 class TreeDetailModel {
   int? id;
   String? name;
-
   String? image;
   String? description;
   String? provinceId;
@@ -13,7 +12,7 @@ class TreeDetailModel {
   int? level;
   int? totalMember;
   int? totalUser;
-
+  int? roleId;
   TreeDetailModel({
     this.id,
     this.name,
@@ -25,14 +24,13 @@ class TreeDetailModel {
     this.level,
     this.totalMember,
     this.totalUser,
+    this.roleId,
   });
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
       'name': name,
       // 'roleId': roleId,
-
       'image': image,
       'description': description,
       'province': provinceId,
@@ -41,6 +39,7 @@ class TreeDetailModel {
       'level': level,
       'total_member': totalMember,
       'total_user': totalUser,
+      'role_id': roleId,
     };
   }
 
@@ -60,11 +59,10 @@ class TreeDetailModel {
       totalMember:
           map['total_member'] != null ? map['total_member'] as int : null,
       totalUser: map['total_user'] != null ? map['total_user'] as int : null,
+      roleId: map['role_id'] != null ? map['role_id'] as int : null,
     );
   }
-
   String toJson() => json.encode(toMap());
-
   factory TreeDetailModel.fromJson(String source) =>
       TreeDetailModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -11,8 +11,12 @@ import '../../../core/widgets/button/primary_button.dart';
 import '../cubit/tree_detail_cubit.dart';
 import '../cubit/tree_detail_state.dart';
 
+enum ModalMenuType { leave, delete, edit }
+
 class ModalMenu extends StatelessWidget {
-  const ModalMenu({super.key});
+  const ModalMenu({super.key, required this.callbackFunc});
+
+  final Function(ModalMenuType type) callbackFunc;
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +40,23 @@ class ModalMenu extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _cardMini(
-                        context,
-                        SvgPicture.asset(
-                          "assets/images/edit_icon.svg",
-                        ),
-                        StringConstants.editInfo,
-                        () => {
-                              context
-                                  .read<TreeDetailCubit>()
-                                  .toEditJafa(context)
-                            }),
+                      context,
+                      SvgPicture.asset(
+                        "assets/images/edit_icon.svg",
+                      ),
+                      StringConstants.editInfo,
+                      () {
+                        Navigator.of(context).pop();
+                        callbackFunc(ModalMenuType.edit);
+                      },
+                    ),
                     _cardMiniExit(context, StringConstants.leavejafa, () {
                       _showdialogWithCountDown(
                           context,
-                          () => {
-                                context.read<TreeDetailCubit>().leaveJafaFunc(
-                                    context.read<TreeDetailCubit>().idJafa)
-                              },
+                          () {
+                            Navigator.of(context).pop();
+                        callbackFunc(ModalMenuType.leave);
+                          },
                           StringConstants.sureLeaveJafa,
                           StringConstants.alertContentLeveJafa,
                           StringConstants.agree);
@@ -64,12 +68,10 @@ class ModalMenu extends StatelessWidget {
                       ),
                       StringConstants.deleteJafa,
                       () {
-                        _showdialogWithCountDown(
-                            context,
-                            () => {
-                                  context.read<TreeDetailCubit>().leaveJafaFunc(
-                                      context.read<TreeDetailCubit>().idJafa)
-                                },
+                        _showdialogWithCountDown(context, () {
+                          Navigator.of(context).pop();
+                        callbackFunc(ModalMenuType.delete);
+                        },
                             StringConstants.sureDeleteJafa,
                             StringConstants.alertContentDeleteJafa,
                             StringConstants.agree);
@@ -259,21 +261,21 @@ class ModalMenu extends StatelessWidget {
   }
 }
 
-class ShowDialogCD extends StatelessWidget {
-  const ShowDialogCD({super.key});
+// class ShowDialogCD extends StatelessWidget {
+//   const ShowDialogCD({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TreeDetailCubit, TreeDetailState>(
-        builder: (context, state) {
-      return state.showModal!
-          ? const Positioned(
-              child: Align(alignment: Alignment.topRight, child: ModalMenu()),
-            )
-          : Container();
-    });
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<TreeDetailCubit, TreeDetailState>(
+//         builder: (context, state) {
+//       return state.showModal!
+//           ? const Positioned(
+//               child: Align(alignment: Alignment.topRight, child: ModalMenu()),
+//             )
+//           : Container();
+//     });
+//   }
+// }
 
 class CountDown extends StatelessWidget {
   CountDown({super.key});

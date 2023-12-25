@@ -11,8 +11,6 @@ import '../../../core/widgets/card/custom_card.dart';
 import '../../../core/widgets/search/custom_search.dart';
 import '../../../data/model/jafa_model.dart';
 import '../../scan_QR/scan_qr_view.dart';
-import '../../tree_view/view/tree_view.dart';
-import '../api/home_api.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 import '../repository/home_repository.dart';
@@ -28,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
   bool haveJaFa = true;
   void openScan() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ScanQRView()));
+        context, MaterialPageRoute(builder: (context) => const ScanQRView()));
   }
 
   @override
@@ -179,6 +177,8 @@ class _HomeViewState extends State<HomeView> {
                   //context.read<HomeCubit>().getConservations();
                   await context.router
                       .push(TreeDetailViewRoute(idJafa: i.id ?? 0));
+                  // ignore: use_build_context_synchronously
+                  context.read<HomeCubit>().loadData();
                 },
                 child: CustomCard(
                   name: i.name,

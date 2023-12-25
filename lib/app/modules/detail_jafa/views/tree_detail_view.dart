@@ -12,6 +12,7 @@ import 'package:genealogy_management/app/modules/detail_jafa/widgets/modal_menu.
 import 'package:genealogy_management/app/modules/detail_jafa/widgets/relation_ship.dart';
 
 import '../../../core/values/app_colors.dart';
+import '../../../main_router.dart';
 import '../cubit/tree_detail_cubit.dart';
 import '../cubit/tree_detail_state.dart';
 import '../repository/tree_detail_repository.dart';
@@ -26,14 +27,43 @@ class TreeDetailView extends StatefulWidget {
 }
 
 class _TreeDetailViewState extends State<TreeDetailView> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          TreeDetailCubit(context.read<TreeDetailRepository>(), widget.idJafa)
+            ..initData(),
+      child: TreeDetailPage(
+        idJafa: widget.idJafa,
+      ),
+    );
+  }
+}
+
+class TreeDetailPage extends StatefulWidget {
+  const TreeDetailPage({super.key, required this.idJafa});
+  final int idJafa;
+
+  @override
+  State<TreeDetailPage> createState() => _TreeDetailPageState();
+}
+
+class _TreeDetailPageState extends State<TreeDetailPage> {
   bool haveJaFa = true;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) =>
-            TreeDetailCubit(context.read<TreeDetailRepository>(), widget.idJafa)
-              ..initData(),
+    return BlocListener<TreeDetailCubit, TreeDetailState>(
+        listenWhen: (previous, current) =>
+            previous.statusDeleteJafa != current.statusDeleteJafa,
+        listener: (contexta, state) async {
+          if (state.statusDeleteJafa != null) {
+            // final name = widget.name ?? "Node này";
+            _showOverlay(contexta, state.statusDeleteJafa!);
+            return;
+          }
+          await context.router.pop();
+        },
         child: Scaffold(
           appBar: AppBar(
             leading: SizedBox(
@@ -89,23 +119,25 @@ class _TreeDetailViewState extends State<TreeDetailView> {
                   ? SingleChildScrollView(child:
                       BlocBuilder<TreeDetailCubit, TreeDetailState>(
                           builder: (context, state) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 13, vertical: 16.0),
                         child: Column(children: [
-                          FamilyWidget(),
-                          SizedBox(
+                          const FamilyWidget(),
+                          const SizedBox(
                             height: 10,
                           ),
-                          MemberWidget(),
-                          SizedBox(
+                          MemberWidget(
+                              idJafa: state.treeDetail!.id ?? -1,
+                              roleMySelf: state.treeDetail!.roleId ?? 4),
+                          const SizedBox(
                             height: 10,
                           ),
-                          DomicileWidget(),
-                          SizedBox(
+                          const DomicileWidget(),
+                          const SizedBox(
                             height: 10,
                           ),
-                          RelationshipWidget()
+                          const RelationshipWidget()
                           //_listCard(context)
                         ]),
                       );
@@ -114,9 +146,12 @@ class _TreeDetailViewState extends State<TreeDetailView> {
               BlocBuilder<TreeDetailCubit, TreeDetailState>(
                   builder: (context, state) {
                 return state.showModal!
-                    ? const Positioned(
+                    ? Positioned(
                         child: Align(
-                            alignment: Alignment.topRight, child: ModalMenu()),
+                            alignment: Alignment.topRight,
+                            child: ModalMenu(
+                              callbackFunc: _handleModalMenuSelected,
+                            )),
                       )
                     : Container();
               }),
@@ -133,5 +168,53 @@ class _TreeDetailViewState extends State<TreeDetailView> {
             ],
           ),
         ));
+  }
+
+  void _handleModalMenuSelected(ModalMenuType type) {
+    final cubit = context.read<TreeDetailCubit>();
+    switch (type) {
+      case ModalMenuType.leave:
+        cubit.leaveJafaFunc(widget.idJafa);
+        break;
+      case ModalMenuType.delete:
+        cubit.deleteJafaFunc(widget.idJafa);
+        break;
+      case ModalMenuType.edit:
+        context.router.push(const TreeEditViewRoute());
+        break;
+    }
+  }
+
+  void _showOverlay(BuildContext context, String message) {
+    OverlayEntry overlayEntry;
+    overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).size.height * 0.15,
+        left: MediaQuery.of(context).size.width * 0.1,
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(64)),
+                color: Color.fromARGB(255, 238, 236, 236)),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 40,
+              vertical: 20,
+            ),
+            child: Text(
+              message,
+              style: TextStyles.mediumRedS20,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    Overlay.of(context).insert(overlayEntry);
+
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
   }
 }

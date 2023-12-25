@@ -17,7 +17,7 @@ class TreeDetailState with _$TreeDetailState {
     int? countDown,
     bool? startCountDownLeftJafa,
     bool? startCountDownDeleteJafa,
-    @Default('') String statusLeftJafa,
-    @Default('') String statusDeleteJafa,
+    String? statusLeftJafa,
+    String? statusDeleteJafa,
   }) = _TreeDetailState;
 }

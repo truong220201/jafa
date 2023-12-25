@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/core/extension/date_format_extension.dart';
-import 'package:genealogy_management/app/core/extension/stringx_extention.dart';
+import 'package:genealogy_management/app/core/extension/string_extention.dart';
 import '../../../../core/values/app_colors.dart';
 import '../../../../core/values/regexp_constant.dart';
 import '../../../../data/model/gender.dart';

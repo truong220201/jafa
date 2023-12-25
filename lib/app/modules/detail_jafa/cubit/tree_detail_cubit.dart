@@ -40,6 +40,8 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     emit(state.copyWith(showModal: !state.showModal!));
   }
 
+  void saveJafaLocal() {}
+
   void changeShowInviteFriends() {
     if (state.showModal == true) {
       emit(state.copyWith(showModal: false));
@@ -47,29 +49,23 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     emit(state.copyWith(showInviteFriends: !state.showInviteFriends!));
   }
 
-  void toEditJafa(
-    BuildContext context,
-  ) {
-    context.router.push(const TreeEditViewRoute());
-  }
-
-  Future<void> showdialog(BuildContext context, String title, String content,
-      String nameButtonSubmit) async {
-    await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CustomDialog(
-            content: content,
-            onTap: () {
-              deleteJafaFunc(10);
-              // ignore: use_build_context_synchronously
-              context.router.replaceAll([const HomeViewRoute()]);
-            },
-            title: title,
-            nameButtonSubmit: nameButtonSubmit,
-          );
-        });
-  }
+  // Future<void> showdialog(BuildContext context, String title, String content,
+  //     String nameButtonSubmit) async {
+  //   await showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return CustomDialog(
+  //           content: content,
+  //           onTap: () {
+  //             deleteJafaFunc(10);
+  //             // ignore: use_build_context_synchronously
+  //             context.router.replaceAll([const HomeViewRoute()]);
+  //           },
+  //           title: title,
+  //           nameButtonSubmit: nameButtonSubmit,
+  //         );
+  //       });
+  // }
 
   Future<void> loadData(int idJafa) async {
     emit(state.copyWith(showModal: false));
@@ -93,7 +89,7 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
   void toTreeView(BuildContext context) async {
     await context.router.push(TreeViewRoute(
         idTree: state.treeDetail!.id!,
-        roleId: 1,
+        roleId: state.treeDetail!.roleId!,
         nameJafa: state.treeDetail!.name ?? ''));
     // Navigator.push(
     //     context,
@@ -116,6 +112,7 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
     String message = await deleteJafaResponse(idJafa);
     debugPrint(message);
     emit(state.copyWith(statusDeleteJafa: message));
+    
   }
 
   Future<String> leaveJafaResponse(int idJafa) async {
@@ -137,7 +134,7 @@ class TreeDetailCubit extends Cubit<TreeDetailState> {
           await _treeDetailRepository.getTreeDetail(idJafa);
       emit(state.copyWith(treeDetail: treeDetailReponse));
     } catch (e) {
-      debugPrint('error--------------' + e.toString());
+      debugPrint('error--------------$e');
       emit(state.copyWith(showUserListError: e));
     }
   }

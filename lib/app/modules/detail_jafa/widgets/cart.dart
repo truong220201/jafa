@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:genealogy_management/app/core/values/app_colors.dart';
 
 import '../../../core/values/text_styles.dart';
 
+// ignore: must_be_immutable
 class CartWidget extends StatelessWidget {
   CartWidget(
       {super.key,
@@ -17,8 +19,11 @@ class CartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: () => onTap(),
       child: Container(
+        //onTap
+        decoration: BoxDecoration(
+            border: Border.all(width: 0, color: AppColors.colorFFFFFFFF)),
         padding: const EdgeInsets.symmetric(vertical: 10),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

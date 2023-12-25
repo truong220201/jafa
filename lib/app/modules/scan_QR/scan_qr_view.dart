@@ -19,8 +19,9 @@ import '../../core/values/text_styles.dart';
 late List<CameraDescription> cameras;
 
 class ScanQRView extends StatefulWidget {
-  const ScanQRView({super.key});
-
+  const ScanQRView({
+    super.key,
+  });
   @override
   State<ScanQRView> createState() => _ScanQRViewState();
 }
@@ -141,7 +142,7 @@ class _ScanQRViewState extends State<ScanQRView> {
           // );
         });
       }).catchError((Object e) {
-        log('aaaa' + e.toString());
+        log('aaaa$e');
       });
     }
   }
@@ -183,20 +184,56 @@ class _ScanQRViewState extends State<ScanQRView> {
 
   Future<String> postQr(String qrCode) async {
     final dio = Dio();
+    String responseString = '';
+    List<String> parts = qrCode.split("_");
+
+    String isInviteJafa = parts[0];
+
+    if (isInviteJafa != 'true' && isInviteJafa != 'false' ||
+        parts.length <= 1) {
+      return 'Mã QR không hợp lệ';
+    }
     try {
-      var response = await dio.post(
-          'https://73f3-117-6-130-156.ngrok-free.app/api/genealogy/10/join',
-          data: {},
-          options: Options(headers: {
-            "Content-Type": "application/json",
-            "Authorization":
-                "Bearer 14|CKVWIhTJObHbmAAtQGyAZSgdZfb3xJ5Wdt017Sqw",
-          }));
-      _snackSample("Gia nhập thành công!");
-      return response.toString();
+      var response;
+
+      if (isInviteJafa == 'true') {
+        String idJafa = parts[1];
+        responseString = 'Bạn đã tham gia gia tộc này rồi';
+        response = await dio.post(
+            'http://jafa.mumesoft.com/api/genealogy/$idJafa/join',
+            data: {},
+            options: Options(headers: {
+              "Content-Type": "application/json",
+              "Authorization":
+                  "Bearer 91|gCd6q6F5vxz2S68kvgXYK1pTLvzcv4pzYTGnySEg",
+            }));
+        responseString = 'Gia nhập thành công!';
+      } else {
+        if (parts.length < 2) {
+          return 'Mã QR không hợp lệ';
+        }
+        String idJafa = parts[1];
+        String idMember = parts[2];
+        responseString = 'Bạn đã ở trong nhánh này rồi';
+        response = await dio.post(
+            'http://jafa.mumesoft.com/api/tree/$idJafa/invite/$idMember',
+            data: {},
+            options: Options(headers: {
+              "Content-Type": "application/json",
+              "Authorization":
+                  "Bearer 91|gCd6q6F5vxz2S68kvgXYK1pTLvzcv4pzYTGnySEg",
+            }));
+        responseString = 'Bạn đã được thêm vào nhánh';
+      }
+      // debugPrint('Gia nhập thành công!');
+      // _snackSample("Gia nhập thành công!");
+      //return response.toString();
+      return responseString;
     } on DioException catch (e) {
-      _snackSample("Bạn đã gia nhập gia tộc này rồi.");
-      return e.toString().contains('400').toString();
+      // debugPrint('Bạn đã gia nhập gia tộc này rồi');
+      // _snackSample("Bạn đã gia nhập gia tộc này rồi.");
+      return responseString;
+      //return e.toString().contains('400').toString();
     }
   }
 
@@ -214,24 +251,15 @@ class _ScanQRViewState extends State<ScanQRView> {
         final url = barcode.rawValue;
         if (url != null) {
           log(url);
-          await postQr(url.toString());
+          String response = await postQr(url.toString());
+          // ignore: use_build_context_synchronously
+          _showOverlay(context, response);
           // ignore: use_build_context_synchronously
           context.router.popUntilRoot();
         } else {}
       },
     );
   }
-
-  Widget _snackSample(String response) => SnackBar(
-        content: Text(
-          response,
-          style: const TextStyle(
-            fontSize: 20,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: AppColors.c1D1D1D_onSurface,
-      );
 
   _buildCamera() {
     final width = MediaQuery.of(context).size.width;
@@ -379,4 +407,37 @@ class OverlayShape extends StatelessWidget {
       ],
     );
   }
+}
+
+void _showOverlay(BuildContext context, String message) {
+  OverlayEntry overlayEntry;
+  overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      top: MediaQuery.of(context).size.height * 0.15,
+      left: MediaQuery.of(context).size.width * 0.1,
+      width: MediaQuery.of(context).size.width * 0.8,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(64)),
+              color: Color.fromARGB(255, 238, 236, 236)),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 40,
+            vertical: 20,
+          ),
+          child: Text(
+            message,
+            style: TextStyles.mediumRedS20,
+          ),
+        ),
+      ),
+    ),
+  );
+
+  Overlay.of(context).insert(overlayEntry);
+
+  Future.delayed(const Duration(seconds: 2), () {
+    overlayEntry.remove();
+  });
 }

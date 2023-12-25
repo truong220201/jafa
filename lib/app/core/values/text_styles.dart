@@ -156,4 +156,9 @@ abstract class TextStyles {
     fontSize: 14,
     color: AppColors.colorFF424242,
   );
+  static const mediumRedS20 = TextStyle(
+    fontWeight: FontW.medium,
+    fontSize: 20,
+    color: AppColors.colorFFB20000,
+  );
 }

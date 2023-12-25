@@ -1,11 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../core/values/app_colors.dart';
 import '../../../core/values/string_constants.dart';
 import '../../../core/values/text_styles.dart';
 import '../../../core/widgets/asset_image/asset_image_view.dart';
 import '../../../core/widgets/popup/popup_list_actions.dart';
+import '../../../main_router.dart';
+import '../cubit/tree_view_cubit.dart';
 
 class AloneUser extends StatelessWidget {
   const AloneUser(
@@ -13,11 +17,15 @@ class AloneUser extends StatelessWidget {
       required this.id,
       required this.name,
       this.avatar,
-      required this.genealogyId});
+      required this.genealogyId,
+      this.gender,
+      this.onTap});
   final int id;
   final String name;
   final String? avatar;
+  final String? gender;
   final int genealogyId;
+  final Function? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,10 +45,10 @@ class AloneUser extends StatelessWidget {
                       SizedBox(
                           width: 100,
                           height: 100,
-                          child: InkWell(
+                          child: GestureDetector(
                             onTap: () {
-                              _showModalTreeDetail(context, genealogyId, id, 1,
-                                  name, avatar, true);
+                              onTap!();
+                             
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -57,15 +65,15 @@ class AloneUser extends StatelessWidget {
                       Positioned(
                           top: 30,
                           left: 75,
-                          child: InkWell(
+                          child: GestureDetector(
                             onTap: () async {
-                              // await context.router.push(CreateBranchViewRoute(
-                              //     name: name,
-                              //     avatar: avatar,
-                              //     genealogyId: genealogyId,
-                              //     isRoot: true,
-                              //     roleId: 1,
-                              //     userGenealogyId: id));
+                              await context.router.push(CreateBranchViewRoute(
+                                  name: name,
+                                  avatar: avatar,
+                                  genealogyId: genealogyId,
+                                  isRoot: true,
+                                  roleId: 1,
+                                  userGenealogyId: id));
                             },
                             child: Container(
                               width: 40,
@@ -85,68 +93,7 @@ class AloneUser extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                name ?? StringConstants.nullName,
-                style: TextStyles.mediumBlackS20,
-              )
+              Text(name)
             ]));
   }
-}
-
-Future<void> _showModalTreeDetail(
-    BuildContext context,
-    int genealogyId,
-    int userGenealogyId,
-    int roleId,
-    String? name,
-    String? avatar,
-    bool isRoot) async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return PopupListActions(
-        actions: [
-          PopupListActionsItem(
-            icon: Icons.edit_square,
-            title: StringConstants.editBranch,
-            onTap: () async {
-              // Navigator.of(context).pop();
-              // await context.router.push(EditBranchViewRoute(
-              //     roleId: roleId,
-              //     genealogyId: genealogyId,
-              //     userGenealogyId: userGenealogyId));
-            },
-          ),
-          PopupListActionsItem(
-            icon: Icons.share,
-            title: StringConstants.addMember,
-            onTap: () {},
-          ),
-          PopupListActionsItem(
-            iconWidget: SvgPicture.asset(
-              "assets/images/ic_path.svg",
-            ),
-            icon: Icons.edit_square,
-            title: StringConstants.addBranch,
-            onTap: () async {
-              Navigator.of(context).pop();
-              // await context.router.push(CreateBranchViewRoute(
-              //     name: name,
-              //     avatar: avatar,
-              //     genealogyId: genealogyId,
-              //     isRoot: isRoot,
-              //     roleId: roleId,
-              //     userGenealogyId: userGenealogyId));
-            },
-          ),
-          PopupListActionsItem(
-            icon: Icons.delete,
-            title: StringConstants.deleteBranch,
-            onTap: () {},
-          ),
-        ],
-        title: StringConstants.doSomething,
-      );
-    },
-  );
 }

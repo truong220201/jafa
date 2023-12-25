@@ -29,6 +29,9 @@ mixin _$TreeViewState {
   bool get requestDone => throw _privateConstructorUsedError;
   List<TreeViewModel>? get listName => throw _privateConstructorUsedError;
   Object? get error => throw _privateConstructorUsedError;
+  Node? get userPosition => throw _privateConstructorUsedError;
+  Offset? get searchPosition => throw _privateConstructorUsedError;
+  List<UserNode>? get nodeList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TreeViewStateCopyWith<TreeViewState> get copyWith =>
@@ -54,7 +57,10 @@ abstract class $TreeViewStateCopyWith<$Res> {
       String? messageTreeRequest,
       bool requestDone,
       List<TreeViewModel>? listName,
-      Object? error});
+      Object? error,
+      Node? userPosition,
+      Offset? searchPosition,
+      List<UserNode>? nodeList});
 }
 
 /// @nodoc
@@ -83,6 +89,9 @@ class _$TreeViewStateCopyWithImpl<$Res, $Val extends TreeViewState>
     Object? requestDone = null,
     Object? listName = freezed,
     Object? error = freezed,
+    Object? userPosition = freezed,
+    Object? searchPosition = freezed,
+    Object? nodeList = freezed,
   }) {
     return _then(_value.copyWith(
       showUserListError: freezed == showUserListError
@@ -133,6 +142,18 @@ class _$TreeViewStateCopyWithImpl<$Res, $Val extends TreeViewState>
           : listName // ignore: cast_nullable_to_non_nullable
               as List<TreeViewModel>?,
       error: freezed == error ? _value.error : error,
+      userPosition: freezed == userPosition
+          ? _value.userPosition
+          : userPosition // ignore: cast_nullable_to_non_nullable
+              as Node?,
+      searchPosition: freezed == searchPosition
+          ? _value.searchPosition
+          : searchPosition // ignore: cast_nullable_to_non_nullable
+              as Offset?,
+      nodeList: freezed == nodeList
+          ? _value.nodeList
+          : nodeList // ignore: cast_nullable_to_non_nullable
+              as List<UserNode>?,
     ) as $Val);
   }
 }
@@ -158,7 +179,10 @@ abstract class _$$_TreeViewStateCopyWith<$Res>
       String? messageTreeRequest,
       bool requestDone,
       List<TreeViewModel>? listName,
-      Object? error});
+      Object? error,
+      Node? userPosition,
+      Offset? searchPosition,
+      List<UserNode>? nodeList});
 }
 
 /// @nodoc
@@ -185,6 +209,9 @@ class __$$_TreeViewStateCopyWithImpl<$Res>
     Object? requestDone = null,
     Object? listName = freezed,
     Object? error = freezed,
+    Object? userPosition = freezed,
+    Object? searchPosition = freezed,
+    Object? nodeList = freezed,
   }) {
     return _then(_$_TreeViewState(
       showUserListError: freezed == showUserListError
@@ -235,6 +262,18 @@ class __$$_TreeViewStateCopyWithImpl<$Res>
           : listName // ignore: cast_nullable_to_non_nullable
               as List<TreeViewModel>?,
       error: freezed == error ? _value.error : error,
+      userPosition: freezed == userPosition
+          ? _value.userPosition
+          : userPosition // ignore: cast_nullable_to_non_nullable
+              as Node?,
+      searchPosition: freezed == searchPosition
+          ? _value.searchPosition
+          : searchPosition // ignore: cast_nullable_to_non_nullable
+              as Offset?,
+      nodeList: freezed == nodeList
+          ? _value._nodeList
+          : nodeList // ignore: cast_nullable_to_non_nullable
+              as List<UserNode>?,
     ));
   }
 }
@@ -255,11 +294,15 @@ class _$_TreeViewState extends _TreeViewState {
       this.messageTreeRequest,
       this.requestDone = false,
       final List<TreeViewModel>? listName,
-      this.error})
+      this.error,
+      this.userPosition,
+      this.searchPosition,
+      final List<UserNode>? nodeList})
       : _treeViewModel = treeViewModel,
         _arrTree = arrTree,
         _arrCouple = arrCouple,
         _listName = listName,
+        _nodeList = nodeList,
         super._();
 
   @override
@@ -326,10 +369,23 @@ class _$_TreeViewState extends _TreeViewState {
 
   @override
   final Object? error;
+  @override
+  final Node? userPosition;
+  @override
+  final Offset? searchPosition;
+  final List<UserNode>? _nodeList;
+  @override
+  List<UserNode>? get nodeList {
+    final value = _nodeList;
+    if (value == null) return null;
+    if (_nodeList is EqualUnmodifiableListView) return _nodeList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'TreeViewState(showUserListError: $showUserListError, treeViewModel: $treeViewModel, isLoading: $isLoading, hasData: $hasData, showModal: $showModal, showSearch: $showSearch, aloneUser: $aloneUser, arrTree: $arrTree, arrCouple: $arrCouple, messageTreeRequest: $messageTreeRequest, requestDone: $requestDone, listName: $listName, error: $error)';
+    return 'TreeViewState(showUserListError: $showUserListError, treeViewModel: $treeViewModel, isLoading: $isLoading, hasData: $hasData, showModal: $showModal, showSearch: $showSearch, aloneUser: $aloneUser, arrTree: $arrTree, arrCouple: $arrCouple, messageTreeRequest: $messageTreeRequest, requestDone: $requestDone, listName: $listName, error: $error, userPosition: $userPosition, searchPosition: $searchPosition, nodeList: $nodeList)';
   }
 
   @override
@@ -358,7 +414,12 @@ class _$_TreeViewState extends _TreeViewState {
             (identical(other.requestDone, requestDone) ||
                 other.requestDone == requestDone) &&
             const DeepCollectionEquality().equals(other._listName, _listName) &&
-            const DeepCollectionEquality().equals(other.error, error));
+            const DeepCollectionEquality().equals(other.error, error) &&
+            (identical(other.userPosition, userPosition) ||
+                other.userPosition == userPosition) &&
+            (identical(other.searchPosition, searchPosition) ||
+                other.searchPosition == searchPosition) &&
+            const DeepCollectionEquality().equals(other._nodeList, _nodeList));
   }
 
   @override
@@ -376,7 +437,10 @@ class _$_TreeViewState extends _TreeViewState {
       messageTreeRequest,
       requestDone,
       const DeepCollectionEquality().hash(_listName),
-      const DeepCollectionEquality().hash(error));
+      const DeepCollectionEquality().hash(error),
+      userPosition,
+      searchPosition,
+      const DeepCollectionEquality().hash(_nodeList));
 
   @JsonKey(ignore: true)
   @override
@@ -399,7 +463,10 @@ abstract class _TreeViewState extends TreeViewState {
       final String? messageTreeRequest,
       final bool requestDone,
       final List<TreeViewModel>? listName,
-      final Object? error}) = _$_TreeViewState;
+      final Object? error,
+      final Node? userPosition,
+      final Offset? searchPosition,
+      final List<UserNode>? nodeList}) = _$_TreeViewState;
   const _TreeViewState._() : super._();
 
   @override
@@ -429,7 +496,147 @@ abstract class _TreeViewState extends TreeViewState {
   @override
   Object? get error;
   @override
+  Node? get userPosition;
+  @override
+  Offset? get searchPosition;
+  @override
+  List<UserNode>? get nodeList;
+  @override
   @JsonKey(ignore: true)
   _$$_TreeViewStateCopyWith<_$_TreeViewState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$UserNode {
+  Offset? get userPosition => throw _privateConstructorUsedError;
+  int? get userId => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UserNodeCopyWith<UserNode> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserNodeCopyWith<$Res> {
+  factory $UserNodeCopyWith(UserNode value, $Res Function(UserNode) then) =
+      _$UserNodeCopyWithImpl<$Res, UserNode>;
+  @useResult
+  $Res call({Offset? userPosition, int? userId});
+}
+
+/// @nodoc
+class _$UserNodeCopyWithImpl<$Res, $Val extends UserNode>
+    implements $UserNodeCopyWith<$Res> {
+  _$UserNodeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userPosition = freezed,
+    Object? userId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      userPosition: freezed == userPosition
+          ? _value.userPosition
+          : userPosition // ignore: cast_nullable_to_non_nullable
+              as Offset?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_UserNodeCopyWith<$Res> implements $UserNodeCopyWith<$Res> {
+  factory _$$_UserNodeCopyWith(
+          _$_UserNode value, $Res Function(_$_UserNode) then) =
+      __$$_UserNodeCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Offset? userPosition, int? userId});
+}
+
+/// @nodoc
+class __$$_UserNodeCopyWithImpl<$Res>
+    extends _$UserNodeCopyWithImpl<$Res, _$_UserNode>
+    implements _$$_UserNodeCopyWith<$Res> {
+  __$$_UserNodeCopyWithImpl(
+      _$_UserNode _value, $Res Function(_$_UserNode) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userPosition = freezed,
+    Object? userId = freezed,
+  }) {
+    return _then(_$_UserNode(
+      userPosition: freezed == userPosition
+          ? _value.userPosition
+          : userPosition // ignore: cast_nullable_to_non_nullable
+              as Offset?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UserNode extends _UserNode {
+  const _$_UserNode({this.userPosition, this.userId}) : super._();
+
+  @override
+  final Offset? userPosition;
+  @override
+  final int? userId;
+
+  @override
+  String toString() {
+    return 'UserNode(userPosition: $userPosition, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserNode &&
+            (identical(other.userPosition, userPosition) ||
+                other.userPosition == userPosition) &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userPosition, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserNodeCopyWith<_$_UserNode> get copyWith =>
+      __$$_UserNodeCopyWithImpl<_$_UserNode>(this, _$identity);
+}
+
+abstract class _UserNode extends UserNode {
+  const factory _UserNode({final Offset? userPosition, final int? userId}) =
+      _$_UserNode;
+  const _UserNode._() : super._();
+
+  @override
+  Offset? get userPosition;
+  @override
+  int? get userId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UserNodeCopyWith<_$_UserNode> get copyWith =>
       throw _privateConstructorUsedError;
 }

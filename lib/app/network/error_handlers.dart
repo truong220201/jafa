@@ -9,6 +9,7 @@ import '/app/network/exceptions/app_exception.dart';
 import '/app/network/exceptions/network_exception.dart';
 import '/app/network/exceptions/not_found_exception.dart';
 import '/app/network/exceptions/service_unavailable_exception.dart';
+import 'exceptions/bad_request_exception.dart';
 
 Exception handleError(String error) {
   // final logger = BuildConfig.instance.config.logger;
@@ -31,7 +32,10 @@ Exception handleDioError(DioException dioError) {
     case DioExceptionType.badCertificate:
       return AppException(message: "Connection timeout with API server");
     case DioExceptionType.badResponse:
-      return AppException(message: "Connection timeout with API server");
+      return BadRequestException(
+          message: dioError.response?.data["message"] ?? dioError.message,
+          httpCode: dioError.response?.statusCode ?? -1,
+          status: dioError.response?.statusMessage ?? "Bad Request");
     case DioExceptionType.connectionError:
       return NetworkException("There is no internet connection");
     case DioExceptionType.unknown:

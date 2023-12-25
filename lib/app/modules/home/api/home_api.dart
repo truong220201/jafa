@@ -10,7 +10,6 @@ import '../../../flavors/build_config.dart';
 import '../../../flavors/env_config.dart';
 
 class HomeApi extends BaseRemoteSource {
-  
   // Future<List<JafaModel>> getHomeDetail() async {
   //   final responseData =
   //       await apiHelper.get(path: '/api/genealogy/?per_page=23&page=1');
@@ -28,10 +27,12 @@ class HomeApi extends BaseRemoteSource {
       '$baseUrl/api/genealogy/',
     );
     try {
-      return callApiWithErrorParser(request).then((response) =>
-          (response.data['data'] as List)
-              .map<JafaModel>((value) => JafaModel.fromJson(value))
-              .toList());
+      return [
+        JafaModel(
+            id: 1, name: 'aaa', roleId: 1, relationName: 'ss', imageJafa: ''),
+        JafaModel(
+            id: 1, name: 'aaa', roleId: 1, relationName: 'ss', imageJafa: '')
+      ];
     } catch (e) {
       rethrow;
     }

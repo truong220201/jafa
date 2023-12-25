@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:genealogy_management/app/data/model/tree_view_model.dart';
+import 'package:genealogy_management/app/data/model/user.dart';
+import 'package:graphview/GraphView.dart';
 import '../../../network/exceptions/bad_request_exception.dart';
 import '../repository/tree_view_repository.dart';
 import 'tree_view_state.dart';
@@ -35,6 +37,11 @@ class TreeViewCubit extends Cubit<TreeViewState> {
       emit(state.copyWith(showSearch: false));
     }
     emit(state.copyWith(showModal: !state.showModal));
+  }
+
+  void changeSearchLocation(Offset searchLocation) {
+    debugPrint(searchLocation.toString());
+    emit(state.copyWith(searchPosition: searchLocation));
   }
 
   void changeShowSearch() {
@@ -83,6 +90,138 @@ class TreeViewCubit extends Cubit<TreeViewState> {
     }
   }
 
+  void addToNode(List<UserNode> listNode) async {
+    emit(state.copyWith(nodeList: listNode));
+    // await addAllNode();
+  }
+
+  // Future<void> addAllNode() async {
+
+  //   // debugPrint('state couple-----------------------------' +
+  //   //     state.arrCouple.toString());
+  //   List<UserNode> allNodeHus = [];
+  //   // List<UserNode> allNode = state.nodeList!;
+  //   for (Couple couple in state.arrCouple!) {
+  //     debugPrint(state.nodeList.toString());
+  //     for (UserNode nodeUser in state.nodeList!) {
+  //       debugPrint(
+  //           'couple:' + couple.toString() + 'nodeUser:' + nodeUser.toString());
+  //       if (nodeUser.userId! == couple.idaPerson) {
+  //         for (int idHusband in couple.listIdvk!) {
+  //           UserNode nodeHusAdd = UserNode(
+  //               userId: idHusband, userPosition: nodeUser.userPosition);
+  //           allNodeHus.add(nodeHusAdd);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   List<UserNode> allNode = new List.from(state.nodeList!)..addAll(allNodeHus);
+  //   debugPrint(allNode.length.toString());
+  //   emit(state.copyWith(nodeList: allNode));
+  //   // allNode = allNode.add(...allNodeHus);
+  // }
+
+//search
+  Offset userLocation(int keyUser) {
+    Offset userLocation = Offset(0, 0);
+
+    for (UserNode nodeUser in state.nodeList!) {
+      // ignore: unrelated_type_equality_checks
+
+      if (nodeUser.userId == keyUser) {
+        userLocation = nodeUser.userPosition!;
+      }
+    }
+    return userLocation;
+  }
+
+//
+//zoom
+  void zoomToPosition(
+      Offset position, TransformationController _transformationController) {
+    const double scale = 2; // Tỷ lệ phóng to
+    debugPrint(position.toString());
+    // _transformationController.value = Matrix4.identity()
+    //   ..scale(scale)
+    //   ..translate(position.dx * (1 - scale), position.dy * (1 - scale));
+    _transformationController.value =
+        Matrix4.translationValues(-position.dx, -position.dy, 0);
+  }
+
+//
+  TreeViewModel getinfPerSon(int id) {
+    TreeViewModel? infPerSon;
+    for (var i in state.treeViewModel!) {
+      if (i.id == id) {
+        infPerSon = i;
+      }
+    }
+    return infPerSon ?? const TreeViewModel();
+  }
+
+  List<TreeViewModel> getinfListPerSon(List<int> idList) {
+    List<TreeViewModel> listInf = [];
+    for (var i in state.treeViewModel!) {
+      for (int j = 0; j < idList.length; j++) {
+        if (i.id == idList[j]) {
+          listInf.add(i);
+        }
+      }
+    }
+    return listInf;
+  }
+
+//get main user location
+  void getMainUserLocation(TransformationController transformationController) {
+    for (TreeViewModel user in state.listName!) {
+      if (user.self == true) {
+        for (UserNode userNode in state.nodeList!) {
+          if (user.id == userNode.userId) {
+            zoomToPosition(userNode.userPosition!, transformationController);
+          }
+        }
+      }
+    }
+  }
+//
+
+  Future<void> loadDataJaFa(int id) async {
+    emit(state.copyWith(isLoading: true, treeViewModel: [], arrCouple: []));
+
+    List<TreeViewModel> listModel =
+        await _treeViewRepository.getTreeViewDetail(id);
+    // debugPrint('listtttt=======' + listModel.toString());
+
+    emit(state.copyWith(
+      treeViewModel: listModel,
+    ));
+    await checkUser();
+    await addName();
+    // addAllNode();
+    // debugPrint('-------------------==============' + state.listName.toString());
+    emit(state.copyWith(isLoading: false));
+  }
+
+  void treeRequest({
+    required int userGenealogyId,
+    required int genealogyId,
+  }) async {
+    try {
+      emit(state.copyWith(requestDone: false));
+      final message = await _treeViewRepository.treeRequest(
+          genealogyId: genealogyId, userGenealogyId: userGenealogyId);
+      emit(state.copyWith(messageTreeRequest: message, requestDone: true));
+    } catch (e) {
+      if (e is BadRequestException) {
+        emit(state.copyWith(messageTreeRequest: e.message, requestDone: true));
+        return;
+      }
+      emit(state.copyWith(error: e, requestDone: false));
+      rethrow;
+    }
+  }
+
+// ----------------------------------------------
   Future<void> checkUser() async {
     if (state.treeViewModel!.isNotEmpty) {
       changeData();
@@ -118,26 +257,26 @@ class TreeViewCubit extends Cubit<TreeViewState> {
             List<int> listvk = [];
             //debugPrint('listvk khoi tao: ${arrCouple[i - 1].listIdvk!}');
             listvk = [...arrCouple[i - 1].listIdvk!];
-            // debugPrint('listvk:----------$listvk');
-            // debugPrint(
-            //     'arrCouple[$i].listIdvk![0]:----------${arrCouple[i].listIdvk![0]}');
+            debugPrint('listvk:----------$listvk');
+            debugPrint(
+                'arrCouple[$i].listIdvk![0]:----------${arrCouple[i].listIdvk![0]}');
             listvk.add(arrCouple[i].listIdvk![0]);
-            // debugPrint('listvk:----------$listvk');
+            debugPrint('listvk:----------$listvk');
 
             if (listvk.length <= 2) {
               arrCoupleAdd.add(Couple(
                   idaPerson: arrCouple[i].idaPerson,
                   listIdvk: arrCouple[i].listIdvk));
-              // debugPrint(
-              //     'arrCoupleAdd 2 phan tu:----------${arrCoupleAdd.length}');
-              // debugPrint(
-              //     'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------$listvk');
+              debugPrint(
+                  'arrCoupleAdd 2 phan tu:----------${arrCoupleAdd.length}');
+              debugPrint(
+                  'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------$listvk');
             } else {
               arrCoupleAdd[arrCoupleAdd.length - 1] =
                   arrCoupleAdd[arrCoupleAdd.length - 1]
                       .copyWith(listIdvk: listvk);
-              // debugPrint(
-              //     'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------$listvk');
+              debugPrint(
+                  'arrCoupleAdd[${arrCoupleAdd.length - 1} ]:----------$listvk');
             }
             //
             arrCouple[i] = arrCouple[i].copyWith(listIdvk: listvk);
@@ -145,7 +284,7 @@ class TreeViewCubit extends Cubit<TreeViewState> {
             // arrCoupleAdd.add(Couple(
             //     idaPerson: arrCouple[i].idaPerson,
             //     listIdvk: arrCouple[i].listIdvk));
-            // debugPrint('arrCoupleAdd-----' + arrCoupleAdd.toString());
+            debugPrint('arrCoupleAdd-----' + arrCoupleAdd.toString());
           }
         } else if (i == 0) {
           //
@@ -237,61 +376,4 @@ class TreeViewCubit extends Cubit<TreeViewState> {
       // debugPrint('length----------' + arrCoupleAdd.length.toString());
     }
   }
-
-  TreeViewModel getinfPerSon(int id) {
-    TreeViewModel? infPerSon;
-    for (var i in state.treeViewModel!) {
-      if (i.id == id) {
-        infPerSon = i;
-      }
-    }
-    return infPerSon ?? const TreeViewModel();
-  }
-
-  List<TreeViewModel> getinfListPerSon(List<int> idList) {
-    List<TreeViewModel> listInf = [];
-    for (var i in state.treeViewModel!) {
-      for (int j = 0; j < idList.length; j++) {
-        if (i.id == idList[j]) {
-          listInf.add(i);
-        }
-      }
-    }
-    return listInf;
-  }
-
-  Future<void> loadDataJaFa(int id) async {
-    emit(state.copyWith(isLoading: true, treeViewModel: [], arrCouple: []));
-
-    List<TreeViewModel> listModel =
-        await _treeViewRepository.getTreeViewDetail(id);
-    // debugPrint('listtttt=======' + listModel.toString());
-
-    emit(state.copyWith(
-      treeViewModel: listModel,
-    ));
-    await checkUser();
-    await addName();
-    debugPrint('-------------------==============' + state.listName.toString());
-    emit(state.copyWith(isLoading: false));
-  }
-
-  // void treeRequest({
-  //   required int userGenealogyId,
-  //   required int genealogyId,
-  // }) async {
-  //   try {
-  //     emit(state.copyWith(requestDone: false));
-  //     final message = await _treeViewRepository.treeRequest(
-  //         genealogyId: genealogyId, userGenealogyId: userGenealogyId);
-  //     emit(state.copyWith(messageTreeRequest: message, requestDone: true));
-  //   } catch (e) {
-  //     if (e is BadRequestException) {
-  //       emit(state.copyWith(messageTreeRequest: e.message, requestDone: true));
-  //       return;
-  //     }
-  //     emit(state.copyWith(error: e, requestDone: false));
-  //     rethrow;
-  //   }
-  // }
 }

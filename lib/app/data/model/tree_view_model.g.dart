@@ -12,10 +12,13 @@ _$_TreeViewModel _$$_TreeViewModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       avatar: json['avatar'] as String?,
       birthday: json['birthday'] as String?,
+      gender: json['gender'] as String?,
       childrenParrent: (json['children'] as List<dynamic>?)
               ?.map((e) => Parrent.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      isRoot: json['is_root'] as bool? ?? false,
+      self: json['self'] as bool?,
     );
 
 Map<String, dynamic> _$$_TreeViewModelToJson(_$_TreeViewModel instance) =>
@@ -24,7 +27,10 @@ Map<String, dynamic> _$$_TreeViewModelToJson(_$_TreeViewModel instance) =>
       'name': instance.name,
       'avatar': instance.avatar,
       'birthday': instance.birthday,
+      'gender': instance.gender,
       'children': instance.childrenParrent,
+      'is_root': instance.isRoot,
+      'self': instance.self,
     };
 
 _$_Parrent _$$_ParrentFromJson(Map<String, dynamic> json) => _$_Parrent(

@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:genealogy_management/app/core/base/base_response.dart';
 import 'package:genealogy_management/app/data/model/tree_detail_model.dart';
 
 import '../../../flavors/build_config.dart';
@@ -11,14 +15,18 @@ class TreeDetailApi extends BaseRemoteSource {
       '$baseUrl/api/genealogy/$idJafa',
     );
     try {
-      return callApiWithErrorParser(request)
-          .then((response) => TreeDetailModel.fromMap(response.data['data']));
+      return callApiWithErrorParser(request).then((response) {
+        return BaseResponse.fromJson(
+          json: response.data,
+          fromJson: (json) => TreeDetailModel.fromMap(json),
+        ).data;
+      });
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<Response> deleteJafa(int idJafa, bool isDestroy) async {
+  Future<String> deleteJafa(int idJafa, bool isDestroy) async {
     final baseUrl = BuildConfig.instance.config.apiBaseUrl;
 
     final request = dioClient.delete(
@@ -26,18 +34,17 @@ class TreeDetailApi extends BaseRemoteSource {
           ? '$baseUrl/api/genealogy/$idJafa?destroy=true'
           : '$baseUrl/api/genealogy/$idJafa',
     );
-    final Response responseData = await callApiWithErrorParser(request)
-        .then((response) => response.data['data']);
-    return responseData;
+    return await callApiWithErrorParser(request).then(
+        (response) => BaseResponse.fromJson(json: response.data).message ?? '');
   }
 
-  Future<Response> leavingJafa(int idJafa) async {
+  Future<BaseResponse> leavingJafa(int idJafa) async {
     final baseUrl = BuildConfig.instance.config.apiBaseUrl;
     final request = dioClient.delete(
       '$baseUrl/api/genealogy/${idJafa.toString()}/leave',
     );
-    final Response responseData = await callApiWithErrorParser(request)
-        .then((response) => response.data['data']);
+    final responseData = await callApiWithErrorParser(request)
+        .then((response) => BaseResponse.fromJson(json: response.data));
     return responseData;
   }
 

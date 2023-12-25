@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,6 +6,7 @@ import '../../../core/values/string_constants.dart';
 import '../../../core/values/text_styles.dart';
 import '../../../core/widgets/asset_image/asset_image_view.dart';
 import '../../../data/model/tree_view_model.dart';
+import '../../../main_router.dart';
 import '../cubit/tree_view_cubit.dart';
 import '../cubit/tree_view_state.dart';
 
@@ -36,7 +38,7 @@ class SingleUser extends StatelessWidget {
                         const SizedBox(
                           width: 45,
                         ),
-                        SizedBox(
+                        Container(
                           //alignment: Alignment.center,
                           width: 150,
                           child: Stack(children: [
@@ -44,18 +46,15 @@ class SingleUser extends StatelessWidget {
                                 width: 100,
                                 height: 100,
                                 child: Container(
-                                  child: FadeInImage(
-                                    image: NetworkImage(user.avatar ?? ""),
-                                    placeholder:
-                                        AssetImage("assets/images/user.png"),
-                                    imageErrorBuilder:
-                                        (context, error, stackTrace) {
-                                      return Image.asset(
-                                          'assets/images/user.png',
-                                          fit: BoxFit.fitWidth);
-                                    },
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: user.avatar != null
+                                              ? NetworkImage(user.avatar!)
+                                              : const AssetImage(
+                                                      "assets/images/user.png")
+                                                  as ImageProvider<Object>)),
                                 )),
                             Positioned(
                                 top: 30,
@@ -66,16 +65,17 @@ class SingleUser extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                   ),
-                                  child: InkWell(
-                                    onTap: () async => {},
-                                    // await context.router
-                                    //     .push(CreateBranchViewRoute(
-                                    //         name: user.name,
-                                    //         avatar: user.avatar,
-                                    //         genealogyId: genealogyId,
-                                    //         isRoot: user.isRoot,
-                                    //         roleId: roleId,
-                                    //         userGenealogyId: id)),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      await context.router.push(
+                                          CreateBranchViewRoute(
+                                              name: user.name,
+                                              avatar: user.avatar,
+                                              genealogyId: genealogyId,
+                                              isRoot: user.isRoot,
+                                              roleId: roleId,
+                                              userGenealogyId: id));
+                                    },
                                     child: const AssetImageView(
                                       fileName: 'ic_add.svg',
                                     ),
@@ -88,10 +88,7 @@ class SingleUser extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      user.name ?? StringConstants.nullName,
-                      style: TextStyles.mediumBlackS20,
-                    )
+                    Text(user.name ?? StringConstants.nullName)
                   ]));
         });
   }

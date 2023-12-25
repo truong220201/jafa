@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:graphview/GraphView.dart';
 import '../../../data/model/tree_view_model.dart';
@@ -22,5 +23,18 @@ class TreeViewState with _$TreeViewState {
     @Default(false) bool requestDone,
     List<TreeViewModel>? listName,
     Object? error,
+    Node? userPosition,
+    Offset? searchPosition,
+    List<UserNode>? nodeList,
   }) = _TreeViewState;
+}
+
+@freezed
+class UserNode with _$UserNode {
+  const UserNode._();
+
+  const factory UserNode({
+    Offset? userPosition,
+    int? userId,
+  }) = _UserNode;
 }

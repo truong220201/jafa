@@ -82,6 +82,9 @@ class StringConstants {
   static String invYourFriendToJafa = "Mời bạn bè vào gia tộc";
   static String showOrSendQrCode =
       "Hiển thị hoặc gửi mã QR này cho bạn bè để thêm họ vào gia tộc";
+      static String invYourFriendToBranch = "Mời bạn bè vào nhánh";
+        static String showOrSendQrCodeToBranch =
+      "Hiển thị hoặc gửi mã QR này cho bạn bè để thêm họ vào nhánh trong gia tộc";
   static String copyLink = "Sao chép link";
   static String share = "Chia sẻ";
   static String downLoad = "Tải xuống";
@@ -124,4 +127,21 @@ class StringConstants {
   static String childE = "child";
   //Phoenix
   static String nullName = "Chưa điền quan hệ";
+
+  static String dateFormat2 = 'dd-MM-yyyy';
+  static String dateFormat3 = 'MM/dd/yyyy';
+  static String branchInfo = "Thông tin nhánh";
+  static String ralashion = "Quan hệ";
+  static String role = "Vai vế";
+  static String otherName = "Tên gọi khác";
+  static String job2 = "Nghề nghiệp";
+  static String deathday = "Ngày tháng năm mất";
+  static String worshipPlace = "Nơi thờ cúng hiện tại";
+  static String grave = "Mộ táng";
+  static String otherE = 'other';
+  static String phoneHint = 'Nhập số điện thoại';
+  static String emailHint = 'Nhập email';
+  static String email = 'Email';
+  static String wife = "Vợ";
+  static String husband = 'Chồng';
 }

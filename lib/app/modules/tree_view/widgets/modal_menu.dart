@@ -1,18 +1,11 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:genealogy_management/app/core/values/string_constants.dart';
 
-import '../../../core/values/app_colors.dart';
 import '../../../core/values/text_styles.dart';
-import '../../../core/widgets/button/primary_button.dart';
 import '../cubit/tree_view_cubit.dart';
-import '../cubit/tree_view_state.dart';
 
 class ModalMenu extends StatefulWidget {
-  ModalMenu({super.key});
+  const ModalMenu({super.key});
 
   @override
   State<ModalMenu> createState() => _ModalMenuState();
@@ -85,8 +78,8 @@ class _ModalMenuState extends State<ModalMenu> {
                   Container(
                     height: 50,
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.only(left: 15),
-                    child: Text(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: const Text(
                       'Bộ lọc thành viên',
                       style: TextStyles.bold14TitleBold,
                     ),
