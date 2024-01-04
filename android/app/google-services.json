@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1064274526643",
+    "project_id": "jafa-f716c",
+    "storage_bucket": "jafa-f716c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064274526643:android:afc4e8fbab867db31ccbc6",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxO8pFEUpHDozG2HATI1WrrcBuA-UQTBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064274526643:android:5fe52d59d6c5e44b1ccbc6",
+        "android_client_info": {
+          "package_name": "com.example.genealogy_management"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxO8pFEUpHDozG2HATI1WrrcBuA-UQTBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064274526643:android:8c43a10416c048d71ccbc6",
+        "android_client_info": {
+          "package_name": "com.jafa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxO8pFEUpHDozG2HATI1WrrcBuA-UQTBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
