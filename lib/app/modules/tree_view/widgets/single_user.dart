@@ -75,6 +75,10 @@ class SingleUser extends StatelessWidget {
                                               isRoot: user.isRoot,
                                               roleId: roleId,
                                               userGenealogyId: id));
+                                      // ignore: use_build_context_synchronously
+                                      await context
+                                          .read<TreeViewCubit>()
+                                          .loadData();
                                     },
                                     child: const AssetImageView(
                                       fileName: 'ic_add.svg',

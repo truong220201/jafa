@@ -82,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
                           )
                         : const Center(child: CircularProgressIndicator())
                   ])
-                : _ifEmpty();
+                : _ifEmpty(context);
           })),
       floatingActionButton: SizedBox(
         width: 68,
@@ -91,7 +91,8 @@ class _HomeViewState extends State<HomeView> {
           onPressed: () async {
             await context.router.push(const TreeCreateViewRoute());
             // ignore: use_build_context_synchronously
-            // await context.read<HomeCubit>().loadDataJaFa();
+            await context.read<HomeCubit>().loadDataJaFa();
+            // await HomeCubit(context.read<HomeRepository>()).loadData();
           },
           backgroundColor: AppColors.colorFFB20000,
           foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
@@ -105,7 +106,12 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _ifEmpty() {
+  reset(BuildContext context) {
+    debugPrint('press');
+    context.read<HomeCubit>().loadDataJaFa();
+  }
+
+  Widget _ifEmpty(BuildContext context) {
     return Column(
       children: [
         const SizedBox(
@@ -158,11 +164,10 @@ class _HomeViewState extends State<HomeView> {
           height: 18,
         ),
         GestureDetector(
-          child: const SizedBox(
-            child: Text('Làm mới ngay!'),
-          ),
-          onTap: () => context.read<HomeCubit>().loadDataJaFa(),
-        )
+            onTap: reset(context),
+            child: const SizedBox(
+              child: Text('Làm mới ngay!'),
+            ))
       ],
     );
   }

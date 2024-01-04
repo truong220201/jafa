@@ -68,8 +68,10 @@ class _TreeCreateViewState extends State<TreeCreateView> {
                     (pass) ? AppColors.colorFFFBEFEF : AppColors.colorFFF5F5F5,
                 iconColor:
                     (pass) ? AppColors.colorFFB20000 : AppColors.colorFFC2C2C2,
-                onPressed: () {
-                  cubit.treeCreate();
+                onPressed: () async {
+                  await cubit.treeCreate();
+                  // ignore: use_build_context_synchronously
+                  await context.router.pop();
                 },
               );
             },

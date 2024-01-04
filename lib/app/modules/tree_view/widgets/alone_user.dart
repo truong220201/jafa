@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_firebase/app/data/model/tree_view_model.dart';
 import 'package:flutter_firebase/app/main_router.dart';
+import 'package:flutter_firebase/app/modules/tree_view/cubit/tree_view_cubit.dart';
 
 import '../../../core/widgets/asset_image/asset_image_view.dart';
 
@@ -70,6 +72,7 @@ class AloneUser extends StatelessWidget {
                                   isRoot: true,
                                   roleId: 1,
                                   userGenealogyId: id));
+                              await context.read<TreeViewCubit>().loadData();
                             },
                             child: Container(
                               width: 40,

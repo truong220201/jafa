@@ -222,24 +222,28 @@ class _TreeViewPageState extends State<TreeViewPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            AloneUser(
-                                user: state.treeViewModel![0],
-                                genealogyId: widget.idTree,
-                                id: state.treeViewModel![0].id!,
-                                name: state.treeViewModel![0].name!,
-                                onTap: () async => await showModalTreeDetail(
-                                      context,
-                                      widget.idTree,
-                                      state.treeViewModel![0].id!,
-                                      1,
-                                      state.treeViewModel![0].name!,
-                                      state.treeViewModel![0].image!,
-                                      state.treeViewModel![0].gender!,
-                                      widget.nameJafa,
-                                      true,
-                                    ),
-                                avatar: state.treeViewModel![0].image ??
-                                    'https://antimatter.vn/wp-content/uploads/2022/10/hinh-anh-gai-xinh-de-thuong.jpg'),
+                            state.treeViewModel!.length != 0
+                                ? AloneUser(
+                                    user: state.treeViewModel?[0] ??
+                                        TreeViewModel(),
+                                    genealogyId: widget.idTree,
+                                    id: state.treeViewModel![0].id!,
+                                    name: state.treeViewModel![0].name!,
+                                    onTap: () async =>
+                                        await showModalTreeDetail(
+                                          context,
+                                          widget.idTree,
+                                          state.treeViewModel![0].id!,
+                                          1,
+                                          state.treeViewModel![0].name!,
+                                          state.treeViewModel![0].image!,
+                                          state.treeViewModel![0].gender!,
+                                          widget.nameJafa,
+                                          true,
+                                        ),
+                                    avatar: state.treeViewModel![0].image ??
+                                        'https://antimatter.vn/wp-content/uploads/2022/10/hinh-anh-gai-xinh-de-thuong.jpg')
+                                : SizedBox(),
                           ],
                         )
                   : const Center(child: CircularProgressIndicator());

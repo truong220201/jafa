@@ -12,6 +12,7 @@ import 'package:flutter_firebase/app/modules/edit_branch/view/edit_branch_view.d
 import 'package:flutter_firebase/app/modules/edit_branch_no_info/api/edit_branch_no_info_api.dart';
 import 'package:flutter_firebase/app/modules/edit_branch_no_info/repository/edit_branch_no_info_repository.dart';
 import 'package:flutter_firebase/app/modules/home/api/home_api.dart';
+import 'package:flutter_firebase/app/modules/home/cubit/home_cubit.dart';
 import 'package:flutter_firebase/app/modules/home/repository/home_repository.dart';
 import 'package:flutter_firebase/app/modules/select_member_to_branch/api/select_member_to_branch_api.dart';
 import 'package:flutter_firebase/app/modules/select_member_to_branch/repository/select_member_to_branch_repository.dart';
@@ -71,6 +72,10 @@ class _RouteAppState extends State<RouteApp> {
         ),
         RepositoryProvider<CreateBranchRepository>(
           create: (context) => CreateBranchRepository(CreateBranchApi()),
+        ),
+        RepositoryProvider<HomeCubit>(
+          create: (context) => HomeCubit(HomeRepository(
+              HomeApi())), // Thay HomeCubit() bằng constructor hoặc initializer của Cubit của bạn
         ),
       ],
       child: MaterialApp.router(
